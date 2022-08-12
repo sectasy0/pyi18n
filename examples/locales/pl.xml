@@ -1,0 +1,7 @@
+<pl>
+  <hello>
+    <hello_full_name_age>Witaj {name} {surname}! Ty masz {age} lat.</hello_full_name_age>
+    <hello_user>Witaj {user}!</hello_user>
+    <world>Witaj świecie!</world>
+  </hello>
+</pl>

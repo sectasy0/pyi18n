@@ -1,0 +1,7 @@
+<en>
+  <hello>
+    <hello_full_name_age>Hello {name} {surname}! You are {age} years old.</hello_full_name_age>
+    <hello_user>Hello {user}!</hello_user>
+    <world>Hello world!</world>
+  </hello>
+</en>

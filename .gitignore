@@ -1,0 +1,7 @@
+*.pyc
+__pycache__
+*.egg-info
+*.egg
+.pytest_cache
+tests/locales
+tests/bigger_locales
