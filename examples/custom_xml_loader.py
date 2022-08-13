@@ -34,7 +34,7 @@ class PyI18nXMLLoader(PyI18nBaseLoader):
 
 if __name__ == "__main__":
     loader: PyI18nXMLLoader = PyI18nXMLLoader("locales/")
-    i18n: PyI18n = PyI18n(['en', 'pl'], loader=loader)
+    i18n: PyI18n = PyI18n(('en', 'pl'), loader=loader)
     print(i18n.gettext("en", "hello.world"))
     print(i18n.gettext("pl", "hello.world"))
     # >> Hello world!
