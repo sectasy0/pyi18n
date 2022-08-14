@@ -5,3 +5,4 @@ __pycache__
 .pytest_cache
 tests/locales
 tests/bigger_locales
+dist/
