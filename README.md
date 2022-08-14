@@ -6,7 +6,7 @@
 ## Installation
 
 ```sh
-pip install pyi18n
+pip install pyi18n-v2
 ```
 
 ## Using library in your application

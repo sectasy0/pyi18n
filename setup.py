@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 HERE = pathlib.Path(__file__).parent
 
 setup(
-    name='pyi18n',
+    name='pyi18n-v2',
     version='1.0.0',
     description='Small and easy to use internationalization library inspired by Ruby i18n',
     long_description=(HERE / "README.md").read_text(),
