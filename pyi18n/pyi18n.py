@@ -21,10 +21,10 @@ class PyI18n:
         available_locales (tuple): list of available locales
         load_path (str): path to locales directory
         _loaded_translations (dict): (class attribute) dictionary of loaded translations
-    
+ 
     Methods:
         gettext(locale, path, **kwargs) -> Union[dict, str]
-    
+   
     Private Methods:
         __find (path, locale) -> Union[dict, str]
         __pyi18n_init () -> None
@@ -40,9 +40,9 @@ class PyI18n:
 
     _loaded_translations: dict = {}
 
-    def __init__(self, 
-            available_locales: tuple, 
-            load_path: str = "locales/", 
+    def __init__(self,
+            available_locales: tuple,
+            load_path: str = "locales/",
             loader: PyI18nBaseLoader = None
         ) -> None:
 
@@ -54,7 +54,6 @@ class PyI18n:
 
         Returns:
             None
-        
         """
 
         self.available_locales: tuple = available_locales
@@ -116,7 +115,6 @@ class PyI18n:
                 return founded.format_map(defaultdict(str, **kwargs))
             except KeyError:
                 return founded
-            
         return founded
         
     def __find(self, path: str, locale: str) -> Union[dict, str]:

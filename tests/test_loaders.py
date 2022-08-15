@@ -66,4 +66,3 @@ def test_loaders_json_bigger_files():
     loaded_locales = loader.load(locales)
     assert loaded_locales != {}
     assert loader._type == "json"
-

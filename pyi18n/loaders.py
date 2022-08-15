@@ -55,7 +55,7 @@ class PyI18nBaseLoader:
                 continue
             
             try:
-                with open(file_path, 'r') as _f:
+                with open(file_path, 'r', encoding="utf-8") as _f:
                     load_params: dict = {"Loader": yaml.FullLoader} if file_extension == "yml" else {}
                     loaded[locale] = ser_mod.load(_f, **load_params)[locale]
             except json.decoder.JSONDecodeError:
@@ -88,6 +88,17 @@ class PyI18nBaseLoader:
 
 
 class PyI18nJsonLoader(PyI18nBaseLoader):
+    """ PyI18n JSON Loader class
+
+    Attributes:
+        load_path (str): path to translations
+        _type (str): loader type
+    
+    Methods:
+        load (tuple, object) -> dict: load translations for given locales and returns as python dict
+        type () -> str: return loader type
+        get_path () -> str: return loader path
+    """
 
     _type: str = "json"
 
@@ -108,6 +119,17 @@ class PyI18nJsonLoader(PyI18nBaseLoader):
 
 
 class PyI18nYamlLoader(PyI18nBaseLoader):
+    """ PyI18n YAML Loader class
+
+    Attributes:
+        load_path (str): path to translations
+        _type (str): loader type
+    
+    Methods:
+        load (tuple, object) -> dict: load translations for given locales and returns as python dict
+        type () -> str: return loader type
+        get_path () -> str: return loader path
+    """
 
     _type: str = "yaml"
     

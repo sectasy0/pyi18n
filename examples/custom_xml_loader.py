@@ -26,8 +26,8 @@ class PyI18nXMLLoader(PyI18nBaseLoader):
                 # raise FileNotFoundError(f"locale file not found: {file_path}")
                 continue
             
-            with open(file_path, "r") as f:
-                loaded[locale] = parse(f.read())[locale]
+            with open(file_path, "r", encoding="utf-8") as _f:
+                loaded[locale] = parse(_f.read())[locale]
             
         return loaded
 
