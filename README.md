@@ -39,7 +39,7 @@ print(_("pl", "hello.hello_user", user="John"))
 #> Witaj John!
 print(_("de", "hello.hello_user", user="John"))
 #> Hallo John!
-print(_("jp", "hello.hello_user", user="John"))
+print(_("jp", "hello.hello_user", user="ジョンさん"))
 #> こんにちは、ジョンさん！
 ```
 
