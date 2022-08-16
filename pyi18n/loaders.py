@@ -2,6 +2,7 @@ from os.path import exists
 import json
 import yaml
 
+
 class LoaderType:
     """ Enum for the different loader types. """
     BASE: str = "base"
@@ -17,7 +18,8 @@ class PyI18nBaseLoader:
         _type (str): loader type
 
     Methods:
-        load (tuple, object) -> dict: load translations for given locales and returns as python dict
+        load (tuple, object) -> dict: load translations for given
+                                locales and returns as python dict
         type () -> str: return loader type
         get_path () -> str: return loader path
 
@@ -47,7 +49,8 @@ class PyI18nBaseLoader:
             dict: loaded translations
 
         Notes:
-            Custom load function should be implemented in child classes and return python dict
+            Custom load function should be implemented
+            in child classes and return python dict
 
         """
 
@@ -58,7 +61,6 @@ class PyI18nBaseLoader:
 
             file_path: str = f"{self.load_path}{locale}.{file_extension}"
             if not exists(file_path):
-                # raise FileNotFoundError(f"locale file not found: {file_path}")
                 continue
 
             try:
@@ -103,7 +105,8 @@ class PyI18nJsonLoader(PyI18nBaseLoader):
         _type (str): loader type
 
     Methods:
-        load (tuple, object) -> dict: load translations for given locales and returns as python dict
+        load (tuple, object) -> dict: load translations for given
+                                locales and returns as python dict
         type () -> str: return loader type
         get_path () -> str: return loader path
     """
@@ -134,7 +137,8 @@ class PyI18nYamlLoader(PyI18nBaseLoader):
         _type (str): loader type
 
     Methods:
-        load (tuple, object) -> dict: load translations for given locales and returns as python dict
+        load (tuple, object) -> dict: load translations for given
+                                locales and returns as python dict
         type () -> str: return loader type
         get_path () -> str: return loader path
     """

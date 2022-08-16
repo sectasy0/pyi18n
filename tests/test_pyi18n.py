@@ -66,7 +66,8 @@ def test_gettext_with_invalid_locale() -> None:
 def test_gettext_with_invalid_path() -> None:
     available_locales: tuple = ("en", "pl")
     i18n = PyI18n(available_locales, load_path=test_path)
-    translated = [i18n.gettext(locale, "hello.world.invalid") for locale in available_locales] 
+    translated = [i18n.gettext(locale, "hello.world.invalid")
+                  for locale in available_locales]
     assert translated == [
         "missing translation for: en.hello.world.invalid",
         "missing translation for: pl.hello.world.invalid"
@@ -77,7 +78,8 @@ def test_gettext_with_invalid_path() -> None:
 def test_gettext_with_valid_path() -> None:
     available_locales: tuple = ("en", "pl")
     i18n = PyI18n(available_locales, load_path=test_path)
-    translated = [i18n.gettext(locale, "hello.world") for locale in available_locales]
+    translated = [i18n.gettext(locale, "hello.world")
+                  for locale in available_locales]
     assert translated == ['Hello world!', 'Witaj świecie!']
     assert i18n.get_loader()._type == "yaml"
 
@@ -86,7 +88,7 @@ def test_gettext_with_interpolation() -> None:
     available_locales: tuple = ("en", "pl")
     i18n = PyI18n(available_locales, load_path=test_path)
     translated = [i18n.gettext(locale, "hello.hello_user", user="John")
-        for locale in available_locales] 
+                  for locale in available_locales]
     assert translated == ['Hello John!', 'Witaj John!']
     assert i18n.get_loader()._type == "yaml"
 
@@ -95,9 +97,10 @@ def test_gettext_with_multiple_interpolation() -> None:
     available_locales: tuple = ("en", "pl")
     i18n = PyI18n(available_locales, load_path=test_path)
     translated = [i18n.gettext(locale, "hello.hello_full_name_age",
-        name="John", surname="Conor", age=25) for locale in available_locales]
+                               name="John", surname="Conor", age=25)
+                  for locale in available_locales]
     assert translated == [
-        'Hello John Conor! You are 25 years old.', 
+        'Hello John Conor! You are 25 years old.',
         'Witaj John Conor! Ty masz 25 lat.'
     ]
     assert i18n.get_loader()._type == "yaml"
@@ -106,10 +109,11 @@ def test_gettext_with_multiple_interpolation() -> None:
 def test_gettext_with_interpolation_and_missing_some_parameter() -> None:
     available_locales: tuple = ("en", "pl")
     i18n = PyI18n(available_locales, load_path=test_path)
-    translated = [i18n.gettext(locale, "hello.hello_full_name_age", 
-        name="John") for locale in available_locales] 
+    translated = [i18n.gettext(locale, "hello.hello_full_name_age",
+                               name="John")
+                  for locale in available_locales]
     assert translated == [
-        'Hello John ! You are  years old.', 
+        'Hello John ! You are  years old.',
         'Witaj John ! Ty masz  lat.'
     ]
     assert i18n.get_loader()._type == "yaml"
@@ -118,9 +122,10 @@ def test_gettext_with_interpolation_and_missing_some_parameter() -> None:
 def test_gettext_with_interpolation_and_missing_all_parameter() -> None:
     available_locales: tuple = ("en", "pl")
     i18n = PyI18n(available_locales, load_path=test_path)
-    translated = [i18n.gettext(locale, "hello.hello_full_name_age") for locale in available_locales] 
+    translated = [i18n.gettext(locale, "hello.hello_full_name_age")
+                  for locale in available_locales]
     assert translated == [
-        'Hello {name} {surname}! You are {age} years old.', 
+        'Hello {name} {surname}! You are {age} years old.',
         'Witaj {name} {surname}! Ty masz {age} lat.'
     ]
     assert i18n.get_loader()._type == "yaml"
@@ -210,7 +215,8 @@ def test_gettext_with_invalid_path_json_loader() -> None:
     available_locales: tuple = ("en", "pl")
     loader = PyI18nJsonLoader(test_path)
     i18n = PyI18n(available_locales, loader=loader)
-    translated = [i18n.gettext(locale, "hello.world.invalid") for locale in available_locales] 
+    translated = [i18n.gettext(locale, "hello.world.invalid")
+                  for locale in available_locales]
     assert translated == [
         "missing translation for: en.hello.world.invalid",
         "missing translation for: pl.hello.world.invalid"
@@ -222,7 +228,8 @@ def test_gettext_with_valid_path_json_loader() -> None:
     available_locales: tuple = ("en", "pl")
     loader = PyI18nJsonLoader(test_path)
     i18n = PyI18n(available_locales, loader=loader)
-    translated = [i18n.gettext(locale, "hello.world") for locale in available_locales] 
+    translated = [i18n.gettext(locale, "hello.world")
+                  for locale in available_locales]
     assert translated == ['Hello world!', 'Witaj świecie!']
     assert i18n.get_loader()._type == "json"
 
@@ -231,8 +238,8 @@ def test_gettext_with_interpolation_json_loader() -> None:
     available_locales: tuple = ("en", "pl")
     loader = PyI18nJsonLoader(test_path)
     i18n = PyI18n(available_locales, loader=loader)
-    translated = [i18n.gettext(locale, "hello.hello_user", user="John") 
-        for locale in available_locales]
+    translated = [i18n.gettext(locale, "hello.hello_user", user="John")
+                  for locale in available_locales]
     assert translated == ['Hello John!', 'Witaj John!']
     assert i18n.get_loader()._type == "json"
 
@@ -241,10 +248,11 @@ def test_gettext_with_multiple_interpolation_json_loader() -> None:
     available_locales: tuple = ("en", "pl")
     loader = PyI18nJsonLoader(test_path)
     i18n = PyI18n(available_locales, loader=loader)
-    translated = [i18n.gettext(locale, "hello.hello_full_name_age", 
-        name="John", surname="Conor", age=25) for locale in available_locales] 
+    translated = [i18n.gettext(locale, "hello.hello_full_name_age",
+                               name="John", surname="Conor", age=25)
+                  for locale in available_locales]
     assert translated == [
-        'Hello John Conor! You are 25 years old.', 
+        'Hello John Conor! You are 25 years old.',
         'Witaj John Conor! Ty masz 25 lat.'
     ]
     assert i18n.get_loader()._type == "json"
@@ -254,10 +262,10 @@ def test_gettext_with_interpolation_and_missing_some_parameter_json_loader() -> 
     available_locales: tuple = ("en", "pl")
     loader = PyI18nJsonLoader(test_path)
     i18n = PyI18n(available_locales, loader=loader)
-    translated = [i18n.gettext(locale, "hello.hello_full_name_age", 
-        name="John") for locale in available_locales] 
+    translated = [i18n.gettext(locale, "hello.hello_full_name_age",
+                  name="John") for locale in available_locales]
     assert translated == [
-        'Hello John ! You are  years old.', 
+        'Hello John ! You are  years old.',
         'Witaj John ! Ty masz  lat.'
     ]
     assert i18n.get_loader()._type == "json"
@@ -267,9 +275,10 @@ def test_gettext_with_interpolation_and_missing_all_parameter_json_loader() -> N
     available_locales: tuple = ("en", "pl")
     loader = PyI18nJsonLoader(test_path)
     i18n = PyI18n(available_locales, loader=loader)
-    translated = [i18n.gettext(locale, "hello.hello_full_name_age") for locale in available_locales] 
+    translated = [i18n.gettext(locale, "hello.hello_full_name_age")
+                  for locale in available_locales]
     assert translated == [
-        'Hello {name} {surname}! You are {age} years old.', 
+        'Hello {name} {surname}! You are {age} years old.',
         'Witaj {name} {surname}! Ty masz {age} lat.'
     ]
     assert i18n.get_loader()._type == "json"

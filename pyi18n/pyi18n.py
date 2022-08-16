@@ -20,7 +20,8 @@ class PyI18n:
     Attributes:
         available_locales (tuple): list of available locales
         load_path (str): path to locales directory
-        _loaded_translations (dict): (class attribute) dictionary of loaded translations
+        _loaded_translations (dict): (class attribute) dictionary
+                                    of loaded translations
 
     Methods:
         gettext(locale, path, **kwargs) -> Union[dict, str]
@@ -41,10 +42,10 @@ class PyI18n:
     _loaded_translations: dict = {}
 
     def __init__(self,
-            available_locales: tuple,
-            load_path: str = "locales/",
-            loader: PyI18nBaseLoader = None
-        ) -> None:
+        available_locales: tuple,
+        load_path: str = "locales/",
+        loader: PyI18nBaseLoader = None
+    ) -> None:
 
         """ Initialize i18n class
 
@@ -61,7 +62,8 @@ class PyI18n:
         if loader is not None and loader.get_path() != self.load_path:
             self.load_path = loader.get_path()
 
-        self.loader: PyI18nBaseLoader = loader or PyI18nYamlLoader(self.load_path)
+        self.loader: PyI18nBaseLoader = loader or \
+            PyI18nYamlLoader(self.load_path)
 
         self.__pyi18n_init()
 
@@ -84,7 +86,8 @@ class PyI18n:
             raise ValueError("available locales must be specified")
 
         if not exists(self.load_path):
-            raise FileNotFoundError(f"{self.load_path} directory not found, please create it")
+            raise FileNotFoundError(f"{self.load_path} directory "
+                                    "not found, please create it")
 
         self._loaded_translations = self.loader.load(self.available_locales)
 
@@ -105,7 +108,8 @@ class PyI18n:
         """
 
         if locale not in self.available_locales:
-            raise ValueError(f"locale {locale} not specified in available locales")
+            raise ValueError(f"locale {locale} not specified "
+                             "in available locales")
 
         founded: Union[dict, str] = self.__find(path, locale)
 
@@ -129,7 +133,7 @@ class PyI18n:
         """
         try:
             return reduce(getitem, path.split('.'),
-                self._loaded_translations[locale])
+                          self._loaded_translations[locale])
         except (KeyError, TypeError):
             return f"missing translation for: {locale}.{path}"
 

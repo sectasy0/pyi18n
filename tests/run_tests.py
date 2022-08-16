@@ -5,7 +5,7 @@ from yaml import dump
 from pytest import main
 
 from helpers import (test_path, locale_content,
-    bigger_files_path, bigger_locales)
+                     bigger_files_path, bigger_locales)
 
 
 def create_test_file(locale: str, content: dict, f_path: str) -> None:
@@ -19,7 +19,8 @@ def create_test_file(locale: str, content: dict, f_path: str) -> None:
 def setup_fixtures() -> None:
     """ Setup fixture before running tests. """
     if not path.exists(test_path) \
-        and not path.exists(bigger_files_path):
+       and not path.exists(bigger_files_path):
+
         mkdir(test_path)
         mkdir(bigger_files_path)
 
@@ -36,5 +37,4 @@ def setup_fixtures() -> None:
 
 if __name__ == "__main__":
     setup_fixtures()
-    args = ['-vv', '--tb=line']
-    main(args)
+    main(['-vv'])
