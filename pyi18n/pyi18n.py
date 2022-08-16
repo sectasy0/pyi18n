@@ -1,8 +1,8 @@
 from collections import defaultdict
 from os import getcwd
+from os.path import exists
 from functools import reduce
 from operator import getitem
-from os.path import exists
 from typing import Union
 
 from .loaders import PyI18nBaseLoader
@@ -21,10 +21,10 @@ class PyI18n:
         available_locales (tuple): list of available locales
         load_path (str): path to locales directory
         _loaded_translations (dict): (class attribute) dictionary of loaded translations
- 
+
     Methods:
         gettext(locale, path, **kwargs) -> Union[dict, str]
-   
+
     Private Methods:
         __find (path, locale) -> Union[dict, str]
         __pyi18n_init () -> None
@@ -88,7 +88,6 @@ class PyI18n:
 
         self._loaded_translations = self.loader.load(self.available_locales)
 
-
     def gettext(self, locale: str, path: str, **kwargs) -> Union[dict, str]:
         """ Get translation for given locale and path
 
@@ -116,24 +115,24 @@ class PyI18n:
             except KeyError:
                 return founded
         return founded
-        
+
     def __find(self, path: str, locale: str) -> Union[dict, str]:
         """ Find translation for given path and locale
-            
+
         Args:
             path (str): path to translation
             locale (str): locale to get translation for
-        
+
         Returns:
             Union[dict, str]: translation str, dict or error message
 
         """
         try:
-            return reduce(getitem, path.split('.'), 
+            return reduce(getitem, path.split('.'),
                 self._loaded_translations[locale])
         except (KeyError, TypeError):
             return f"missing translation for: {locale}.{path}"
-    
+
     def get_loader(self) -> PyI18nBaseLoader:
         """ Return loader class
 
