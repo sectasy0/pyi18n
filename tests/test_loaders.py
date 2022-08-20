@@ -1,3 +1,4 @@
+# flake8: noqa
 from tests.helpers import test_path, bigger_files_path
 from pyi18n import loaders
 

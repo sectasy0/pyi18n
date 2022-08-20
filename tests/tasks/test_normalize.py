@@ -1,3 +1,4 @@
+# flake8: noqa
 import pytest
 from pyi18n.tasks import normalize
 from tests.helpers import test_path, empty_locales, not_raises

@@ -1,6 +1,5 @@
 from os import listdir, getcwd
 from os.path import exists
-from threading import local
 from typing import Any, Set, Dict
 from xmltodict import unparse as xml_dump
 from os import environ
@@ -31,7 +30,8 @@ def normalize_locales(locale_path: str = "locales/") -> dict:
         exit(1)
 
     for subclass in loaders.PyI18nBaseLoader.__subclasses__():
-        if subclass.__name__ == "PyI18nXMLLoader" and environ["PYI18N_TEST_ENV"]:
+        if subclass.__name__ == "PyI18nXMLLoader" \
+         and environ["PYI18N_TEST_ENV"]:
             continue
         loader: loaders.PyI18nBaseLoader = subclass(locale_path)
 

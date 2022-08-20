@@ -1,3 +1,4 @@
+# flake8: noqa
 import pytest
 
 from tests.helpers import test_path, locale_content

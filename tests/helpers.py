@@ -1,3 +1,7 @@
+# flake8: noqa
+from contextlib import contextmanager
+import pytest
+
 test_path: str = 'tests/locales/'
 empty_locales: str = 'tests/empty_locales/'
 bigger_files_path: str = 'tests/bigger_locales/'
@@ -122,11 +126,9 @@ bigger_locales: dict = {
 }
 
 
-from contextlib import contextmanager
-import pytest
-
 @contextmanager
 def not_raises(exc):
+    """ fails if exception is raised """
     try:
         yield
     except exc:

@@ -1,3 +1,4 @@
+# flake8: noqa
 import examples.custom_xml_loader
 
 from tests.helpers import custom_loader_path
