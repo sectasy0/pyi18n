@@ -83,6 +83,28 @@ if __name__ == "__main__":
     #> Hello John!
 ```
 
+## Tasks
+
+### Tasks usage
+
+```sh
+$ pyi18n-tasks
+usage: pyi18n-tasks [-h] [-p PATH] normalize
+pyi18n-tasks: error: the following arguments are required: normalize
+```
+
+### Normalization
+Normalization process will sort locales alphabetically. The default normalization path is `locales/`, you can change it by passing `-p` argument.
+
+```sh
+$ pyi18n-tasks normalize 
+```
+
+```sh
+$ pyi18n-tasks normalize -p my_app/locales/
+
+```
+
 ## Run tests
 
 ```sh
@@ -91,9 +113,23 @@ python3 tests/run_tests.py
 
 For any questions and suggestions or bugs please create an issue.
 
+### TODO
+
+* Remove duplicates during normalization
+* Translation for `pyi18n-tasks` from multiple sources
+* Adding new locale from `pyi18n-tasks`
+
 ## Release History
 
-* 1.0.0: Initial release
+### 1.1.0 - unreleased
+
+* New features:
+    * Added `normalize` task
+    * Added ability to run `normalize` task from command line
+
+### 1.0.0 - 2022-08-12
+
+* Initial release
 
 ## Meta
 
