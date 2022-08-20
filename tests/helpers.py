@@ -1,4 +1,5 @@
 test_path: str = 'tests/locales/'
+empty_locales: str = 'tests/empty_locales/'
 bigger_files_path: str = 'tests/bigger_locales/'
 custom_loader_path: str = 'examples/locales/'
 
@@ -9,6 +10,23 @@ locale_content: dict = {
             "hello_user": "Witaj {user}!",
             "hello_full_name_age": "Witaj {name} {surname}! Ty masz {age} lat."
         },
+        "common": {
+            "hello": "Witaj",
+            "center": "Centrum",
+            "world": "Świat",
+            "developer": "Programista",
+            "age": "Wiek"
+        },
+        "announcement": {
+            "hello": "Witaj!",
+            "hello_user": "Witaj {user}!",
+            "hello_full_name_age": "Witaj {name} {surname}! Ty masz {age} lat."
+        },
+        "date": {
+            "today": "Dziś jest {date}",
+            "tomorrow": "Jutro jest {date}",
+            "yesterday": "Wczoraj był {date}"
+        }
     },
     "en": {
         "hello": {
@@ -16,6 +34,23 @@ locale_content: dict = {
             "hello_user": "Hello {user}!",
             "hello_full_name_age": "Hello {name} {surname}! You are {age} years old."
         },
+        "common": {
+            "hello": "Hello",
+            "center": "Center",
+            "world": "World",
+            "developer": "Developer",
+            "age": "Age"
+        },
+        "announcement": {
+            "hello": "Hello {user}!",
+            "hello_user": "Hello {user}!",
+            "hello_full_name_age": "Hello {name} {surname}! You are {age} years old."
+        },
+        "date": {
+            "today": "Today is {date}",
+            "tomorrow": "Tomorrow is {date}",
+            "yesterday": "Yesterday is {date}"
+        }
     }
 }
 
@@ -85,3 +120,14 @@ bigger_locales: dict = {
         }
     }
 }
+
+
+from contextlib import contextmanager
+import pytest
+
+@contextmanager
+def not_raises(exc):
+    try:
+        yield
+    except exc:
+        raise pytest.fail("DID RAISE {0}".format(exc))

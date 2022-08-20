@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-from os import path, mkdir
+from os import path, mkdir, environ
 from json import dumps
 from yaml import dump
 from pytest import main
 
 from helpers import (test_path, locale_content,
-                     bigger_files_path, bigger_locales)
+                     bigger_files_path, bigger_locales, empty_locales)
 
 
 def create_test_file(locale: str, content: dict, f_path: str) -> None:
@@ -24,6 +24,9 @@ def setup_fixtures() -> None:
         mkdir(test_path)
         mkdir(bigger_files_path)
 
+    if not path.exists(empty_locales):
+        mkdir(empty_locales)
+
     for locale in locale_content.keys():
         with open(f"{test_path}/{locale}.yml", "w", encoding="utf-8") as _f:
             _f.write(dump({locale: locale_content[locale]}))
@@ -37,4 +40,5 @@ def setup_fixtures() -> None:
 
 if __name__ == "__main__":
     setup_fixtures()
+    environ["PYI18N_TEST_ENV"] = "1"
     main(['-vv'])
