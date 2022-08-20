@@ -3,7 +3,7 @@ from pytest import raises
 from .helpers import test_path, capture, empty_locales
 from pyi18n.pyi18n_tasks import cli
 
-
+# hack to get percents in test output
 def test_cli() -> None:
     with raises(SystemExit):
         cli()

@@ -148,9 +148,3 @@ class PyI18n:
 
         """
         return self.loader
-
-
-if __name__ == "__main__":
-    i18n = PyI18n(("en", "pl"), load_path="locales/")
-    _ = i18n.gettext
-    print(_("en", "hello", user="John"))

@@ -6,4 +6,5 @@ __pycache__
 tests/locales
 tests/bigger_locales
 tests/empty_locales
+tests/corrupted_locales
 dist/
