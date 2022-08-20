@@ -2,6 +2,8 @@
 > Simple and easy to use internationalization library inspired by Ruby i18n.
 
 ![Python version][python-image]
+[![Code Climate](https://codeclimate.com/github/sectasy0/pyi18n/badges/gpa.svg)](https://codeclimate.com/github/sectasy0/pyi18n/coverage)
+[![Issue Count](https://codeclimate.com/github/sectasy0/pyi18n/badges/issue_count.svg)](https://codeclimate.com/github/sectasy0/pyi18n)
 
 ## Installation
 
