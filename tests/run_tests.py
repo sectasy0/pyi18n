@@ -5,7 +5,22 @@ from yaml import dump
 from pytest import main
 
 from helpers import (test_path, locale_content,
-                     bigger_files_path, bigger_locales, empty_locales)
+                     bigger_files_path, bigger_locales,
+                     empty_locales, corrupted_locales, 
+                     corrupted_path, corrupted_locales_yaml)
+
+
+def create_corrupted_file() -> None:
+    """ Create corrupted test file for locale. """
+
+    if not path.exists(corrupted_path):
+        mkdir(corrupted_path)
+
+    with open(f"{corrupted_path}pl.json", "w", encoding="utf-8") as _f:
+        _f.write(corrupted_locales)
+
+    with open(f"{corrupted_path}pl.yml", "w", encoding="utf-8") as _f:
+        _f.write(corrupted_locales_yaml)
 
 
 def create_test_file(locale: str, content: dict, f_path: str) -> None:
@@ -37,8 +52,10 @@ def setup_fixtures() -> None:
 
     create_test_file("en", bigger_locales, bigger_files_path)
 
+    create_corrupted_file()
+
 
 if __name__ == "__main__":
     setup_fixtures()
     environ["PYI18N_TEST_ENV"] = "1"
-    main(['-vv'])
+    main(['-vv', '-s'])

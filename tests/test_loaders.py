@@ -1,5 +1,5 @@
 # flake8: noqa
-from tests.helpers import test_path, bigger_files_path
+from tests.helpers import test_path, bigger_files_path, corrupted_path
 from pyi18n import loaders
 
 
@@ -17,6 +17,14 @@ def test_loaders_yaml_loader_with_invalid_path():
     locales: tuple = ("en", "pl")
     loaded_locales = loader.load(locales)
     assert loaded_locales == {}
+    assert loader._type == "yaml"
+
+
+def test_loaders_json_loader_corrupted_yaml() -> None:
+    loader = loaders.PyI18nYamlLoader(test_path)
+    locales: tuple = ("pl")
+    loaded_locales = loader.load(locales)
+    assert not loaded_locales
     assert loader._type == "yaml"
 
 
@@ -42,6 +50,14 @@ def test_loaders_json_loader():
     loaded_locales = loader.load(locales)
     assert loaded_locales != {}
     assert tuple(loaded_locales.keys()) == locales
+    assert loader._type == "json"
+
+
+def test_loaders_json_loader_corrupted_json() -> None:
+    loader = loaders.PyI18nJsonLoader(test_path)
+    locales: tuple = ("pl")
+    loaded_locales = loader.load(locales)
+    assert not loaded_locales
     assert loader._type == "json"
 
 

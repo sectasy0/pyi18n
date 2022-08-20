@@ -1,11 +1,13 @@
 # flake8: noqa
 from contextlib import contextmanager
+from subprocess import Popen, PIPE
 import pytest
 
 test_path: str = 'tests/locales/'
 empty_locales: str = 'tests/empty_locales/'
 bigger_files_path: str = 'tests/bigger_locales/'
 custom_loader_path: str = 'examples/locales/'
+corrupted_path: str = 'tests/corrupted_locales/'
 
 locale_content: dict = {
     "pl": {
@@ -57,6 +59,41 @@ locale_content: dict = {
         }
     }
 }
+
+corrupted_locales: str = """
+    "pl": {
+        "hello": {
+            "world": "Witaj świecie!",
+            "hello_user": "Witaj {user}!",
+            "hello_full_name_age": "Witaj {name} {surname}! Ty masz {age} lat."
+        },
+        "common": {
+            "hello": "Witaj",
+            "center": "Centrum",
+            "world": "Świat",
+            "developer": "Programista",
+            "age": "Wiek"
+        },
+        "announcement": {
+            "hello": "Witaj!",
+            "hello_user": "Witaj {user}!",
+            "hello_full_name_age": "Witaj {name} {surname}! Ty masz {age} lat."
+        "date": {
+            "today": "Dziś jest {date}",
+            "tomorrow": "Jutro jest {date}",
+            "yesterday": "Wczoraj był {date}"
+    },
+
+"""
+
+corrupted_locales_yaml: str = """
+    pl:
+        announcement: {
+            hello: "Witaj!",
+        }
+        en) asdasda
+        
+"""
 
 bigger_locales: dict = {
     "en": {
@@ -131,5 +168,15 @@ def not_raises(exc):
     """ fails if exception is raised """
     try:
         yield
-    except exc:
-        raise pytest.fail("DID RAISE {0}".format(exc))
+    except exc as exc:
+        raise pytest.fail(f"DID RAISE {exc}")
+
+
+def capture(command: str) -> str:
+    proc = Popen(command,
+        stdout=PIPE,
+        stderr=PIPE,
+    )
+    out, err = proc.communicate()
+    print(proc.communicate())
+    return out, err, proc.returncode
