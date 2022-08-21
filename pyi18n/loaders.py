@@ -53,7 +53,6 @@ class PyI18nBaseLoader:
             in child classes and return python dict
 
         """
-
         file_extension: str = ser_mod.__name__.replace('yaml', 'yml')
 
         loaded: dict = {}
@@ -125,7 +124,6 @@ class PyI18nJsonLoader(PyI18nBaseLoader):
             dict: loaded translations
 
         """
-
         return super().load(locales, json)
 
 
@@ -157,5 +155,4 @@ class PyI18nYamlLoader(PyI18nBaseLoader):
             dict: loaded translations
 
         """
-
         return super().load(locales, yaml)

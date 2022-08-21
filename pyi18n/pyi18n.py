@@ -56,7 +56,6 @@ class PyI18n:
         Returns:
             None
         """
-
         self.available_locales: tuple = available_locales
         self.load_path: str = f"{getcwd()}/{load_path}"
         if loader is not None and loader.get_path() != self.load_path:
@@ -81,7 +80,6 @@ class PyI18n:
             FileNotFoundError: if translation file is not found
 
         """
-
         if not self.available_locales:
             raise ValueError("available locales must be specified")
 
@@ -106,7 +104,6 @@ class PyI18n:
             ValueError: if locale is not in self.available_locales
 
         """
-
         if locale not in self.available_locales:
             raise ValueError(f"locale {locale} not specified "
                              "in available locales")

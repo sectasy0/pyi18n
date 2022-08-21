@@ -16,7 +16,6 @@ from yaml import dump as yaml_dump
 
 def normalize_locales(locale_path: str = "locales/") -> dict:
     """ Sorts the keys in alphabetically order, and overrides files """
-
     # dir_content = listdir(locale_path)
     locale_path: str = f"{getcwd()}/{locale_path}"
     if not exists(locale_path):

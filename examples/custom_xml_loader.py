@@ -27,7 +27,6 @@ class PyI18nXMLLoader(PyI18nBaseLoader):
             dict: loaded translations
 
         """
-
         loaded: dict = {}
         for locale in locales:
 

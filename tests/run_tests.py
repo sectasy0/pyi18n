@@ -12,7 +12,6 @@ from helpers import (test_path, locale_content,
 
 def create_corrupted_file() -> None:
     """ Create corrupted test file for locale. """
-
     if not path.exists(corrupted_path):
         mkdir(corrupted_path)
 
