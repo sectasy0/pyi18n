@@ -1,0 +1,64 @@
+site_name: PyI18n
+repo_url: https://github.com/sectasy0/pyi18n
+url: /home/
+repo_name: sectasy0/pyi18n
+copyright: Copyright &copy; 2022 Piotr Markiewicz
+markdown_extensions:
+  - pymdownx.critic
+  - pymdownx.caret
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.tilde
+  - pymdownx.smartsymbols
+  - pymdownx.betterem
+  - pymdownx.emoji
+  - pymdownx.magiclink
+  - pymdownx.superfences
+  - pymdownx.tasklist
+  - pymdownx.details
+  - admonition
+extra:
+  version:
+    provider: mike
+  social:
+    - icon: fontawesome/brands/python 
+      link: https://pypi.org/project/pyi18n-v2
+    - icon: fontawesome/brands/github 
+      link: https://github.com/sectasy0/
+plugins:
+  - include-markdown
+  - snippet
+  - search
+  - mkdocstrings
+theme: 
+  name: material
+  features:
+    - navigation.tabs
+    - navigation.indexes
+  palette: 
+    # Palette toggle for light mode
+    - scheme: default
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+
+    # Palette toggle for dark mode
+    - scheme: slate
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+nav:
+  - Home: 
+    - Home: 'home/index.md'
+    - Release History: 'home/release-history.md'
+    - Contributing: 'home/contributing.md'
+    - License: 'home/license.md'
+  - Getting started: 
+    - Basic usage: 'started/basic-usage.md'
+    - Custom loader: 'started/custom-loader.md'
+    - Normalize your locales: 'started/normalization.md'
+  - Code Reference: 
+    - PyI18n class: 'code/pyi18n.md'
+    - Loaders: 'code/loaders.md'
+    - Tasks: 'code/tasks.md'
+  - Support: 'support.md'
