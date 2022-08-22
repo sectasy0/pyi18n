@@ -75,9 +75,6 @@ class PyI18nBaseLoader:
     def type(self) -> str:
         """ Return loader type
 
-        Args:
-            None
-
         Returns:
             str: loader type
 
@@ -86,9 +83,6 @@ class PyI18nBaseLoader:
 
     def get_path(self) -> str:
         """ Return loader path
-
-        Args:
-            None
 
         Returns:
             str: loader path

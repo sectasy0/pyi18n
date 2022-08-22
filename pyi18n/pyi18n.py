@@ -32,7 +32,7 @@ class PyI18n:
 
     Examples:
         >>> from pyi18n import PyI18n
-        >>> pyi18n = PyI18n(["en", "jp"], "locales/")
+        >>> pyi18n = PyI18n(("en", "jp"), "locales/")
         >>> pyi18n.gettext("en", "hello.world")
         'Hello, world!'
         >>> pyi18n.gettext("jp", "hello.world")
@@ -70,12 +70,6 @@ class PyI18n:
     def __pyi18n_init(self) -> None:
         """ validator and loader for translations
 
-        Args:
-            None
-
-        Returns:
-            None
-
         Raises:
             ValueError: if locale is not available in self.available_locales
             FileNotFoundError: if translation file is not found
@@ -97,7 +91,7 @@ class PyI18n:
         Args:
             locale (str): locale to get translation for
             path (str): path to translation
-            **kwargs: interpolation variables
+            **kwargs (dict): interpolation variables
 
         Returns:
             Union[dict, str]: translation str, dict or error message
@@ -139,9 +133,6 @@ class PyI18n:
 
     def get_loader(self) -> PyI18nBaseLoader:
         """ Return loader class
-
-        Args:
-            None
 
         Returns:
             PyI18nBaseLoader: loader class
