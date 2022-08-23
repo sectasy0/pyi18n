@@ -137,15 +137,7 @@ For any questions and suggestions or bugs please create an issue.
 
 ## Release History
 
-### 1.1.0 - 23.08.2022
-
-* New features:
-    * Added `normalize` task
-    * Added ability to run `normalize` task from command line
-
-### 1.0.0 - 2022-08-12
-
-* Initial release
+**Release History available at [https://sectasy0.github.io/pyi18n/home/release-history/](https://sectasy0.github.io/pyi18n/home/release-history/).**
 
 ## Meta
 
