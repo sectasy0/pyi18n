@@ -137,7 +137,7 @@ For any questions and suggestions or bugs please create an issue.
 
 ## Release History
 
-### 1.1.0 - unreleased
+### 1.1.0 - 23.08.2022
 
 * New features:
     * Added `normalize` task
