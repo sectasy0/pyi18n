@@ -33,16 +33,22 @@ Then create an instance of `PyI18n` class. For custom locales directory you can 
 
 ```python
 from pyi18n import PyI18n
+
+
 # default load_path is locales/
 # you can change this path by specifying load_path parameter
 i18n = PyI18n(("en", "pl", "de", "jp"), load_path="translations/")
 _ = i18n.gettext
+
 print(_("en", "hello.hello_user", user="John"))
 #> Hello John!
+
 print(_("pl", "hello.hello_user", user="John"))
 #> Witaj John!
+
 print(_("de", "hello.hello_user", user="John"))
 #> Hallo John!
+
 print(_("jp", "hello.hello_user", user="ジョンさん"))
 #> こんにちは、ジョンさん！
 ```
@@ -55,10 +61,14 @@ To create custom locale loader you have to create a class which will inherit fro
 from pyi18n.loaders import PyI18nBaseLoader
 
 class MyCustomLoader(PyI18nBaseLoader):
+
     def load(self, locales: tuple, load_path: str):
         # load_path is the path where your loader will look for locales files
         # locales is a tuple of locales which will be loaded
         # return a dictionary with locale data
+
+        ...your custom loader logic...
+
         return {}
 ```
 
@@ -68,6 +78,7 @@ Then pass your custom loader to PyI18n class.
 from pyi18n.loaders import PyI18nBaseLoader
 
 class MyCustomLoader(PyI18nBaseLoader):
+
     def load(self, locales: tuple, load_path: str):
         # load_path is the path where your loader will look for locales files
         # locales is a tuple of locales which will be loaded
@@ -83,6 +94,7 @@ if __name__ == "__main__":
     loader = MyCustomLoader(load_path=load_path)
     i18n = PyI18n(("en",), loader=loader)
     _ = i18n.gettext
+
     print(_("en", "hello.hello_user", user="John"))
     #> Hello John!
 ```
