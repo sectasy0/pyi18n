@@ -5,7 +5,7 @@
 [![Code Climate](https://codeclimate.com/github/sectasy0/pyi18n/badges/gpa.svg)](https://codeclimate.com/github/sectasy0/pyi18n/coverage)
 [![Issue Count](https://codeclimate.com/github/sectasy0/pyi18n/badges/issue_count.svg)](https://codeclimate.com/github/sectasy0/pyi18n)
 
-**Documentation available at [https://sectasy0.github.io/pyi18n](https://sectasy0.github.io/pyi18n).**
+**Documentation available at [https://sectasy0.github.io/pyi18n](http://pyi18n.pmarkiewicz.pl/home/).**
 
 ## Installation
 
