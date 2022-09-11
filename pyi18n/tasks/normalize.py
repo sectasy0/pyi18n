@@ -1,6 +1,5 @@
 from os import listdir, getcwd
 from os.path import exists
-from typing import Any, Set, Dict
 from xmltodict import unparse as xml_dump
 from os import environ
 
@@ -17,13 +16,12 @@ from yaml import dump as yaml_dump
 def normalize_locales(locale_path: str = "locales/") -> dict:
     """ Sorts the keys in alphabetically order, and overrides files """
 
-    # dir_content = listdir(locale_path)
     locale_path: str = f"{getcwd()}/{locale_path}"
     if not exists(locale_path):
         print(f"[ERROR] {locale_path} does not exist")
         exit(1)
 
-    locales: Set = set([x.split('.')[0] for x in listdir(locale_path)])
+    locales: set = set([x.split('.')[0] for x in listdir(locale_path)])
 
     if not locales:
         print(f"[ERROR] {locale_path} is empty")
@@ -32,28 +30,28 @@ def normalize_locales(locale_path: str = "locales/") -> dict:
     __perform_normalize(locales, locale_path)
 
 
-def __perform_normalize(locales: Set[str], locale_path: str) -> None:
+def __perform_normalize(locales: set, locale_path: str) -> None:
     """ private method to perform normalization """
+
     for subclass in loaders.PyI18nBaseLoader.__subclasses__():
         if subclass.__name__ == "PyI18nXMLLoader" \
          and environ["PYI18N_TEST_ENV"]:
             continue
 
         loader: loaders.PyI18nBaseLoader = subclass(locale_path)
+        content: dict = loader.load(locales)
 
-        content: Dict[str] = loader.load(locales)
-
-        sorted_content: Dict[Any] = __sort_nested(content)
+        sorted_content: dict = __sort_nested(content)
 
         __save_normalized(locales, loader,
-            locale_path, sorted_content)
+                          locale_path, sorted_content)
 
 
 def __save_normalized(
-        locales: Set[str],
+        locales: set,
         loader: loaders.PyI18nBaseLoader,
         locale_path: str,
-        sorted_content: Dict[Any]
+        sorted_content: dict
     ) -> None:
     """ private function to save the normalized content """
 
