@@ -31,7 +31,8 @@ def normalize_locales(locale_path: str = "locales/") -> dict:
 
 
 def __perform_normalize(locales: set, locale_path: str) -> None:
-    """ private method to perform normalization """
+    """ private method to perform normalization,
+        should not be called directly"""
 
     for subclass in loaders.PyI18nBaseLoader.__subclasses__():
         if subclass.__name__ == "PyI18nXMLLoader" \
@@ -53,7 +54,8 @@ def __save_normalized(
         locale_path: str,
         sorted_content: dict
     ) -> None:
-    """ private function to save the normalized content """
+    """ private function to save the normalized content,
+        should not be called directly."""
 
     ext: str = loader.type().replace('yaml', 'yml')
     dumper: str = {
