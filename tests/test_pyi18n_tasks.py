@@ -1,3 +1,4 @@
+# flake8: noqa
 from typing import List
 from pytest import raises
 from .helpers import test_path, capture, empty_locales

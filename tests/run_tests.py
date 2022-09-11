@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# flake8: noqa
 from os import path, mkdir, environ
 from json import dumps
 from yaml import dump
@@ -6,7 +7,7 @@ from pytest import main
 
 from helpers import (test_path, locale_content,
                      bigger_files_path, bigger_locales,
-                     empty_locales, corrupted_locales, 
+                     empty_locales, corrupted_locales,
                      corrupted_path, corrupted_locales_yaml)
 
 
