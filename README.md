@@ -7,6 +7,9 @@
 
 **Documentation available at [http://pyi18n.pmarkiewicz.pl](http://pyi18n.pmarkiewicz.pl/home/).**
 
+## Overview
+Pyi18n is a simple library for internationalization in Python. It allows you to easily translate your application into multiple languages and support pluralization. Pyi18n supports custom loaders, so you can use it with translation files in any format. Simply provide a custom loader to parse your translation files, and Pyi18n will take care of the rest. With Pyi18n, it's easy to create a truly internationalized application.
+
 ## Installation
 
 ```sh
