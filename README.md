@@ -134,6 +134,7 @@ For any questions and suggestions or bugs please create an issue.
 
 ### TODO
 
+* Django and FastAPI integration.
 * Remove duplicates during normalization
 * Translation for `pyi18n-tasks` from multiple sources
 * Adding new locale from `pyi18n-tasks`
