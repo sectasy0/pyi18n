@@ -12,7 +12,7 @@ You can install PyI18n via pip:
 pip install pyi18n-v2
 ```
 
-## Using library in your application
+## Getting Started
 
 A few motivating and useful examples of how pyi18n can be used.
 
@@ -31,7 +31,6 @@ You can then create an instance of the PyI18n class, passing in the desired lang
 
 ```python
 from pyi18n import PyI18n
-
 
 # default load_path is locales/
 # you can change this path by specifying load_path parameter
@@ -98,6 +97,7 @@ To create custom locale loader you have to create a class which will inherit fro
 ```python
 from pyi18n.loaders import PyI18nBaseLoader
 
+
 class MyCustomLoader(PyI18nBaseLoader):
 
     def load(self, locales: tuple, load_path: str):
@@ -114,6 +114,7 @@ Then pass your custom loader to PyI18n class.
 
 ```python
 from pyi18n.loaders import PyI18nBaseLoader
+
 
 class MyCustomLoader(PyI18nBaseLoader):
 
@@ -166,11 +167,9 @@ python3 tests/run_tests.py
 
 For any questions and suggestions or bugs please create an issue.
 
-### TODO
+## Roadmap
 
-* Remove duplicates during normalization
-* Translation for `pyi18n-tasks` from multiple sources
-* Adding new locale from `pyi18n-tasks`
+See issues, If I have enough time and come up with a good idea on how this package can be improved, I'll post it there, along with tip.
 
 ## Release History
 

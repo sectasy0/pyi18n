@@ -22,6 +22,7 @@ class PyI18nBaseLoader:
                                 locales and returns as python dict
         type () -> str: return loader type
         get_path () -> str: return loader path
+        __load_file (str, str, object, str) -> dict: return file content
 
     """
 
@@ -40,7 +41,8 @@ class PyI18nBaseLoader:
         self.load_path: str = load_path
 
     def load(self, locales: tuple, ser_mod: object) -> dict:
-        """ Load translations for given locales
+        """ Load translations for given locales,
+            should be overridden in child classes.
 
         Args:
             locales (tuple): locales to load
@@ -64,13 +66,28 @@ class PyI18nBaseLoader:
                 continue
 
             try:
-                with open(file_path, 'r', encoding="utf-8") as _f:
-                    load_params: dict = {"Loader": yaml.FullLoader} \
-                        if file_extension == "yml" else {}
-                    loaded[locale] = ser_mod.load(_f, **load_params)[locale]
+                loaded[locale] = self.__load_file(file_path,
+                                    file_extension, ser_mod, locale)
             except (json.decoder.JSONDecodeError, yaml.YAMLError):
                 continue
         return loaded
+
+    def __load_file(self,
+            file_path: str,
+            ext: str,
+            ser_mod: object,
+            locale: str
+        ) -> dict:
+        """ loads content, should not be called directly
+
+        Returns:
+            dict: loaded content
+
+        """
+        with open(file_path, 'r', encoding="utf-8") as _f:
+            load_params: dict = {"Loader": yaml.FullLoader} \
+                if ext == "yml" else {}
+            return ser_mod.load(_f, **load_params)[locale]
 
     def type(self) -> str:
         """ Return loader type

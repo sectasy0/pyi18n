@@ -83,7 +83,7 @@ class PyI18n:
             raise FileNotFoundError(f"{self.load_path} directory "
                                     "not found, please create it")
 
-        self._loaded_translations = self.loader.load(self.available_locales)
+        self._loaded_translations: dict = self.loader.load(self.available_locales)
 
     def gettext(self, locale: str, path: str, **kwargs) -> Union[dict, str]:
         """ Get translation for given locale and path
