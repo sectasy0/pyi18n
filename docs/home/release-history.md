@@ -1,3 +1,6 @@
+### Unreleased
+* Improvements:
+    * Added guidelines for integration with Django framework
 
 ### Version [1.1.0](https://pypi.org/project/pyi18n-v2/1.1.0/) - 23.08.2022
 
