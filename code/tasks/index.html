@@ -600,6 +600,20 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#pyi18n.tasks.normalize.__perform_normalize" class="md-nav__link">
+    __perform_normalize()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pyi18n.tasks.normalize.__save_normalized" class="md-nav__link">
+    __save_normalized()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#pyi18n.tasks.normalize.__sort_nested" class="md-nav__link">
     __sort_nested()
   </a>
@@ -684,6 +698,20 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#pyi18n.tasks.normalize.__perform_normalize" class="md-nav__link">
+    __perform_normalize()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pyi18n.tasks.normalize.__save_normalized" class="md-nav__link">
+    __save_normalized()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#pyi18n.tasks.normalize.__sort_nested" class="md-nav__link">
     __sort_nested()
   </a>
@@ -741,6 +769,122 @@
 
 
 
+<h2 id="pyi18n.tasks.normalize.__perform_normalize" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">__perform_normalize</span><span class="p">(</span><span class="n">locales</span><span class="p">,</span> <span class="n">locale_path</span><span class="p">)</span></code>
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>private method to perform normalization,
+should not be called directly</p>
+
+      <details class="quote">
+        <summary>Source code in <code>pyi18n/tasks/normalize.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">__perform_normalize</span><span class="p">(</span><span class="n">locales</span><span class="p">:</span> <span class="nb">set</span><span class="p">,</span> <span class="n">locale_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot; private method to perform normalization,</span>
+<span class="sd">        should not be called directly&quot;&quot;&quot;</span>
+
+    <span class="k">for</span> <span class="n">subclass</span> <span class="ow">in</span> <span class="n">loaders</span><span class="o">.</span><span class="n">PyI18nBaseLoader</span><span class="o">.</span><span class="n">__subclasses__</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">subclass</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;PyI18nXMLLoader&quot;</span> \
+         <span class="ow">and</span> <span class="n">environ</span><span class="p">[</span><span class="s2">&quot;PYI18N_TEST_ENV&quot;</span><span class="p">]:</span>
+            <span class="k">continue</span>
+
+        <span class="n">loader</span><span class="p">:</span> <span class="n">loaders</span><span class="o">.</span><span class="n">PyI18nBaseLoader</span> <span class="o">=</span> <span class="n">subclass</span><span class="p">(</span><span class="n">locale_path</span><span class="p">)</span>
+        <span class="n">content</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="n">loader</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">locales</span><span class="p">)</span>
+
+        <span class="n">sorted_content</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="n">__sort_nested</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+
+        <span class="n">__save_normalized</span><span class="p">(</span><span class="n">locales</span><span class="p">,</span> <span class="n">loader</span><span class="p">,</span>
+                          <span class="n">locale_path</span><span class="p">,</span> <span class="n">sorted_content</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h2 id="pyi18n.tasks.normalize.__save_normalized" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">__save_normalized</span><span class="p">(</span><span class="n">locales</span><span class="p">,</span> <span class="n">loader</span><span class="p">,</span> <span class="n">locale_path</span><span class="p">,</span> <span class="n">sorted_content</span><span class="p">)</span></code>
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>private function to save the normalized content,
+should not be called directly.</p>
+
+      <details class="quote">
+        <summary>Source code in <code>pyi18n/tasks/normalize.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">__save_normalized</span><span class="p">(</span>
+        <span class="n">locales</span><span class="p">:</span> <span class="nb">set</span><span class="p">,</span>
+        <span class="n">loader</span><span class="p">:</span> <span class="n">loaders</span><span class="o">.</span><span class="n">PyI18nBaseLoader</span><span class="p">,</span>
+        <span class="n">locale_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">sorted_content</span><span class="p">:</span> <span class="nb">dict</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot; private function to save the normalized content,</span>
+<span class="sd">        should not be called directly.&quot;&quot;&quot;</span>
+
+    <span class="n">ext</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">loader</span><span class="o">.</span><span class="n">type</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;yaml&#39;</span><span class="p">,</span> <span class="s1">&#39;yml&#39;</span><span class="p">)</span>
+    <span class="n">dumper</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;json&quot;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">json_dump</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+        <span class="s2">&quot;yml&quot;</span><span class="p">:</span> <span class="n">yaml_dump</span><span class="p">,</span>
+        <span class="s2">&quot;xml&quot;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">_</span><span class="p">:</span> <span class="n">xml_dump</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">pretty</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="k">for</span> <span class="n">locale</span> <span class="ow">in</span> <span class="n">locales</span><span class="p">:</span>
+        <span class="n">file_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">locale_path</span><span class="si">}{</span><span class="n">locale</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">ext</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">_f</span><span class="p">:</span>
+            <span class="n">dumper</span><span class="p">[</span><span class="n">ext</span><span class="p">]({</span><span class="n">locale</span><span class="p">:</span> <span class="n">sorted_content</span><span class="p">[</span><span class="n">locale</span><span class="p">]},</span> <span class="n">_f</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
 <h2 id="pyi18n.tasks.normalize.__sort_nested" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">__sort_nested</span><span class="p">(</span><span class="n">dictionary</span><span class="p">)</span></code>
 
@@ -749,17 +893,17 @@
 
   <div class="doc doc-contents ">
   
-      <p>Sorts nested dictionaries</p>
+      <p>private function to sort nested dictionaries</p>
 
       <details class="quote">
         <summary>Source code in <code>pyi18n/tasks/normalize.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">55</span>
-<span class="normal">56</span>
-<span class="normal">57</span>
-<span class="normal">58</span>
-<span class="normal">59</span>
-<span class="normal">60</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">__sort_nested</span><span class="p">(</span><span class="n">dictionary</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot; Sorts nested dictionaries &quot;&quot;&quot;</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">__sort_nested</span><span class="p">(</span><span class="n">dictionary</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot; private function to sort nested dictionaries &quot;&quot;&quot;</span>
     <span class="n">dictionary</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="n">dictionary</span>
     <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
         <span class="n">dictionary</span><span class="p">[</span><span class="n">d</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="n">d</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()))</span>
@@ -786,7 +930,8 @@
 
       <details class="quote">
         <summary>Source code in <code>pyi18n/tasks/normalize.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">17</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">16</span>
+<span class="normal">17</span>
 <span class="normal">18</span>
 <span class="normal">19</span>
 <span class="normal">20</span>
@@ -799,64 +944,21 @@
 <span class="normal">27</span>
 <span class="normal">28</span>
 <span class="normal">29</span>
-<span class="normal">30</span>
-<span class="normal">31</span>
-<span class="normal">32</span>
-<span class="normal">33</span>
-<span class="normal">34</span>
-<span class="normal">35</span>
-<span class="normal">36</span>
-<span class="normal">37</span>
-<span class="normal">38</span>
-<span class="normal">39</span>
-<span class="normal">40</span>
-<span class="normal">41</span>
-<span class="normal">42</span>
-<span class="normal">43</span>
-<span class="normal">44</span>
-<span class="normal">45</span>
-<span class="normal">46</span>
-<span class="normal">47</span>
-<span class="normal">48</span>
-<span class="normal">49</span>
-<span class="normal">50</span>
-<span class="normal">51</span>
-<span class="normal">52</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">normalize_locales</span><span class="p">(</span><span class="n">locale_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;locales/&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="normal">30</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">normalize_locales</span><span class="p">(</span><span class="n">locale_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;locales/&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot; Sorts the keys in alphabetically order, and overrides files &quot;&quot;&quot;</span>
 
-    <span class="c1"># dir_content = listdir(locale_path)</span>
     <span class="n">locale_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">getcwd</span><span class="p">()</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">locale_path</span><span class="si">}</span><span class="s2">&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">exists</span><span class="p">(</span><span class="n">locale_path</span><span class="p">):</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[ERROR] </span><span class="si">{</span><span class="n">locale_path</span><span class="si">}</span><span class="s2"> does not exist&quot;</span><span class="p">)</span>
         <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
-    <span class="n">locales</span><span class="p">:</span> <span class="n">Set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="n">x</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">listdir</span><span class="p">(</span><span class="n">locale_path</span><span class="p">)])</span>
+    <span class="n">locales</span><span class="p">:</span> <span class="nb">set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="n">x</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">listdir</span><span class="p">(</span><span class="n">locale_path</span><span class="p">)])</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">locales</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[ERROR] </span><span class="si">{</span><span class="n">locale_path</span><span class="si">}</span><span class="s2"> is empty&quot;</span><span class="p">)</span>
         <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
-    <span class="k">for</span> <span class="n">subclass</span> <span class="ow">in</span> <span class="n">loaders</span><span class="o">.</span><span class="n">PyI18nBaseLoader</span><span class="o">.</span><span class="n">__subclasses__</span><span class="p">():</span>
-        <span class="k">if</span> <span class="n">subclass</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;PyI18nXMLLoader&quot;</span> \
-         <span class="ow">and</span> <span class="n">environ</span><span class="p">[</span><span class="s2">&quot;PYI18N_TEST_ENV&quot;</span><span class="p">]:</span>
-            <span class="k">continue</span>
-        <span class="n">loader</span><span class="p">:</span> <span class="n">loaders</span><span class="o">.</span><span class="n">PyI18nBaseLoader</span> <span class="o">=</span> <span class="n">subclass</span><span class="p">(</span><span class="n">locale_path</span><span class="p">)</span>
-
-        <span class="n">content</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">loader</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">locales</span><span class="p">)</span>
-
-        <span class="n">sorted_content</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="n">__sort_nested</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
-
-        <span class="n">ext</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">loader</span><span class="o">.</span><span class="n">type</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;yaml&#39;</span><span class="p">,</span> <span class="s1">&#39;yml&#39;</span><span class="p">)</span>
-        <span class="n">dumper</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s2">&quot;json&quot;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">json_dump</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
-            <span class="s2">&quot;yml&quot;</span><span class="p">:</span> <span class="n">yaml_dump</span><span class="p">,</span>
-            <span class="s2">&quot;xml&quot;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">_</span><span class="p">:</span> <span class="n">xml_dump</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">pretty</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="p">}</span>
-
-        <span class="k">for</span> <span class="n">locale</span> <span class="ow">in</span> <span class="n">locales</span><span class="p">:</span>
-            <span class="n">file_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">locale_path</span><span class="si">}{</span><span class="n">locale</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">ext</span><span class="si">}</span><span class="s2">&quot;</span>
-            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">_f</span><span class="p">:</span>
-                <span class="n">dumper</span><span class="p">[</span><span class="n">ext</span><span class="p">]({</span><span class="n">locale</span><span class="p">:</span> <span class="n">sorted_content</span><span class="p">[</span><span class="n">locale</span><span class="p">]},</span> <span class="n">_f</span><span class="p">)</span>
+    <span class="n">__perform_normalize</span><span class="p">(</span><span class="n">locales</span><span class="p">,</span> <span class="n">locale_path</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
       </details>
   </div>

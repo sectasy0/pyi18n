@@ -615,9 +615,43 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#using-library-in-your-application" class="md-nav__link">
-    Using library in your application
+  <a href="#getting-started" class="md-nav__link">
+    Getting Started
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integrate-pyi18n-with-django-project" class="md-nav__link">
+    Integrate pyi18n with Django project
+  </a>
+  
+    <nav class="md-nav" aria-label="Integrate pyi18n with Django project">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#settingspy" class="md-nav__link">
+    settings.py
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#viewspy" class="md-nav__link">
+    views.py
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#register-template-tag" class="md-nav__link">
+    register template tag
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -662,6 +696,34 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#roadmap" class="md-nav__link">
+    Roadmap
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#release-history" class="md-nav__link">
+    Release History
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#meta" class="md-nav__link">
+    Meta
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#contributing" class="md-nav__link">
+    Contributing
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -682,32 +744,30 @@
 
 <h1 id="pyi18n">PyI18n</h1>
 <blockquote>
-<p>Simple and easy to use internationalization library inspired by Ruby i18n.</p>
+<p>PyI18n is a simple and easy to use internationalization library for Python, inspired by Ruby i18n.</p>
 </blockquote>
-<p><img alt="Python version" src="https://img.shields.io/badge/python-3.6-blue" />
-<a href="https://codeclimate.com/github/sectasy0/pyi18n/coverage"><img alt="Code Climate" src="https://codeclimate.com/github/sectasy0/pyi18n/badges/gpa.svg" /></a>
-<a href="https://codeclimate.com/github/sectasy0/pyi18n"><img alt="Issue Count" src="https://codeclimate.com/github/sectasy0/pyi18n/badges/issue_count.svg" /></a></p>
+<p><img alt="Python version" src="https://img.shields.io/badge/python-3.6-blue" /> <a href="https://codeclimate.com/github/sectasy0/pyi18n/coverage"><img alt="Code Climate" src="https://codeclimate.com/github/sectasy0/pyi18n/badges/gpa.svg" /></a> <a href="https://codeclimate.com/github/sectasy0/pyi18n"><img alt="Issue Count" src="https://codeclimate.com/github/sectasy0/pyi18n/badges/issue_count.svg" /></a></p>
+<p><strong>Documentation available at <a href="https://sectasy0.github.io/pyi18n">https://sectasy0.github.io/pyi18n</a>.</strong></p>
 <h2 id="installation">Installation</h2>
+<p>You can install PyI18n via pip:
 <div class="highlight"><pre><span></span><code>pip install pyi18n-v2
-</code></pre></div>
-<h2 id="using-library-in-your-application">Using library in your application</h2>
+</code></pre></div></p>
+<h2 id="getting-started">Getting Started</h2>
 <p>A few motivating and useful examples of how pyi18n can be used.</p>
-<p>In first step you have to create locales folder in your main application folder.
-Then you can create your own locale files in this folder.</p>
-<p>for example:</p>
+<p>To use PyI18n in your application, you will first need to create a locales folder in the root directory of your project. Within this folder, you can create locale files in the format of your choice (e.g. YAML, JSON).</p>
+<p>For example:</p>
 <div class="highlight"><pre><span></span><code>$ mkdir -p my_app/locales
 $ touch my_app/locales/en.yml
 $ touch my_app/locales/pl.yml
 $ touch my_app/locales/de.yml
 </code></pre></div>
-<p>Then create an instance of <code>PyI18n</code> class. For custom locales directory you can pass it as an argument (default is in app_root/locale/).</p>
+<p>You can then create an instance of the PyI18n class, passing in the desired languages and, optionally, a custom locales directory.</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">pyi18n</span> <span class="kn">import</span> <span class="n">PyI18n</span>
-
 
 <span class="c1"># default load_path is locales/</span>
 <span class="c1"># you can change this path by specifying load_path parameter</span>
 <span class="n">i18n</span> <span class="o">=</span> <span class="n">PyI18n</span><span class="p">((</span><span class="s2">&quot;en&quot;</span><span class="p">,</span> <span class="s2">&quot;pl&quot;</span><span class="p">,</span> <span class="s2">&quot;de&quot;</span><span class="p">,</span> <span class="s2">&quot;jp&quot;</span><span class="p">),</span> <span class="n">load_path</span><span class="o">=</span><span class="s2">&quot;translations/&quot;</span><span class="p">)</span>
-<span class="n">_</span> <span class="o">=</span> <span class="n">i18n</span><span class="o">.</span><span class="n">gettext</span>
+<span class="n">_</span><span class="p">:</span> <span class="n">callable</span> <span class="o">=</span> <span class="n">i18n</span><span class="o">.</span><span class="n">gettext</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s2">&quot;en&quot;</span><span class="p">,</span> <span class="s2">&quot;hello.hello_user&quot;</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="s2">&quot;John&quot;</span><span class="p">))</span>
 <span class="c1">#&gt; Hello John!</span>
@@ -721,23 +781,54 @@ $ touch my_app/locales/de.yml
 <span class="nb">print</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s2">&quot;jp&quot;</span><span class="p">,</span> <span class="s2">&quot;hello.hello_user&quot;</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="s2">&quot;ジョンさん&quot;</span><span class="p">))</span>
 <span class="c1">#&gt; こんにちは、ジョンさん！</span>
 </code></pre></div>
+<h2 id="integrate-pyi18n-with-django-project">Integrate pyi18n with Django project</h2>
+<p>To integrate pyi18n into your Django project, you will need to first add a locale field to your user model class. This field will store the user's preferred language, which will be used to retrieve the appropriate translations from the locales directory.</p>
+<p>Next, you will need to configure pyi18n in your settings.py file by creating an instance of the PyI18n class and specifying the available languages. You can also create a gettext function for ease of use.</p>
+<p>In your views, you can then use the gettext function to retrieve translations based on the user's preferred language. To use translations in templates, you will need to create a custom template tag that utilizes the gettext function.</p>
+<h3 id="settingspy">settings.py</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">pyi18n</span> <span class="kn">import</span> <span class="n">PyI18n</span>
+
+<span class="n">i18n</span><span class="p">:</span> <span class="n">PyI18n</span> <span class="o">=</span> <span class="n">PyI18n</span><span class="p">([</span><span class="s1">&#39;pl&#39;</span><span class="p">,</span> <span class="s1">&#39;en&#39;</span><span class="p">])</span>
+<span class="n">_</span><span class="p">:</span> <span class="n">callable</span> <span class="o">=</span> <span class="n">i18n</span><span class="o">.</span><span class="n">gettext</span>
+</code></pre></div>
+<h3 id="viewspy">views.py</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">mysite.settings</span> <span class="kn">import</span> <span class="n">_</span>
+
+<span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="n">translated</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">_</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">locale</span><span class="p">,</span> <span class="s1">&#39;hello&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;John&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;This is an example view. </span><span class="si">{</span><span class="n">translated</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="register-template-tag">register template tag</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">django</span> <span class="kn">import</span> <span class="n">template</span>
+<span class="kn">from</span> <span class="nn">mysite.settings</span> <span class="kn">import</span> <span class="n">_</span>
+
+<span class="n">register</span> <span class="o">=</span> <span class="n">template</span><span class="o">.</span><span class="n">Library</span><span class="p">()</span>
+
+<span class="nd">@register</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;t&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">translate</span><span class="p">(</span><span class="n">locale</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">_</span><span class="p">(</span><span class="n">locale</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</code></pre></div>
+<p>That's it, you have now successfully installed and configured PyI18n for your project. You can now use the provided gettext function to easily retrieve translations based on the user's preferred language. Additionally, you can use the provided template tag to easily retrieve translations in your templates. And if you need to use custom loaders you can use the PyI18nBaseLoader to create your own loaders.</p>
+<hr />
 <h2 id="creating-custom-loader-class">Creating custom loader class</h2>
 <p>To create custom locale loader you have to create a class which will inherit from PyI18nBaseLoader and override <code>load</code> method with all required parameters (see below). You can see an example of custom locale loader in <code>examples/custom_xml_loader.py</code>.</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">pyi18n.loaders</span> <span class="kn">import</span> <span class="n">PyI18nBaseLoader</span>
+
 
 <span class="k">class</span> <span class="nc">MyCustomLoader</span><span class="p">(</span><span class="n">PyI18nBaseLoader</span><span class="p">):</span>
 
     <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">locales</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">,</span> <span class="n">load_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
         <span class="c1"># load_path is the path where your loader will look for locales files</span>
         <span class="c1"># locales is a tuple of locales which will be loaded</span>
+        <span class="c1"># return a dictionary with locale data</span>
 
         <span class="o">...</span><span class="n">your</span> <span class="n">custom</span> <span class="n">loader</span> <span class="n">logic</span><span class="o">...</span>
 
-        <span class="c1"># return a dictionary with locale data</span>
         <span class="k">return</span> <span class="p">{}</span>
 </code></pre></div>
 <p>Then pass your custom loader to PyI18n class.</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">pyi18n.loaders</span> <span class="kn">import</span> <span class="n">PyI18nBaseLoader</span>
+
 
 <span class="k">class</span> <span class="nc">MyCustomLoader</span><span class="p">(</span><span class="n">PyI18nBaseLoader</span><span class="p">):</span>
 
@@ -752,10 +843,10 @@ $ touch my_app/locales/de.yml
 
 <span class="c1"># don&#39;t use load_path in `PyI18n` constructor, if not using default yaml loader</span>
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
-    <span class="n">loader</span> <span class="o">=</span> <span class="n">MyCustomLoader</span><span class="p">(</span><span class="n">load_path</span><span class="o">=</span><span class="s2">&quot;locales/&quot;</span><span class="p">)</span>
-    <span class="n">i18n</span> <span class="o">=</span> <span class="n">PyI18n</span><span class="p">((</span><span class="s2">&quot;en&quot;</span><span class="p">,),</span> <span class="n">loader</span><span class="o">=</span><span class="n">loader</span><span class="p">)</span>
-
-    <span class="n">_</span> <span class="o">=</span> <span class="n">i18n</span><span class="o">.</span><span class="n">gettext</span>
+    <span class="n">load_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;locales/&quot;</span>
+    <span class="n">loader</span><span class="p">:</span> <span class="n">PyI18nBaseLoader</span> <span class="o">=</span> <span class="n">MyCustomLoader</span><span class="p">(</span><span class="n">load_path</span><span class="o">=</span><span class="n">load_path</span><span class="p">)</span>
+    <span class="n">i18n</span><span class="p">:</span> <span class="n">PyI18n</span> <span class="o">=</span> <span class="n">PyI18n</span><span class="p">((</span><span class="s2">&quot;en&quot;</span><span class="p">,),</span> <span class="n">loader</span><span class="o">=</span><span class="n">loader</span><span class="p">)</span>
+    <span class="n">_</span><span class="p">:</span> <span class="n">callable</span> <span class="o">=</span> <span class="n">i18n</span><span class="o">.</span><span class="n">gettext</span>
 
     <span class="nb">print</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s2">&quot;en&quot;</span><span class="p">,</span> <span class="s2">&quot;hello.hello_user&quot;</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="s2">&quot;John&quot;</span><span class="p">))</span>
     <span class="c1">#&gt; Hello John!</span>
@@ -776,6 +867,21 @@ pyi18n-tasks: error: the following arguments are required: normalize
 <div class="highlight"><pre><span></span><code>python3 tests/run_tests.py
 </code></pre></div>
 <p>For any questions and suggestions or bugs please create an issue.</p>
+<h2 id="roadmap">Roadmap</h2>
+<p>See issues, If I have enough time and come up with a good idea on how this package can be improved, I'll post it there, along with tip.</p>
+<h2 id="release-history">Release History</h2>
+<p><strong>Release History available at <a href="https://sectasy0.github.io/pyi18n/home/release-history/">https://sectasy0.github.io/pyi18n/home/release-history/</a>.</strong></p>
+<h2 id="meta">Meta</h2>
+<p>Distributed under the MIT license. See <code>LICENSE</code> for more information.</p>
+<p><a href="https://github.com/sectasy0">https://github.com/sectasy0</a></p>
+<h2 id="contributing">Contributing</h2>
+<ol>
+<li>Fork it (<a href="https://github.com/sectasy0/pyi18n">https://github.com/sectasy0/pyi18n</a>)</li>
+<li>Create your feature branch (<code>git checkout -b feature/fooBar</code>)</li>
+<li>Commit your changes (<code>git commit -am 'feat: Add some fooBar'</code>) </li>
+<li>Push to the branch (<code>git push origin feature/fooBar</code>)</li>
+<li>Create a new Pull Request</li>
+</ol>
 <!-- Markdown link & img dfn's -->
 
 
