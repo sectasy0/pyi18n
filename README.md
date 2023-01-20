@@ -82,9 +82,15 @@ from mysite.settings import _
 
 register = template.Library()
 
-@register.filter(name='t')
+@register.simple_tag
 def translate(locale: str, path: str, **kwargs):
     return _(locale, path, **kwargs)
+```
+
+## usage in templates
+
+```python
+{% translate request.current_user.locale, "hello", name="John" %}
 ```
 
 That's it, you have now successfully installed and configured PyI18n for your project. You can now use the provided gettext function to easily retrieve translations based on the user's preferred language. Additionally, you can use the provided template tag to easily retrieve translations in your templates. And if you need to use custom loaders you can use the PyI18nBaseLoader to create your own loaders.
@@ -177,12 +183,6 @@ See issues, If I have enough time and come up with a good idea on how this packa
 
 **Release History available at [https://sectasy0.github.io/pyi18n/home/release-history/](https://sectasy0.github.io/pyi18n/home/release-history/).**
 
-## Meta
-
-Distributed under the MIT license. See ``LICENSE`` for more information.
-
-[https://github.com/sectasy0](https://github.com/sectasy0)
-
 ## Contributing
 
 1. Fork it (<https://github.com/sectasy0/pyi18n>)
@@ -191,7 +191,6 @@ Distributed under the MIT license. See ``LICENSE`` for more information.
 4. Push to the branch (`git push origin feature/fooBar`)
 5. Create a new Pull Request
 
-<!-- Markdown link & img dfn's -->
 [python-image]: https://img.shields.io/badge/python-3.6-blue
 [pypi-image]: https://img.shields.io/badge/pypi-remly-blue
 [pypi-url]:  pypi.org/project/pyi18n/
