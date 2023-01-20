@@ -42,10 +42,10 @@ class PyI18n:
     _loaded_translations: dict = {}
 
     def __init__(self,
-        available_locales: tuple,
-        load_path: str = "locales/",
-        loader: PyI18nBaseLoader = None
-    ) -> None:
+                 available_locales: tuple,
+                 load_path: str = "locales/",
+                 loader: PyI18nBaseLoader = None
+                 ) -> None:
 
         """ Initialize i18n class
 
@@ -59,11 +59,11 @@ class PyI18n:
 
         self.available_locales: tuple = available_locales
         self.load_path: str = f"{getcwd()}/{load_path}"
-        if loader is not None and loader.get_path() != self.load_path:
-            self.load_path = loader.get_path()
+        self.loader: PyI18nBaseLoader = loader or PyI18nYamlLoader(
+            self.load_path)
 
-        self.loader: PyI18nBaseLoader = loader or \
-            PyI18nYamlLoader(self.load_path)
+        self.load_path: str = self.loader.get_path() if self.loader.get_path(
+        ) != self.load_path else self.load_path
 
         self.__pyi18n_init()
 
@@ -83,7 +83,8 @@ class PyI18n:
             raise FileNotFoundError(f"{self.load_path} directory "
                                     "not found, please create it")
 
-        self._loaded_translations: dict = self.loader.load(self.available_locales)
+        self._loaded_translations: dict = self.loader.load(
+                                            self.available_locales)
 
     def gettext(self, locale: str, path: str, **kwargs) -> Union[dict, str]:
         """ Get translation for given locale and path

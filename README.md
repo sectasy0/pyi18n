@@ -166,6 +166,8 @@ python3 tests/run_tests.py
 ```
 
 For any questions and suggestions or bugs please create an issue.
+## Limitations
+* Normalization task will not work for custom loader classes except xml, if you need that use one of build in loaders or user XML loader from example. 
 
 ## Roadmap
 

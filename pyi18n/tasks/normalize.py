@@ -49,11 +49,11 @@ def __perform_normalize(locales: set, locale_path: str) -> None:
 
 
 def __save_normalized(
-        locales: set,
-        loader: loaders.PyI18nBaseLoader,
-        locale_path: str,
-        sorted_content: dict
-    ) -> None:
+                    locales: set,
+                    loader: loaders.PyI18nBaseLoader,
+                    locale_path: str,
+                    sorted_content: dict
+                    ) -> None:
     """ private function to save the normalized content,
         should not be called directly."""
 
@@ -72,7 +72,4 @@ def __save_normalized(
 
 def __sort_nested(dictionary: dict) -> dict:
     """ private function to sort nested dictionaries """
-    dictionary: dict = dictionary
-    for d in dictionary:
-        dictionary[d] = dict(sorted(dictionary[d].items()))
-    return dict(dictionary)
+    return {k: dict(sorted(v.items())) for k, v in dictionary.items()}

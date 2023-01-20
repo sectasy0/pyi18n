@@ -67,17 +67,20 @@ class PyI18nBaseLoader:
 
             try:
                 loaded[locale] = self.__load_file(file_path,
-                                    file_extension, ser_mod, locale)
+                                                  file_extension,
+                                                  ser_mod,
+                                                  locale
+                                                  )
             except (json.decoder.JSONDecodeError, yaml.YAMLError):
                 continue
         return loaded
 
     def __load_file(self,
-            file_path: str,
-            ext: str,
-            ser_mod: object,
-            locale: str
-        ) -> dict:
+                    file_path: str,
+                    ext: str,
+                    ser_mod: object,
+                    locale: str
+                    ) -> dict:
         """ loads content, should not be called directly
 
         Returns:
