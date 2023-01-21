@@ -87,7 +87,7 @@ def translate(locale: str, path: str, **kwargs):
     return _(locale, path, **kwargs)
 ```
 
-## usage in templates
+### usage in templates
 
 ```python
 {% translate request.current_user.locale, "hello", name="John" %}
