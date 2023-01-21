@@ -5,6 +5,12 @@ name: pyi18n
 
 on:
   push:
+    paths-ignore:
+      - '**/README.md'
+      - '.docs/*'
+      - '.gitignore'
+      - 'LICENSE'
+      - 'mkdocs.yml'
   pull_request:
 
 permissions:
