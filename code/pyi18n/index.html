@@ -935,7 +935,8 @@ __pyi18n_init () -&gt; None</p>
 <span class="normal">138</span>
 <span class="normal">139</span>
 <span class="normal">140</span>
-<span class="normal">141</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">PyI18n</span><span class="p">:</span>
+<span class="normal">141</span>
+<span class="normal">142</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">PyI18n</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot; Main i18n localization class</span>
 
 <span class="sd">    Attributes:</span>
@@ -963,10 +964,10 @@ __pyi18n_init () -&gt; None</p>
     <span class="n">_loaded_translations</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{}</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-        <span class="n">available_locales</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">,</span>
-        <span class="n">load_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;locales/&quot;</span><span class="p">,</span>
-        <span class="n">loader</span><span class="p">:</span> <span class="n">PyI18nBaseLoader</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+                 <span class="n">available_locales</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">,</span>
+                 <span class="n">load_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;locales/&quot;</span><span class="p">,</span>
+                 <span class="n">loader</span><span class="p">:</span> <span class="n">PyI18nBaseLoader</span> <span class="o">=</span> <span class="kc">None</span>
+                 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 
         <span class="sd">&quot;&quot;&quot; Initialize i18n class</span>
 
@@ -980,11 +981,11 @@ __pyi18n_init () -&gt; None</p>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">available_locales</span><span class="p">:</span> <span class="nb">tuple</span> <span class="o">=</span> <span class="n">available_locales</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">load_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">getcwd</span><span class="p">()</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">load_path</span><span class="si">}</span><span class="s2">&quot;</span>
-        <span class="k">if</span> <span class="n">loader</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">loader</span><span class="o">.</span><span class="n">get_path</span><span class="p">()</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_path</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">load_path</span> <span class="o">=</span> <span class="n">loader</span><span class="o">.</span><span class="n">get_path</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">loader</span><span class="p">:</span> <span class="n">PyI18nBaseLoader</span> <span class="o">=</span> <span class="n">loader</span> <span class="ow">or</span> <span class="n">PyI18nYamlLoader</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">load_path</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">loader</span><span class="p">:</span> <span class="n">PyI18nBaseLoader</span> <span class="o">=</span> <span class="n">loader</span> <span class="ow">or</span> \
-            <span class="n">PyI18nYamlLoader</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">load_path</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">load_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">loader</span><span class="o">.</span><span class="n">get_path</span><span class="p">()</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">loader</span><span class="o">.</span><span class="n">get_path</span><span class="p">(</span>
+        <span class="p">)</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_path</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_path</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">__pyi18n_init</span><span class="p">()</span>
 
@@ -1004,7 +1005,8 @@ __pyi18n_init () -&gt; None</p>
             <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">load_path</span><span class="si">}</span><span class="s2"> directory &quot;</span>
                                     <span class="s2">&quot;not found, please create it&quot;</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">_loaded_translations</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">loader</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">available_locales</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_loaded_translations</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">loader</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
+                                            <span class="bp">self</span><span class="o">.</span><span class="n">available_locales</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">gettext</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">locale</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">dict</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
         <span class="sd">&quot;&quot;&quot; Get translation for given locale and path</span>
@@ -1143,8 +1145,7 @@ __pyi18n_init () -&gt; None</p>
 
       <details class="quote">
         <summary>Source code in <code>pyi18n/pyi18n.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">117</span>
-<span class="normal">118</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">118</span>
 <span class="normal">119</span>
 <span class="normal">120</span>
 <span class="normal">121</span>
@@ -1158,7 +1159,8 @@ __pyi18n_init () -&gt; None</p>
 <span class="normal">129</span>
 <span class="normal">130</span>
 <span class="normal">131</span>
-<span class="normal">132</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">__find</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">locale</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">dict</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+<span class="normal">132</span>
+<span class="normal">133</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">__find</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">locale</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">dict</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot; Find translation for given path and locale</span>
 
 <span class="sd">    Args:</span>
@@ -1273,10 +1275,10 @@ __pyi18n_init () -&gt; None</p>
 <span class="normal">66</span>
 <span class="normal">67</span>
 <span class="normal">68</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-    <span class="n">available_locales</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">,</span>
-    <span class="n">load_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;locales/&quot;</span><span class="p">,</span>
-    <span class="n">loader</span><span class="p">:</span> <span class="n">PyI18nBaseLoader</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+             <span class="n">available_locales</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">,</span>
+             <span class="n">load_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;locales/&quot;</span><span class="p">,</span>
+             <span class="n">loader</span><span class="p">:</span> <span class="n">PyI18nBaseLoader</span> <span class="o">=</span> <span class="kc">None</span>
+             <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 
     <span class="sd">&quot;&quot;&quot; Initialize i18n class</span>
 
@@ -1290,11 +1292,11 @@ __pyi18n_init () -&gt; None</p>
 
     <span class="bp">self</span><span class="o">.</span><span class="n">available_locales</span><span class="p">:</span> <span class="nb">tuple</span> <span class="o">=</span> <span class="n">available_locales</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">load_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">getcwd</span><span class="p">()</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">load_path</span><span class="si">}</span><span class="s2">&quot;</span>
-    <span class="k">if</span> <span class="n">loader</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">loader</span><span class="o">.</span><span class="n">get_path</span><span class="p">()</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_path</span><span class="p">:</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">load_path</span> <span class="o">=</span> <span class="n">loader</span><span class="o">.</span><span class="n">get_path</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">loader</span><span class="p">:</span> <span class="n">PyI18nBaseLoader</span> <span class="o">=</span> <span class="n">loader</span> <span class="ow">or</span> <span class="n">PyI18nYamlLoader</span><span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">load_path</span><span class="p">)</span>
 
-    <span class="bp">self</span><span class="o">.</span><span class="n">loader</span><span class="p">:</span> <span class="n">PyI18nBaseLoader</span> <span class="o">=</span> <span class="n">loader</span> <span class="ow">or</span> \
-        <span class="n">PyI18nYamlLoader</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">load_path</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">load_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">loader</span><span class="o">.</span><span class="n">get_path</span><span class="p">()</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">loader</span><span class="o">.</span><span class="n">get_path</span><span class="p">(</span>
+    <span class="p">)</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_path</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_path</span>
 
     <span class="bp">self</span><span class="o">.</span><span class="n">__pyi18n_init</span><span class="p">()</span>
 </code></pre></div></td></tr></table></div>
@@ -1359,7 +1361,8 @@ __pyi18n_init () -&gt; None</p>
 <span class="normal">83</span>
 <span class="normal">84</span>
 <span class="normal">85</span>
-<span class="normal">86</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">__pyi18n_init</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="normal">86</span>
+<span class="normal">87</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">__pyi18n_init</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot; validator and loader for translations</span>
 
 <span class="sd">    Raises:</span>
@@ -1375,7 +1378,8 @@ __pyi18n_init () -&gt; None</p>
         <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">load_path</span><span class="si">}</span><span class="s2"> directory &quot;</span>
                                 <span class="s2">&quot;not found, please create it&quot;</span><span class="p">)</span>
 
-    <span class="bp">self</span><span class="o">.</span><span class="n">_loaded_translations</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">loader</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">available_locales</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_loaded_translations</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">loader</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
+                                        <span class="bp">self</span><span class="o">.</span><span class="n">available_locales</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
       </details>
   </div>
@@ -1416,14 +1420,14 @@ __pyi18n_init () -&gt; None</p>
 
       <details class="quote">
         <summary>Source code in <code>pyi18n/pyi18n.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">134</span>
-<span class="normal">135</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">135</span>
 <span class="normal">136</span>
 <span class="normal">137</span>
 <span class="normal">138</span>
 <span class="normal">139</span>
 <span class="normal">140</span>
-<span class="normal">141</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_loader</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PyI18nBaseLoader</span><span class="p">:</span>
+<span class="normal">141</span>
+<span class="normal">142</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_loader</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PyI18nBaseLoader</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot; Return loader class</span>
 
 <span class="sd">    Returns:</span>
@@ -1533,8 +1537,7 @@ __pyi18n_init () -&gt; None</p>
 
       <details class="quote">
         <summary>Source code in <code>pyi18n/pyi18n.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 88</span>
-<span class="normal"> 89</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 89</span>
 <span class="normal"> 90</span>
 <span class="normal"> 91</span>
 <span class="normal"> 92</span>
@@ -1560,7 +1563,8 @@ __pyi18n_init () -&gt; None</p>
 <span class="normal">112</span>
 <span class="normal">113</span>
 <span class="normal">114</span>
-<span class="normal">115</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">gettext</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">locale</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">dict</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+<span class="normal">115</span>
+<span class="normal">116</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">gettext</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">locale</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">dict</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot; Get translation for given locale and path</span>
 
 <span class="sd">    Args:</span>

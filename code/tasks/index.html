@@ -856,11 +856,11 @@ should not be called directly.</p>
 <span class="normal">68</span>
 <span class="normal">69</span>
 <span class="normal">70</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">__save_normalized</span><span class="p">(</span>
-        <span class="n">locales</span><span class="p">:</span> <span class="nb">set</span><span class="p">,</span>
-        <span class="n">loader</span><span class="p">:</span> <span class="n">loaders</span><span class="o">.</span><span class="n">PyI18nBaseLoader</span><span class="p">,</span>
-        <span class="n">locale_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-        <span class="n">sorted_content</span><span class="p">:</span> <span class="nb">dict</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">locales</span><span class="p">:</span> <span class="nb">set</span><span class="p">,</span>
+                    <span class="n">loader</span><span class="p">:</span> <span class="n">loaders</span><span class="o">.</span><span class="n">PyI18nBaseLoader</span><span class="p">,</span>
+                    <span class="n">locale_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                    <span class="n">sorted_content</span><span class="p">:</span> <span class="nb">dict</span>
+                    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot; private function to save the normalized content,</span>
 <span class="sd">        should not be called directly.&quot;&quot;&quot;</span>
 
@@ -899,15 +899,9 @@ should not be called directly.</p>
         <summary>Source code in <code>pyi18n/tasks/normalize.py</code></summary>
         <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">73</span>
 <span class="normal">74</span>
-<span class="normal">75</span>
-<span class="normal">76</span>
-<span class="normal">77</span>
-<span class="normal">78</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">__sort_nested</span><span class="p">(</span><span class="n">dictionary</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="normal">75</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">__sort_nested</span><span class="p">(</span><span class="n">dictionary</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot; private function to sort nested dictionaries &quot;&quot;&quot;</span>
-    <span class="n">dictionary</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="n">dictionary</span>
-    <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-        <span class="n">dictionary</span><span class="p">[</span><span class="n">d</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="n">d</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()))</span>
-    <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">dictionary</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">items</span><span class="p">()))</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
 </code></pre></div></td></tr></table></div>
       </details>
   </div>
