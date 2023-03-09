@@ -1,0 +1,55 @@
+greetings:
+  welcome: "Welcome"
+  hello: "Hello"
+  goodbye: "Goodbye"
+  see_you_soon: "See you soon"
+  howdy: "Howdy"
+
+buttons:
+  save: "Save"
+  cancel: "Cancel"
+  delete: "Delete"
+  confirm: "Confirm"
+  back: "Back"
+  next: "Next"
+  previous: "Previous"
+  edit: "Edit"
+  create: "Create"
+  submit: "Submit"
+
+messages:
+  error: "Error"
+  success: "Success"
+  warning: "Warning"
+  info: "Information"
+
+menu:
+  home: "Home"
+  about: "About Us"
+  contact: "Contact Us"
+  settings: "Settings"
+  account: "Account"
+
+forms:
+  username: "Username"
+  password: "Password"
+  email: "Email"
+  name: "Name"
+  address: "Address"
+  city: "City"
+  state: "State"
+  country: "Country"
+  phone: "Phone"
+  submit_button: "Submit"
+
+notifications:
+  message_received: "You have received a new message"
+  invitation_received: "You have received a new invitation"
+  notification_center: "Notification Center"
+
+miscellaneous:
+  loading: "Loading..."
+  search: "Search"
+  select_option: "Select an option"
+  privacy_policy: "Privacy Policy"
+  terms_of_service: "Terms of Service"

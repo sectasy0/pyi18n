@@ -1,0 +1,19 @@
+en:
+  announcement:
+    hello: Hello {user}!
+    hello_full_name_age: Hello {name} {surname}! You are {age} years old.
+    hello_user: Hello {user}!
+  common:
+    age: Age
+    center: Center
+    developer: Developer
+    hello: Hello
+    world: World
+  date:
+    today: Today is {date}
+    tomorrow: Tomorrow is {date}
+    yesterday: Yesterday is {date}
+  hello:
+    hello_full_name_age: Hello {name} {surname}! You are {age} years old.
+    hello_user: Hello {user}!
+    world: Hello world!

@@ -1,0 +1,25 @@
+{
+    "title": "Bestellungen",
+        "description": "Verwalten Sie hier Ihre Bestellungen",
+        "table": {
+        "id": "ID",
+        "customer": "Kunde",
+        "date": "Datum",
+        "total": "Gesamt",
+        "status": "Status",
+        "actions": "Aktionen"
+    },
+    "status": {
+        "new": "Neu",
+        "inProgress": "In Bearbeitung",
+        "shipped": "Versendet",
+        "delivered": "Geliefert",
+        "canceled": "Storniert"
+    },
+    "action": {
+        "markAsInProgress": "Als in Bearbeitung markieren",
+        "markAsShipped": "Als versendet markieren",
+        "markAsDelivered": "Als geliefert markieren",
+        "cancelOrder": "Bestellung stornieren"
+    }
+}
