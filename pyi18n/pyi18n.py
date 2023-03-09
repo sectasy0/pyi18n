@@ -23,13 +23,6 @@ class PyI18n:
         _loaded_translations (dict): (class attribute) dictionary
                                     of loaded translations
 
-    Methods:
-        gettext(locale, path, **kwargs) -> Union[dict, str]
-
-    Private Methods:
-        __find (path, locale) -> Union[dict, str]
-        __pyi18n_init () -> None
-
     Examples:
         >>> from pyi18n import PyI18n
         >>> pyi18n = PyI18n(("en", "jp"), "locales/")

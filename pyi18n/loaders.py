@@ -16,15 +16,9 @@ class PyI18nBaseLoader:
 
     Attributes:
         load_path (str): path to translations
+        namespaced (bool): tells loader should look for namespaces
+
         _type (str): loader type
-
-    Methods:
-        load (tuple, object) -> dict: load translations for given
-                                locales and returns as python dict
-        type () -> str: return loader type
-        get_path () -> str: return loader path
-        __load_file (str, str, object, str) -> dict: return file content
-
     """
 
     _type: str = LoaderType.BASE
@@ -34,6 +28,7 @@ class PyI18nBaseLoader:
 
         Args:
             load_path (str): path to translations
+            namespaced (bool): namespaces support
 
         Returns:
             None
@@ -97,19 +92,15 @@ class PyI18nBaseLoader:
             return ser_mod.load(_f, **load_params)[locale]
 
     def _load_namespaced(self, locales: tuple, ser_mod: object) -> dict:
-        """ Load translations from namespaces should be overridden in child classes. This will be looking for a locale (directories) and load all namespaces.
+        """ Load translations from namespaces should be overridden in child classes.
+            This will be looking for a locale (directories) and load all namespaces.
 
         Args:
             locales (tuple): locales to load
-            ser_mod (object): module to serialize
+            ser_mod (object): module for serialization
 
         Returns:
             dict: loaded translations
-
-        Notes:
-            Custom load function should be implemented
-            in child classes and return python dict
-
         """
         loaded: dict = {}
         for locale in locales:
@@ -166,13 +157,9 @@ class PyI18nJsonLoader(PyI18nBaseLoader):
 
     Attributes:
         load_path (str): path to translations
-        _type (str): loader type
+        namespaced (bool): tells loader should look for namespaces
 
-    Methods:
-        load (tuple, object) -> dict: load translations for given
-                                locales and returns as python dict
-        type () -> str: return loader type
-        get_path () -> str: return loader path
+        _type (str): loader type
     """
 
     _type: str = LoaderType.JSON
@@ -184,7 +171,6 @@ class PyI18nJsonLoader(PyI18nBaseLoader):
 
         Args:
             locales (tuple): locales to load
-            namespaced (bool): tells loader should look for namespaces
 
         Returns:
             dict: loaded translations
@@ -202,13 +188,9 @@ class PyI18nYamlLoader(PyI18nBaseLoader):
 
     Attributes:
         load_path (str): path to translations
-        _type (str): loader type
+        namespaced (bool): tells loader should look for namespaces
 
-    Methods:
-        load (tuple, object) -> dict: load translations for given
-                                locales and returns as python dict
-        type () -> str: return loader type
-        get_path () -> str: return loader path
+        _type (str): loader type
     """
 
     _type: str = LoaderType.YAML
@@ -220,7 +202,6 @@ class PyI18nYamlLoader(PyI18nBaseLoader):
 
         Args:
             locales (tuple): locales to load
-            namespaced (bool): tells loader should look for namespaces
 
         Returns:
             dict: loaded translations
