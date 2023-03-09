@@ -6,7 +6,7 @@ HERE = pathlib.Path(__file__).parent
 setup(
     name='pyi18n-v2',
     version='1.1.0',
-    description='Small and easy to use internationalization'
+    description='Simple and easy to use internationalization'
                 'library inspired by Ruby i18n',
     long_description=(HERE / "README.md").read_text(),
     long_description_content_type="text/markdown",
