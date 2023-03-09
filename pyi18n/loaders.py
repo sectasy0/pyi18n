@@ -1,4 +1,5 @@
-from os.path import exists
+from os.path import exists, join, splitext, basename
+from os import listdir, stat
 import json
 import yaml
 
@@ -28,7 +29,7 @@ class PyI18nBaseLoader:
 
     _type: str = LoaderType.BASE
 
-    def __init__(self, load_path: str = "locales/") -> None:
+    def __init__(self, load_path: str = "locales/", namespaced: bool = False) -> None:
         """ Initialize loader class
 
         Args:
@@ -39,6 +40,7 @@ class PyI18nBaseLoader:
 
         """
         self.load_path: str = load_path
+        self.namespaced: bool = namespaced
 
     def load(self, locales: tuple, ser_mod: object) -> dict:
         """ Load translations for given locales,
@@ -73,6 +75,7 @@ class PyI18nBaseLoader:
                                                   )
             except (json.decoder.JSONDecodeError, yaml.YAMLError):
                 continue
+
         return loaded
 
     def __load_file(self,
@@ -90,7 +93,54 @@ class PyI18nBaseLoader:
         with open(file_path, 'r', encoding="utf-8") as _f:
             load_params: dict = {"Loader": yaml.FullLoader} \
                 if ext == "yml" else {}
+
             return ser_mod.load(_f, **load_params)[locale]
+
+    def _load_namespaced(self, locales: tuple, ser_mod: object) -> dict:
+        """ Load translations from namespaces should be overridden in child classes. This will be looking for a locale (directories) and load all namespaces.
+
+        Args:
+            locales (tuple): locales to load
+            ser_mod (object): module to serialize
+
+        Returns:
+            dict: loaded translations
+
+        Notes:
+            Custom load function should be implemented
+            in child classes and return python dict
+
+        """
+        loaded: dict = {}
+        for locale in locales:
+            path: str = join(self.load_path, locale)
+
+            if not exists(path):
+                print(f"[WARNING] path {path} doesn't exist, probably you forgot to add to the available locales list.")
+                continue
+
+            load_params: dict = {"Loader": yaml.FullLoader} \
+                if self._type == "yaml" else {}
+
+            file_extension: str = ser_mod.__name__.replace('yaml', 'yml')
+
+            for file in listdir(path):
+                if file.endswith(file_extension):
+                    filepath: str = join(path, file)
+                    namespace: str = splitext(basename(filepath))[0]
+
+                    # file is empty, should continue
+                    if stat(filepath).st_size == 0:
+                        continue
+
+                    with open(filepath, 'r', encoding="utf-8") as _file:
+                        locale_content: object = ser_mod.load(_file, **load_params)
+
+                        if locale not in loaded:
+                            loaded[locale] = {}
+                        loaded[locale][namespace] = locale_content
+
+        return loaded
 
     def type(self) -> str:
         """ Return loader type
@@ -134,11 +184,15 @@ class PyI18nJsonLoader(PyI18nBaseLoader):
 
         Args:
             locales (tuple): locales to load
+            namespaced (bool): tells loader should look for namespaces
 
         Returns:
             dict: loaded translations
 
         """
+
+        if self.namespaced:
+            return super()._load_namespaced(locales, json)
 
         return super().load(locales, json)
 
@@ -166,10 +220,13 @@ class PyI18nYamlLoader(PyI18nBaseLoader):
 
         Args:
             locales (tuple): locales to load
+            namespaced (bool): tells loader should look for namespaces
 
         Returns:
             dict: loaded translations
 
         """
+        if self.namespaced:
+            return super()._load_namespaced(locales, yaml)
 
         return super().load(locales, yaml)
