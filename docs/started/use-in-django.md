@@ -1,4 +1,3 @@
-
 To integrate pyi18n into your Django project, you will need to first add a locale field to your user model class. This field will store the user's preferred language, which will be used to retrieve the appropriate translations from the locales directory.
 
 Next, you will need to configure pyi18n in your settings.py file by creating an instance of the PyI18n class and specifying the available languages. You can also create a gettext function for ease of use.
@@ -30,9 +29,16 @@ from mysite.settings import _
 
 register = template.Library()
 
-@register.filter(name='t')
+@register.simple_tag
 def translate(locale: str, path: str, **kwargs):
     return _(locale, path, **kwargs)
+```
+
+### usage in templates
+
+> **_NOTE:_**  Wrap this tag inside jinja2 special characters
+```python
+translate request.current_user.locale, "hello", name="John"
 ```
 
 That's it, you have now successfully installed and configured PyI18n for your project. You can now use the provided gettext function to easily retrieve translations based on the user's preferred language. Additionally, you can use the provided template tag to easily retrieve translations in your templates. And if you need to use custom loaders you can use the PyI18nBaseLoader to create your own loaders.

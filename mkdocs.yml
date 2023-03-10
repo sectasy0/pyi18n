@@ -54,6 +54,7 @@ nav:
   - Getting started:
     - Basic usage: 'started/basic-usage.md'
     - Custom loader: 'started/custom-loader.md'
+    - Namespaces: 'started/namespaces.md'
     - Integrate pyi18n with Django project: 'started/use-in-django.md'
     - Normalize your locales: 'started/normalization.md'
   - Code Reference:
