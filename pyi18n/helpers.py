@@ -22,8 +22,8 @@ def load_locale(path: str, ser_mod: object, l_type: str) -> dict:
         dict: loaded translations for the locale
     """
     if not exists(path):
-        print(f"[WARNING] path {path} doesn't exist, probably you forgot",
-               "to add it to the available locales list.")
+        print("f[WARNING] path {path} doesn't exist, probably you forgot",
+              "to add it to the available locales list.")
         return {}
 
     loader_params: object = {"Loader": FullLoader} if l_type == "yaml" else {}

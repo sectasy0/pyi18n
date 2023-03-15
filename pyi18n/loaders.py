@@ -108,7 +108,9 @@ class PyI18nBaseLoader:
             return ser_mod.load(_f, **load_params)[locale]
 
     def _load_namespaced(self, locales: tuple, ser_mod: Any) -> dict:
-        """Load translations from namespaces. Should be overridden in child classes.
+        """Load translations from namespaces.
+
+        Should be overridden in child classes.
         This will look for a locale (directories) and load all namespaces.
 
         Args:
