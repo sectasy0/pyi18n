@@ -39,7 +39,11 @@ class PyI18nBaseLoader:
 
     _type: str = LoaderType.BASE
 
-    def __init__(self, load_path: str = "locales/", namespaced: bool = False) -> None:
+    def __init__(self,
+                 load_path: str = "locales/",
+                 namespaced: bool = False
+                 ) -> None:
+
         """ Initialize loader class
 
         Args:
