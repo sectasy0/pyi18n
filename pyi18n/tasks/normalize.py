@@ -1,16 +1,51 @@
+"""
+This module contains functions for normalizing i18n (internationalization) localization files.
+
+Functions:
+normalize_locales(locale_path: str = "locales/") -> dict:
+Sorts the keys in alphabetically order, and overrides files.
+
+Parameters:
+- locale_path: (str) path to localization files, default value is "locales/".
+    Returns: None
+
+- __perform_normalize(locales: set, locale_path: str) -> None:
+    Private method to perform normalization, should not be called directly.
+
+    Parameters:
+    - locales: (set) set of locales (language codes) for which localization files are present.
+    - locale_path: (str) path to localization files.
+    Returns: None
+
+- __save_normalized(locales: set, loader: loaders.PyI18nBaseLoader, locale_path: str, sorted_content: dict) -> None:
+    Private function to save the normalized content, should not be called directly.
+
+    Parameters:
+    - locales: (set) set of locales (language codes) for which localization files are present.
+    - loader: (loaders.PyI18nBaseLoader) an instance of PyI18nBaseLoader subclass.
+    - locale_path: (str) path to localization files.
+    - sorted_content: (dict) the normalized content to be saved.
+    Returns: None
+
+- __sort_nested(dictionary: dict) -> dict:
+    Private function to sort nested dictionaries.
+
+    Parameters:
+    dictionary: (dict) a nested dictionary to be sorted.
+    Returns: (dict) sorted dictionary.
+"""
 from os import listdir, getcwd
 from os.path import exists
-from xmltodict import unparse as xml_dump
 from os import environ
+from json import dump as json_dump
+from yaml import dump as yaml_dump
+from xmltodict import unparse as xml_dump
 
 # TODO: fix this ugly hack, problem with import during testing
 try:
     import loaders
 except ModuleNotFoundError:
     from pyi18n import loaders
-
-from json import dump as json_dump
-from yaml import dump as yaml_dump
 
 
 def normalize_locales(locale_path: str = "locales/") -> dict:

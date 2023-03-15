@@ -1,7 +1,24 @@
-from os.path import exists, join, splitext, basename
-from os import listdir, stat
+"""
+This module defines the PyI18n loaders which load translations from files in YAML or JSON format.
+The loaders can load translations from multiple locales and can be set to look for namespaces.
+The module also defines a LoaderType enum which lists the different types of loaders.
+
+Classes:
+- LoaderType: Enum for the different loader types.
+- PyI18nBaseLoader: PyI18n base loader class, supports YAML and JSON.
+- PyI18nJsonLoader: PyI18n JSON loader class.
+- PyI18nYamlLoader: PyI18n YAML loader class.
+
+Note:
+This module relies on pyi18n.helpers.load_locale function.
+"""
+
+from os.path import exists, join
+from typing import Any
 import json
 import yaml
+
+from pyi18n.helpers import load_locale
 
 
 class LoaderType:
@@ -91,9 +108,9 @@ class PyI18nBaseLoader:
 
             return ser_mod.load(_f, **load_params)[locale]
 
-    def _load_namespaced(self, locales: tuple, ser_mod: object) -> dict:
-        """ Load translations from namespaces should be overridden in child classes.
-            This will be looking for a locale (directories) and load all namespaces.
+    def _load_namespaced(self, locales: tuple, ser_mod: Any) -> dict:
+        """Load translations from namespaces. Should be overridden in child classes.
+        This will look for a locale (directories) and load all namespaces.
 
         Args:
             locales (tuple): locales to load
@@ -105,31 +122,12 @@ class PyI18nBaseLoader:
         loaded: dict = {}
         for locale in locales:
             path: str = join(self.load_path, locale)
+            loaded_locale: dict = load_locale(path, ser_mod, self._type)
 
-            if not exists(path):
-                print(f"[WARNING] path {path} doesn't exist, probably you forgot to add to the available locales list.")
+            if not loaded_locale:
                 continue
 
-            load_params: dict = {"Loader": yaml.FullLoader} \
-                if self._type == "yaml" else {}
-
-            file_extension: str = ser_mod.__name__.replace('yaml', 'yml')
-
-            for file in listdir(path):
-                if file.endswith(file_extension):
-                    filepath: str = join(path, file)
-                    namespace: str = splitext(basename(filepath))[0]
-
-                    # file is empty, should continue
-                    if stat(filepath).st_size == 0:
-                        continue
-
-                    with open(filepath, 'r', encoding="utf-8") as _file:
-                        locale_content: object = ser_mod.load(_file, **load_params)
-
-                        if locale not in loaded:
-                            loaded[locale] = {}
-                        loaded[locale][namespace] = locale_content
+            loaded.setdefault(locale, loaded_locale)
 
         return loaded
 
