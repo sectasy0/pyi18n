@@ -1,5 +1,5 @@
 """
-This module contains functions for normalizing i18n (internationalization) localization files.
+This module contains functions for normalizing i18n localization files.
 
 Functions:
 normalize_locales(locale_path: str = "locales/") -> dict:
@@ -13,16 +13,22 @@ Parameters:
     Private method to perform normalization, should not be called directly.
 
     Parameters:
-    - locales: (set) set of locales (language codes) for which localization files are present.
+    - locales: (set) set of locales (language codes).
     - locale_path: (str) path to localization files.
     Returns: None
 
-- __save_normalized(locales: set, loader: loaders.PyI18nBaseLoader, locale_path: str, sorted_content: dict) -> None:
-    Private function to save the normalized content, should not be called directly.
+- __save_normalized(
+        locales: set,
+        loader: loaders.PyI18nBaseLoader,
+        locale_path: str,
+        sorted_content: dict
+    ) -> None:
+
+    Private function to save the normalized content
 
     Parameters:
-    - locales: (set) set of locales (language codes) for which localization files are present.
-    - loader: (loaders.PyI18nBaseLoader) an instance of PyI18nBaseLoader subclass.
+    - locales: (set) set of locales (language codes).
+    - loader: (loaders.PyI18nBaseLoader) an instance of Base subclass.
     - locale_path: (str) path to localization files.
     - sorted_content: (dict) the normalized content to be saved.
     Returns: None

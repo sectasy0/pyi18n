@@ -15,10 +15,10 @@ Methods:
            loader: PyI18nBaseLoader = None
            ) -> None
 
-    Initializes the PyI18n class with the given available locales, load path, and loader.
+    Initializes class with the given available locales, load path, and loader.
 
 - __pyi18n_init() -> None
-    Validates and loads the translations for the given available locales and load path.
+    Validates and loads the translations for available locales and load path.
 
 - gettext(locale: str, path: str, **kwargs) -> Union[dict, str]
     Retrieves the translation for the given locale and path, with optional
