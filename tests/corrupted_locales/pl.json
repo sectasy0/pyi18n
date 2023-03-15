@@ -1,0 +1,24 @@
+
+    "pl": {
+        "hello": {
+            "world": "Witaj świecie!",
+            "hello_user": "Witaj {user}!",
+            "hello_full_name_age": "Witaj {name} {surname}! Ty masz {age} lat."
+        },
+        "common": {
+            "hello": "Witaj",
+            "center": "Centrum",
+            "world": "Świat",
+            "developer": "Programista",
+            "age": "Wiek"
+        },
+        "announcement": {
+            "hello": "Witaj!",
+            "hello_user": "Witaj {user}!",
+            "hello_full_name_age": "Witaj {name} {surname}! Ty masz {age} lat."
+        "date": {
+            "today": "Dziś jest {date}",
+            "tomorrow": "Jutro jest {date}",
+            "yesterday": "Wczoraj był {date}"
+    },
+

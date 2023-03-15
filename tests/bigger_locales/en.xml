@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<en>
+	<hello>
+		<world>Hello world!</world>
+		<hello_user>Hello {user}!</hello_user>
+		<hello_full_name_age>Hello {name} {surname}! You are {age} years old.</hello_full_name_age>
+	</hello>
+	<labels>
+		<todos>
+			<empty>You have no todos.</empty>
+			<one>You have 1 todo.</one>
+			<many>You have {count} todos.</many>
+			<add>Add a todo.</add>
+			<delete>Delete todo.</delete>
+			<delete_confirm>Are you sure you want to delete this todo?</delete_confirm>
+		</todos>
+		<products>
+			<empty>You have no products.</empty>
+			<one>You have 1 product.</one>
+			<many>You have {count} products.</many>
+			<add>Add a product.</add>
+			<delete>Delete product.</delete>
+			<delete_confirm>Are you sure you want to delete this product?</delete_confirm>
+		</products>
+		<users>
+			<empty>You have no users.</empty>
+			<one>You have 1 user.</one>
+			<many>You have {count} users.</many>
+			<add>Add a user.</add>
+			<delete>Delete user.</delete>
+			<delete_confirm>Are you sure you want to delete this user?</delete_confirm>
+			<username>Username</username>
+			<full_name>Full name</full_name>
+			<age>Age</age>
+			<password>Password</password>
+			<password_confirm>Password confirm</password_confirm>
+			<email>Email</email>
+			<phone>Phone</phone>
+			<address>Address</address>
+			<description>Description</description>
+			<created_at>Created at</created_at>
+			<updated_at>Updated at</updated_at>
+		</users>
+	</labels>
+	<messages>
+		<todos>
+			<added>Todo added.</added>
+			<deleted>Todo deleted.</deleted>
+			<not_found>Todo not found.</not_found>
+			<updated>Todo updated.</updated>
+		</todos>
+		<products>
+			<added>Product added.</added>
+			<deleted>Product deleted.</deleted>
+			<not_found>Product not found.</not_found>
+			<updated>Product updated.</updated>
+		</products>
+		<users>
+			<added>User added.</added>
+			<deleted>User deleted.</deleted>
+			<not_found>User not found.</not_found>
+			<updated>User updated.</updated>
+		</users>
+	</messages>
+</en>

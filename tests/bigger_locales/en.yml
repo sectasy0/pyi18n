@@ -1,0 +1,54 @@
+en:
+  hello:
+    hello_full_name_age: Hello {name} {surname}! You are {age} years old.
+    hello_user: Hello {user}!
+    world: Hello world!
+  labels:
+    products:
+      add: Add a product.
+      delete: Delete product.
+      delete_confirm: Are you sure you want to delete this product?
+      empty: You have no products.
+      many: You have {count} products.
+      one: You have 1 product.
+    todos:
+      add: Add a todo.
+      delete: Delete todo.
+      delete_confirm: Are you sure you want to delete this todo?
+      empty: You have no todos.
+      many: You have {count} todos.
+      one: You have 1 todo.
+    users:
+      add: Add a user.
+      address: Address
+      age: Age
+      created_at: Created at
+      delete: Delete user.
+      delete_confirm: Are you sure you want to delete this user?
+      description: Description
+      email: Email
+      empty: You have no users.
+      full_name: Full name
+      many: You have {count} users.
+      one: You have 1 user.
+      password: Password
+      password_confirm: Password confirm
+      phone: Phone
+      updated_at: Updated at
+      username: Username
+  messages:
+    products:
+      added: Product added.
+      deleted: Product deleted.
+      not_found: Product not found.
+      updated: Product updated.
+    todos:
+      added: Todo added.
+      deleted: Todo deleted.
+      not_found: Todo not found.
+      updated: Todo updated.
+    users:
+      added: User added.
+      deleted: User deleted.
+      not_found: User not found.
+      updated: User updated.

@@ -3,8 +3,5 @@ __pycache__
 *.egg-info
 *.egg
 .pytest_cache
-tests/locales
-tests/bigger_locales
-tests/empty_locales
-tests/corrupted_locales
+build/
 dist/

@@ -1,0 +1,32 @@
+{
+    "titles": {
+        "analysis": "Analyse",
+        "overview": "Übersicht",
+        "results": "Ergebnisse"
+    },
+    "charts": {
+        "bar": "Balkendiagramm",
+        "pie": "Kreisdiagramm",
+        "line": "Liniendiagramm"
+    },
+    "tables": {
+        "id": "ID",
+        "name": "Name",
+        "email": "E-Mail",
+        "age": "Alter",
+        "gender": "Geschlecht"
+    },
+    "messages": {
+        "no_results": "Keine Ergebnisse gefunden.",
+        "error_occurred": "Ein Fehler ist aufgetreten.",
+        "loading_results": "Ergebnisse werden geladen..."
+    },
+    "buttons": {
+        "view": "Anzeigen",
+        "export": "Exportieren"
+    },
+    "miscellaneous": {
+        "total": "Gesamt",
+        "percentage": "Prozentsatz"
+    }
+}

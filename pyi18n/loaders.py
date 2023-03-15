@@ -1,6 +1,23 @@
-from os.path import exists
+"""
+This module defines the PyI18n loaders which
+load translations from files in YAML or JSON format.
+
+Classes:
+- LoaderType: Enum for the different loader types.
+- PyI18nBaseLoader: PyI18n base loader class, supports YAML and JSON.
+- PyI18nJsonLoader: PyI18n JSON loader class.
+- PyI18nYamlLoader: PyI18n YAML loader class.
+
+Note:
+This module relies on pyi18n.helpers.load_locale function.
+"""
+
+from os.path import exists, join
+from typing import Any
 import json
 import yaml
+
+from pyi18n.helpers import load_locale
 
 
 class LoaderType:
@@ -15,30 +32,30 @@ class PyI18nBaseLoader:
 
     Attributes:
         load_path (str): path to translations
+        namespaced (bool): tells loader should look for namespaces
+
         _type (str): loader type
-
-    Methods:
-        load (tuple, object) -> dict: load translations for given
-                                locales and returns as python dict
-        type () -> str: return loader type
-        get_path () -> str: return loader path
-        __load_file (str, str, object, str) -> dict: return file content
-
     """
 
     _type: str = LoaderType.BASE
 
-    def __init__(self, load_path: str = "locales/") -> None:
+    def __init__(self,
+                 load_path: str = "locales/",
+                 namespaced: bool = False
+                 ) -> None:
+
         """ Initialize loader class
 
         Args:
             load_path (str): path to translations
+            namespaced (bool): namespaces support
 
         Returns:
             None
 
         """
         self.load_path: str = load_path
+        self.namespaced: bool = namespaced
 
     def load(self, locales: tuple, ser_mod: object) -> dict:
         """ Load translations for given locales,
@@ -73,6 +90,7 @@ class PyI18nBaseLoader:
                                                   )
             except (json.decoder.JSONDecodeError, yaml.YAMLError):
                 continue
+
         return loaded
 
     def __load_file(self,
@@ -90,7 +108,33 @@ class PyI18nBaseLoader:
         with open(file_path, 'r', encoding="utf-8") as _f:
             load_params: dict = {"Loader": yaml.FullLoader} \
                 if ext == "yml" else {}
+
             return ser_mod.load(_f, **load_params)[locale]
+
+    def _load_namespaced(self, locales: tuple, ser_mod: Any) -> dict:
+        """Load translations from namespaces.
+
+        Should be overridden in child classes.
+        This will look for a locale (directories) and load all namespaces.
+
+        Args:
+            locales (tuple): locales to load
+            ser_mod (object): module for serialization
+
+        Returns:
+            dict: loaded translations
+        """
+        loaded: dict = {}
+        for locale in locales:
+            path: str = join(self.load_path, locale)
+            loaded_locale: dict = load_locale(path, ser_mod, self._type)
+
+            if not loaded_locale:
+                continue
+
+            loaded.setdefault(locale, loaded_locale)
+
+        return loaded
 
     def type(self) -> str:
         """ Return loader type
@@ -116,13 +160,9 @@ class PyI18nJsonLoader(PyI18nBaseLoader):
 
     Attributes:
         load_path (str): path to translations
-        _type (str): loader type
+        namespaced (bool): tells loader should look for namespaces
 
-    Methods:
-        load (tuple, object) -> dict: load translations for given
-                                locales and returns as python dict
-        type () -> str: return loader type
-        get_path () -> str: return loader path
+        _type (str): loader type
     """
 
     _type: str = LoaderType.JSON
@@ -140,6 +180,9 @@ class PyI18nJsonLoader(PyI18nBaseLoader):
 
         """
 
+        if self.namespaced:
+            return super()._load_namespaced(locales, json)
+
         return super().load(locales, json)
 
 
@@ -148,13 +191,9 @@ class PyI18nYamlLoader(PyI18nBaseLoader):
 
     Attributes:
         load_path (str): path to translations
-        _type (str): loader type
+        namespaced (bool): tells loader should look for namespaces
 
-    Methods:
-        load (tuple, object) -> dict: load translations for given
-                                locales and returns as python dict
-        type () -> str: return loader type
-        get_path () -> str: return loader path
+        _type (str): loader type
     """
 
     _type: str = LoaderType.YAML
@@ -171,5 +210,7 @@ class PyI18nYamlLoader(PyI18nBaseLoader):
             dict: loaded translations
 
         """
+        if self.namespaced:
+            return super()._load_namespaced(locales, yaml)
 
         return super().load(locales, yaml)

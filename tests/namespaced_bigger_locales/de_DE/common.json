@@ -1,0 +1,58 @@
+{
+    "greetings": {
+        "welcome": "Willkommen",
+        "hello": "Hallo",
+        "goodbye": "Auf Wiedersehen",
+        "see_you_soon": "Bis bald",
+        "howdy": "Hallo"
+    },
+    "buttons": {
+        "save": "Speichern",
+        "cancel": "Abbrechen",
+        "delete": "Löschen",
+        "confirm": "Bestätigen",
+        "back": "Zurück",
+        "next": "Weiter",
+        "previous": "Zurück",
+        "edit": "Bearbeiten",
+        "create": "Erstellen",
+        "submit": "Absenden"
+    },
+    "messages": {
+        "error": "Fehler",
+        "success": "Erfolg",
+        "warning": "Warnung",
+        "info": "Information"
+    },
+    "menu": {
+        "home": "Startseite",
+        "about": "Über uns",
+        "contact": "Kontaktieren Sie uns",
+        "settings": "Einstellungen",
+        "account": "Konto"
+    },
+    "forms": {
+        "username": "Benutzername",
+        "password": "Passwort",
+        "email": "E-Mail",
+        "name": "Name",
+        "address": "Adresse",
+        "city": "Stadt",
+        "state": "Bundesland",
+        "country": "Land",
+        "phone": "Telefon",
+        "submit_button": "Absenden"
+    },
+    "notifications": {
+        "message_received": "Sie haben eine neue Nachricht erhalten",
+        "invitation_received": "Sie haben eine neue Einladung erhalten",
+        "notification_center": "Benachrichtigungszentrum"
+    },
+    "miscellaneous": {
+        "loading": "Laden...",
+        "search": "Suche",
+        "select_option": "Option auswählen",
+        "privacy_policy": "Datenschutzrichtlinie",
+        "terms_of_service": "Nutzungsbedingungen"
+    }
+}

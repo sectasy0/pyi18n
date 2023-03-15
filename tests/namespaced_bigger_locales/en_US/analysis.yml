@@ -1,0 +1,29 @@
+titles:
+  analysis: "Analysis"
+  overview: "Overview"
+  results: "Results"
+
+charts:
+  bar: "Bar Chart"
+  pie: "Pie Chart"
+  line: "Line Chart"
+
+tables:
+  id: "ID"
+  name: "Name"
+  email: "Email"
+  age: "Age"
+  gender: "Gender"
+
+messages:
+  no_results: "No results found."
+  error_occurred: "An error occurred."
+  loading_results: "Loading results..."
+
+buttons:
+  view: "View"
+  export: "Export"
+
+miscellaneous:
+  total: "Total"
+  percentage: "Percentage"

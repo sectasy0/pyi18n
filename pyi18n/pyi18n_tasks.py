@@ -1,3 +1,17 @@
+"""
+PyI18n Command-line interface
+
+This module provides a command-line interface for the normalize task,
+    which sorts locales in alphabetical order.
+
+Functions:
+- cli: Runs the command-line interface for the normalize task.
+
+Examples:
+$ pyi18n-tasks normalize -p my_app/locales/
+Sorts the locales in alphabetical order.
+
+"""
 from argparse import ArgumentParser
 
 try:
