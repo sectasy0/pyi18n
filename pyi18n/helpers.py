@@ -55,7 +55,8 @@ def get_files(path: str, file_extension: str) -> List[str]:
     Returns:
         List[str]: list of file names in the directory with the given extension
     """
-    return [file_name for file_name in listdir(path) if file_name.endswith(file_extension)]
+    return [file_name for file_name in listdir(path)
+            if file_name.endswith(file_extension)]
 
 
 def load_file(file_path: str, ser_mod: object, l_type: str) -> dict:
