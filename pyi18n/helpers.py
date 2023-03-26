@@ -21,7 +21,7 @@ def load_locale(path: str, ser_mod: object, l_type: str) -> dict:
         path (str): path to the locale directory
         ser_mod (object): module for serialization
 
-    Returns:
+    Return:
         dict: loaded translations for the locale
     """
     if not exists(path):
@@ -52,9 +52,12 @@ def get_files(path: str, file_extension: str) -> List[str]:
         path (str): path to the directory
         file_extension (str): file extension to search for (e.g. ".yml")
 
-    Returns:
+    Return:
         List[str]: list of file names in the directory with the given extension
     """
+    if not file_extension:
+        return []
+
     return [file_name for file_name in listdir(path)
             if file_name.endswith(file_extension)]
 
@@ -67,9 +70,9 @@ def load_file(file_path: str, ser_mod: object, l_type: str) -> dict:
         ser_mod (object): module for serialization
         l_type (str): type of file to load (e.g. "yaml", "json")
 
-    Returns:
+    Return:
         dict: loaded translations from the file
     """
-    loader_params: dict = {"Loader": FullLoader} if l_type == "yaml" else {}
+    loader_params: dict = {'Loader': FullLoader} if l_type == 'yaml' else {}
     with open(file_path, 'r', encoding='utf-8') as file:
         return ser_mod.load(file, **loader_params)
