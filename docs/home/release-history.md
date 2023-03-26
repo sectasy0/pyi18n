@@ -1,4 +1,4 @@
-### Version [1.2.0](https://pypi.org/project/pyi18n-v2/1.1.0/) - unreleased
+### Version [1.2.0](https://pypi.org/project/pyi18n-v2/1.2.0/) - 15.03.2023
 
 * New Features:
     * Support for namespaces.
