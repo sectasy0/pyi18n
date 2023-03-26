@@ -1,3 +1,9 @@
+### Version [1.2.1](https://pypi.org/project/pyi18n-v2/1.2.1/) - 26.03.2023
+
+* Enhancements:
+    * Remove ugly hack to make tests work due to incorrect imports.
+    * Test coverage has been increased to 99%.
+
 ### Version [1.2.0](https://pypi.org/project/pyi18n-v2/1.2.0/) - 15.03.2023
 
 * New Features:
