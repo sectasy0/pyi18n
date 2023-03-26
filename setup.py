@@ -1,11 +1,11 @@
 import pathlib
 from setuptools import setup, find_packages
 
-HERE = pathlib.Path(__file__).parent
+HERE: str = pathlib.Path(__file__).parent
 
 setup(
     name='pyi18n-v2',
-    version='1.2.0',
+    version='1.2.1',
     description='Simple and easy to use internationalization'
                 'library inspired by Ruby i18n',
     long_description=(HERE / "README.md").read_text(),
