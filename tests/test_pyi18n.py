@@ -5,6 +5,7 @@ from tests.helpers import test_path, locale_content
 
 from pyi18n import PyI18n
 from pyi18n.loaders import PyI18nJsonLoader
+from pytest import raises
 
 
 def test_initialize_with_available_locales() -> None:
@@ -302,3 +303,33 @@ def test_gettext_should_return_dict_json_loader() -> None:
     assert isinstance(translated, dict)
     assert translated == locale_content["en"]["hello"]
     assert i18n.get_loader()._type == "json"
+
+
+def test_gettext_valid_locale_and_path():
+    available_locales: tuple = ("en", "pl")
+    i18n = PyI18n(available_locales, load_path=test_path)
+    result = i18n.gettext('pl', 'common.age')
+    assert isinstance(result, dict) or isinstance(result, str)
+
+
+def test_gettext_invalid_locale():
+    available_locales: tuple = ("en", "pl")
+    i18n = PyI18n(available_locales, load_path=test_path)
+    with raises(ValueError):
+        i18n.gettext('invalid_locale', 'common.age')
+
+
+def test_gettext_with_kwargs():
+    available_locales: tuple = ("en", "pl")
+    i18n = PyI18n(available_locales, load_path=test_path)
+    result = i18n.gettext('en', 'announcement.hello_full_name_age', name='test', surname='test2', age=18)
+    assert isinstance(result, str)
+    assert result == "Hello test test2! You are 18 years old."
+
+
+def test_gettext_with_invalid_kwargs():
+    available_locales: tuple = ("en", "pl")
+    i18n = PyI18n(available_locales, load_path=test_path)
+    result = i18n.gettext('en', 'announcement.hello_full_name_age')
+    assert isinstance(result, str)
+    assert result == "Hello {name} {surname}! You are {age} years old."  # Placeholder should not be replaced
