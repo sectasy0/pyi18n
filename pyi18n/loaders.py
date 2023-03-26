@@ -50,9 +50,8 @@ class PyI18nBaseLoader:
             load_path (str): path to translations
             namespaced (bool): namespaces support
 
-        Returns:
+        Return:
             None
-
         """
         self.load_path: str = load_path
         self.namespaced: bool = namespaced
@@ -64,13 +63,12 @@ class PyI18nBaseLoader:
         Args:
             locales (tuple): locales to load
 
-        Returns:
+        Return:
             dict: loaded translations
 
         Notes:
             Custom load function should be implemented
             in child classes and return python dict
-
         """
 
         file_extension: str = ser_mod.__name__.replace('yaml', 'yml')
@@ -101,9 +99,8 @@ class PyI18nBaseLoader:
                     ) -> dict:
         """ loads content, should not be called directly
 
-        Returns:
+        Return:
             dict: loaded content
-
         """
         with open(file_path, 'r', encoding="utf-8") as _f:
             load_params: dict = {"Loader": yaml.FullLoader} \
@@ -121,7 +118,7 @@ class PyI18nBaseLoader:
             locales (tuple): locales to load
             ser_mod (object): module for serialization
 
-        Returns:
+        Return:
             dict: loaded translations
         """
         loaded: dict = {}
@@ -139,18 +136,16 @@ class PyI18nBaseLoader:
     def type(self) -> str:
         """ Return loader type
 
-        Returns:
+        Return:
             str: loader type
-
         """
         return self._type
 
     def get_path(self) -> str:
         """ Return loader path
 
-        Returns:
+        Return:
             str: loader path
-
         """
         return self.load_path
 
@@ -175,9 +170,8 @@ class PyI18nJsonLoader(PyI18nBaseLoader):
         Args:
             locales (tuple): locales to load
 
-        Returns:
+        Return:
             dict: loaded translations
-
         """
 
         if self.namespaced:
@@ -206,9 +200,8 @@ class PyI18nYamlLoader(PyI18nBaseLoader):
         Args:
             locales (tuple): locales to load
 
-        Returns:
+        Return:
             dict: loaded translations
-
         """
         if self.namespaced:
             return super()._load_namespaced(locales, yaml)

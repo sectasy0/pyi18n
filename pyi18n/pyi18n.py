@@ -38,12 +38,7 @@ from operator import getitem
 from typing import Union
 
 from .loaders import PyI18nBaseLoader
-
-# TODO: figure out import error from tests/
-try:
-    from pyi18n.loaders import PyI18nYamlLoader
-except ModuleNotFoundError:
-    from loaders import PyI18nYamlLoader
+from .loaders import PyI18nYamlLoader
 
 
 class PyI18n:
@@ -78,7 +73,7 @@ class PyI18n:
             available_locales (tuple): list of available locales
             load_path (str): path to locales directory
 
-        Returns:
+        Return:
             None
         """
 

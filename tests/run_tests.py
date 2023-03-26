@@ -58,5 +58,5 @@ def setup_fixtures() -> None:
 
 if __name__ == "__main__":
     setup_fixtures()
-    environ["PYI18N_TEST_ENV"] = "1"
+    environ['PYI18N_TEST_ENV'] = '1'
     main(['-vv', '-s'])
