@@ -1,4 +1,4 @@
-# Documentation for `loaders` module
+# Documentation for `helpers` module
 
 ::: pyi18n.helpers
     handler: python

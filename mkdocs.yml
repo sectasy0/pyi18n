@@ -1,8 +1,7 @@
 site_name: PyI18n
 repo_url: https://github.com/sectasy0/pyi18n
-url: /home/
 repo_name: sectasy0/pyi18n
-copyright: Copyright &copy; 2023 Piotr Markiewicz
+copyright: Copyright &copy; 2023 sectasy0
 markdown_extensions:
   - pymdownx.critic
   - pymdownx.caret
