@@ -13,7 +13,7 @@
     
     
       
-        <title>Home - PyI18n</title>
+        <title>Index - PyI18n</title>
       
     
     
@@ -103,7 +103,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Home
+              Index
             
           </span>
         </div>
@@ -197,15 +197,13 @@
         
   
   
-    
-  
 
 
   
   
   
     <li class="md-tabs__item">
-      <a href="./" class="md-tabs__link md-tabs__link--active">
+      <a href="release-history/" class="md-tabs__link">
         Home
       </a>
     </li>
@@ -306,23 +304,15 @@
 
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" >
       
       
       
-        
-          
-            
-          
-        
-          
         
           
         
@@ -330,16 +320,10 @@
         
       
       
-        
-        
-        <div class="md-nav__link md-nav__link--index md-nav__link--active">
-          <a href="./">Home</a>
-          
-            <label for="__nav_1">
-              <span class="md-nav__icon md-icon"></span>
-            </label>
-          
-        </div>
+        <label class="md-nav__link" for="__nav_1">
+          Home
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <nav class="md-nav" aria-label="Home" data-md-level="1">
         <label class="md-nav__title" for="__nav_1">
@@ -349,8 +333,6 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
-          
-            
               
   
   
@@ -358,20 +340,6 @@
     <li class="md-nav__item">
       <a href="release-history/" class="md-nav__link">
         Release History
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="contributing/" class="md-nav__link">
-        Contributing
       </a>
     </li>
   
@@ -420,6 +388,10 @@
         
           
         
+          
+        
+          
+        
       
       
         <label class="md-nav__link" for="__nav_2">
@@ -456,6 +428,34 @@
     <li class="md-nav__item">
       <a href="../started/custom-loader/" class="md-nav__link">
         Custom loader
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../started/namespaces/" class="md-nav__link">
+        Namespaces
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../started/use-in-django/" class="md-nav__link">
+        Integrate pyi18n with Django project
       </a>
     </li>
   
@@ -622,6 +622,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#namespaces" class="md-nav__link">
+    Namespaces
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#integrate-pyi18n-with-django-project" class="md-nav__link">
     Integrate pyi18n with Django project
   </a>
@@ -646,6 +653,13 @@
           <li class="md-nav__item">
   <a href="#register-template-tag" class="md-nav__link">
     register template tag
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usage-in-templates" class="md-nav__link">
+    usage in templates
   </a>
   
 </li>
@@ -718,13 +732,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#meta" class="md-nav__link">
-    Meta
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#contributing" class="md-nav__link">
     Contributing
   </a>
@@ -788,6 +795,29 @@ $ touch my_app/locales/de.yml
 <span class="nb">print</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s2">&quot;jp&quot;</span><span class="p">,</span> <span class="s2">&quot;hello.hello_user&quot;</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="s2">&quot;ジョンさん&quot;</span><span class="p">))</span>
 <span class="c1">#&gt; こんにちは、ジョンさん！</span>
 </code></pre></div>
+<h2 id="namespaces">Namespaces</h2>
+<p>PyI18n supports namespaces, which allows you to organize your translations into separate groups.</p>
+<p>To use PyI18n with namespaces, you need to define the loader object yourself. Here's an example:
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">pyi18n.loaders</span> <span class="kn">import</span> <span class="n">PyI18nYamlLoader</span>
+<span class="kn">from</span> <span class="nn">pyi18n</span> <span class="kn">import</span> <span class="n">PyI18n</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">loader</span><span class="p">:</span> <span class="n">PyI18nYamlLoader</span> <span class="o">=</span> <span class="n">PyI18nYamlLoader</span><span class="p">(</span><span class="s1">&#39;locales/&#39;</span><span class="p">,</span> <span class="n">namespaced</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">pyi18n</span><span class="p">:</span> <span class="n">PyI18n</span> <span class="o">=</span> <span class="n">PyI18n</span><span class="p">((</span><span class="s1">&#39;en_US&#39;</span><span class="p">,</span> <span class="s1">&#39;de_DE&#39;</span><span class="p">),</span> <span class="n">loader</span><span class="o">=</span><span class="n">loader</span><span class="p">)</span>
+</code></pre></div></p>
+<p>In this example, we create an instance of the PyI18nYamlLoader class with the namespaced parameter set to True. This tells the loader to look for namespaced locales in separate folders instead of one single file for one locale.</p>
+<p>Here's an example of the expected file structure for the locales:
+<div class="highlight"><pre><span></span><code>locales
+    en_US
+        common.yml
+        analysis.yml
+    de_DE
+        common.yml
+        analysis.yml
+</code></pre></div></p>
+<p>To get a key that is located in the common namespace, you should use the dot notation in your translation call:
+<div class="highlight"><pre><span></span><code><span class="n">_</span><span class="p">(</span><span class="n">locale</span><span class="p">,</span> <span class="s1">&#39;common.greetings&#39;</span><span class="p">)</span>
+</code></pre></div></p>
 <h2 id="integrate-pyi18n-with-django-project">Integrate pyi18n with Django project</h2>
 <p>To integrate pyi18n into your Django project, you will need to first add a locale field to your user model class. This field will store the user's preferred language, which will be used to retrieve the appropriate translations from the locales directory.</p>
 <p>Next, you will need to configure pyi18n in your settings.py file by creating an instance of the PyI18n class and specifying the available languages. You can also create a gettext function for ease of use.</p>
@@ -811,10 +841,16 @@ $ touch my_app/locales/de.yml
 
 <span class="n">register</span> <span class="o">=</span> <span class="n">template</span><span class="o">.</span><span class="n">Library</span><span class="p">()</span>
 
-<span class="nd">@register</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;t&#39;</span><span class="p">)</span>
+<span class="nd">@register</span><span class="o">.</span><span class="n">simple_tag</span>
 <span class="k">def</span> <span class="nf">translate</span><span class="p">(</span><span class="n">locale</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">_</span><span class="p">(</span><span class="n">locale</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 </code></pre></div>
+<h3 id="usage-in-templates">usage in templates</h3>
+<blockquote>
+<p><strong><em>NOTE:</em></strong>  Wrap this tag inside jinja2 special characters
+<div class="highlight"><pre><span></span><code><span class="n">translate</span> <span class="n">request</span><span class="o">.</span><span class="n">current_user</span><span class="o">.</span><span class="n">locale</span><span class="p">,</span> <span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;John&quot;</span>
+</code></pre></div></p>
+</blockquote>
 <p>That's it, you have now successfully installed and configured PyI18n for your project. You can now use the provided gettext function to easily retrieve translations based on the user's preferred language. Additionally, you can use the provided template tag to easily retrieve translations in your templates. And if you need to use custom loaders you can use the PyI18nBaseLoader to create your own loaders.</p>
 <hr />
 <h2 id="creating-custom-loader-class">Creating custom loader class</h2>
@@ -866,7 +902,7 @@ pyi18n-tasks: error: the following arguments are required: normalize
 </code></pre></div>
 <h3 id="normalization">Normalization</h3>
 <p>Normalization process will sort locales alphabetically. The default normalization path is <code>locales/</code>, you can change it by passing <code>-p</code> argument.</p>
-<div class="highlight"><pre><span></span><code>$ pyi18n-tasks normalize 
+<div class="highlight"><pre><span></span><code>$ pyi18n-tasks normalize
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>$ pyi18n-tasks normalize -p my_app/locales/
 </code></pre></div>
@@ -876,24 +912,20 @@ pyi18n-tasks: error: the following arguments are required: normalize
 <p>For any questions and suggestions or bugs please create an issue.</p>
 <h2 id="limitations">Limitations</h2>
 <ul>
-<li>Normalization task will not work for custom loader classes except xml, if you need that use one of build in loaders or user XML loader from example. </li>
+<li>Normalization task will not work for custom loader classes except xml, cause it's based on loader type field ( If you have an idea how to solve this differently please open the issue with a description ), if you need that use one of build in loaders or user XML loader from example.</li>
 </ul>
 <h2 id="roadmap">Roadmap</h2>
 <p>See issues, If I have enough time and come up with a good idea on how this package can be improved, I'll post it there, along with tip.</p>
 <h2 id="release-history">Release History</h2>
 <p><strong>Release History available at <a href="https://sectasy0.github.io/pyi18n/home/release-history/">https://sectasy0.github.io/pyi18n/home/release-history/</a>.</strong></p>
-<h2 id="meta">Meta</h2>
-<p>Distributed under the MIT license. See <code>LICENSE</code> for more information.</p>
-<p><a href="https://github.com/sectasy0">https://github.com/sectasy0</a></p>
 <h2 id="contributing">Contributing</h2>
 <ol>
 <li>Fork it (<a href="https://github.com/sectasy0/pyi18n">https://github.com/sectasy0/pyi18n</a>)</li>
 <li>Create your feature branch (<code>git checkout -b feature/fooBar</code>)</li>
-<li>Commit your changes (<code>git commit -am 'feat: Add some fooBar'</code>) </li>
+<li>Commit your changes (<code>git commit -am 'feat: Add some fooBar'</code>)</li>
 <li>Push to the branch (<code>git push origin feature/fooBar</code>)</li>
 <li>Create a new Pull Request</li>
 </ol>
-<!-- Markdown link & img dfn's -->
 
 
 
@@ -908,33 +940,12 @@ pyi18n-tasks: error: the following arguments are required: normalize
       
         <footer class="md-footer">
   
-    
-    <nav class="md-footer__inner md-grid" aria-label="Footer" >
-      
-      
-        
-        <a href="release-history/" class="md-footer__link md-footer__link--next" aria-label="Next: Release History" rel="next">
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Next
-              </span>
-              Release History
-            </div>
-          </div>
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
-          </div>
-        </a>
-      
-    </nav>
-  
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
       <div class="md-copyright">
   
     <div class="md-copyright__highlight">
-      Copyright &copy; 2022 Piotr Markiewicz
+      Copyright &copy; 2023 sectasy0
     </div>
   
   

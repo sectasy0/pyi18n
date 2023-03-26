@@ -66,7 +66,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#pyi18n.loaders" class="md-skip">
+        <a href="#documentation-for-loaders-module" class="md-skip">
           Skip to content
         </a>
       
@@ -203,7 +203,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../home/" class="md-tabs__link">
+      <a href="../../home/release-history/" class="md-tabs__link">
         Home
       </a>
     </li>
@@ -317,27 +317,15 @@
       
         
           
-            
-          
-        
-          
-        
-          
         
           
         
       
       
-        
-        
-        <div class="md-nav__link md-nav__link--index ">
-          <a href="../../home/">Home</a>
-          
-            <label for="__nav_1">
-              <span class="md-nav__icon md-icon"></span>
-            </label>
-          
-        </div>
+        <label class="md-nav__link" for="__nav_1">
+          Home
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <nav class="md-nav" aria-label="Home" data-md-level="1">
         <label class="md-nav__title" for="__nav_1">
@@ -347,8 +335,6 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
-          
-            
               
   
   
@@ -356,20 +342,6 @@
     <li class="md-nav__item">
       <a href="../../home/release-history/" class="md-nav__link">
         Release History
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../home/contributing/" class="md-nav__link">
-        Contributing
       </a>
     </li>
   
@@ -418,6 +390,10 @@
         
           
         
+          
+        
+          
+        
       
       
         <label class="md-nav__link" for="__nav_2">
@@ -454,6 +430,34 @@
     <li class="md-nav__item">
       <a href="../../started/custom-loader/" class="md-nav__link">
         Custom loader
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../started/namespaces/" class="md-nav__link">
+        Namespaces
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../started/use-in-django/" class="md-nav__link">
+        Integrate pyi18n with Django project
       </a>
     </li>
   
@@ -544,6 +548,8 @@
       <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
       
       
+        
+      
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
           Loaders
@@ -559,6 +565,8 @@
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
+  
+    
   
   
     <label class="md-nav__title" for="__toc">
@@ -730,6 +738,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -857,13 +867,17 @@
 
 
 
-  <h1>Loaders</h1>
+<h1 id="documentation-for-loaders-module">Documentation for <code>loaders</code> module</h1>
+
 
 <div class="doc doc-object doc-module">
 
 
 <a id="pyi18n.loaders"></a>
   <div class="doc doc-contents first">
+  
+      <p>This module defines the PyI18n loaders which
+load translations from files in YAML or JSON format.</p>
 
   
 
@@ -895,11 +909,11 @@
 
         <details class="quote">
           <summary>Source code in <code>pyi18n/loaders.py</code></summary>
-          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">LoaderType</span><span class="p">:</span>
+          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">LoaderType</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot; Enum for the different loader types. &quot;&quot;&quot;</span>
     <span class="n">BASE</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;base&quot;</span>
     <span class="n">YAML</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;yaml&quot;</span>
@@ -961,6 +975,13 @@
           <td><p>path to translations</p></td>
         </tr>
         <tr>
+          <td><code>namespaced</code></td>
+          <td>
+                <code>bool</code>
+          </td>
+          <td><p>tells loader should look for namespaces</p></td>
+        </tr>
+        <tr>
           <td><code>_type</code></td>
           <td>
                 <code>str</code>
@@ -970,26 +991,10 @@
     </tbody>
   </table>
 
-<details class="methods">
-  <summary>Methods</summary>
-  <p>load (tuple, object) -&gt; dict: load translations for given
-                        locales and returns as python dict
-type () -&gt; str: return loader type
-get_path () -&gt; str: return loader path
-__load_file (str, str, object, str) -&gt; dict: return file content</p>
-</details>
 
         <details class="quote">
           <summary>Source code in <code>pyi18n/loaders.py</code></summary>
-          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 13</span>
-<span class="normal"> 14</span>
-<span class="normal"> 15</span>
-<span class="normal"> 16</span>
-<span class="normal"> 17</span>
-<span class="normal"> 18</span>
-<span class="normal"> 19</span>
-<span class="normal"> 20</span>
-<span class="normal"> 21</span>
+          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 21</span>
 <span class="normal"> 22</span>
 <span class="normal"> 23</span>
 <span class="normal"> 24</span>
@@ -1079,35 +1084,64 @@ __load_file (str, str, object, str) -&gt; dict: return file content</p>
 <span class="normal">108</span>
 <span class="normal">109</span>
 <span class="normal">110</span>
-<span class="normal">111</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">PyI18nBaseLoader</span><span class="p">:</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">PyI18nBaseLoader</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot; PyI18n Base Loader class, supports yaml and json</span>
 
 <span class="sd">    Attributes:</span>
 <span class="sd">        load_path (str): path to translations</span>
+<span class="sd">        namespaced (bool): tells loader should look for namespaces</span>
+
 <span class="sd">        _type (str): loader type</span>
-
-<span class="sd">    Methods:</span>
-<span class="sd">        load (tuple, object) -&gt; dict: load translations for given</span>
-<span class="sd">                                locales and returns as python dict</span>
-<span class="sd">        type () -&gt; str: return loader type</span>
-<span class="sd">        get_path () -&gt; str: return loader path</span>
-<span class="sd">        __load_file (str, str, object, str) -&gt; dict: return file content</span>
-
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">LoaderType</span><span class="o">.</span><span class="n">BASE</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">load_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;locales/&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="n">load_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;locales/&quot;</span><span class="p">,</span>
+                 <span class="n">namespaced</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+                 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
         <span class="sd">&quot;&quot;&quot; Initialize loader class</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            load_path (str): path to translations</span>
+<span class="sd">            namespaced (bool): namespaces support</span>
 
-<span class="sd">        Returns:</span>
+<span class="sd">        Return:</span>
 <span class="sd">            None</span>
-
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">load_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">load_path</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">namespaced</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">namespaced</span>
 
     <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">locales</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">,</span> <span class="n">ser_mod</span><span class="p">:</span> <span class="nb">object</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot; Load translations for given locales,</span>
@@ -1116,13 +1150,12 @@ __load_file (str, str, object, str) -&gt; dict: return file content</p>
 <span class="sd">        Args:</span>
 <span class="sd">            locales (tuple): locales to load</span>
 
-<span class="sd">        Returns:</span>
+<span class="sd">        Return:</span>
 <span class="sd">            dict: loaded translations</span>
 
 <span class="sd">        Notes:</span>
 <span class="sd">            Custom load function should be implemented</span>
 <span class="sd">            in child classes and return python dict</span>
-
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">file_extension</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">ser_mod</span><span class="o">.</span><span class="vm">__name__</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;yaml&#39;</span><span class="p">,</span> <span class="s1">&#39;yml&#39;</span><span class="p">)</span>
@@ -1142,6 +1175,7 @@ __load_file (str, str, object, str) -&gt; dict: return file content</p>
                                                   <span class="p">)</span>
             <span class="k">except</span> <span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">decoder</span><span class="o">.</span><span class="n">JSONDecodeError</span><span class="p">,</span> <span class="n">yaml</span><span class="o">.</span><span class="n">YAMLError</span><span class="p">):</span>
                 <span class="k">continue</span>
+
         <span class="k">return</span> <span class="n">loaded</span>
 
     <span class="k">def</span> <span class="nf">__load_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
@@ -1152,30 +1186,53 @@ __load_file (str, str, object, str) -&gt; dict: return file content</p>
                     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot; loads content, should not be called directly</span>
 
-<span class="sd">        Returns:</span>
+<span class="sd">        Return:</span>
 <span class="sd">            dict: loaded content</span>
-
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">_f</span><span class="p">:</span>
             <span class="n">load_params</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Loader&quot;</span><span class="p">:</span> <span class="n">yaml</span><span class="o">.</span><span class="n">FullLoader</span><span class="p">}</span> \
                 <span class="k">if</span> <span class="n">ext</span> <span class="o">==</span> <span class="s2">&quot;yml&quot;</span> <span class="k">else</span> <span class="p">{}</span>
+
             <span class="k">return</span> <span class="n">ser_mod</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">_f</span><span class="p">,</span> <span class="o">**</span><span class="n">load_params</span><span class="p">)[</span><span class="n">locale</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">_load_namespaced</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">locales</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">,</span> <span class="n">ser_mod</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Load translations from namespaces.</span>
+
+<span class="sd">        Should be overridden in child classes.</span>
+<span class="sd">        This will look for a locale (directories) and load all namespaces.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            locales (tuple): locales to load</span>
+<span class="sd">            ser_mod (object): module for serialization</span>
+
+<span class="sd">        Return:</span>
+<span class="sd">            dict: loaded translations</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">loaded</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">locale</span> <span class="ow">in</span> <span class="n">locales</span><span class="p">:</span>
+            <span class="n">path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">load_path</span><span class="p">,</span> <span class="n">locale</span><span class="p">)</span>
+            <span class="n">loaded_locale</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="n">load_locale</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">ser_mod</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">loaded_locale</span><span class="p">:</span>
+                <span class="k">continue</span>
+
+            <span class="n">loaded</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">locale</span><span class="p">,</span> <span class="n">loaded_locale</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">loaded</span>
 
     <span class="k">def</span> <span class="nf">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot; Return loader type</span>
 
-<span class="sd">        Returns:</span>
+<span class="sd">        Return:</span>
 <span class="sd">            str: loader type</span>
-
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type</span>
 
     <span class="k">def</span> <span class="nf">get_path</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot; Return loader path</span>
 
-<span class="sd">        Returns:</span>
+<span class="sd">        Return:</span>
 <span class="sd">            str: loader path</span>
-
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_path</span>
 </code></pre></div></td></tr></table></div>
@@ -1198,7 +1255,7 @@ __load_file (str, str, object, str) -&gt; dict: return file content</p>
 
 
 <h3 id="pyi18n.loaders.PyI18nBaseLoader.__init__" class="doc doc-heading">
-<code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="n">load_path</span><span class="o">=</span><span class="s1">&#39;locales/&#39;</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="n">load_path</span><span class="o">=</span><span class="s1">&#39;locales/&#39;</span><span class="p">,</span> <span class="n">namespaced</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
 
 </h3>
 
@@ -1228,32 +1285,26 @@ __load_file (str, str, object, str) -&gt; dict: return file content</p>
                 <code>&#39;locales/&#39;</code>
           </td>
         </tr>
-    </tbody>
-  </table>
-
-  <p><strong>Returns:</strong></p>
-  <table>
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
         <tr>
+          <td><code>namespaced</code></td>
           <td>
-                <code>None</code>
+                <code>bool</code>
           </td>
-          <td><p>None</p></td>
+          <td><p>namespaces support</p></td>
+          <td>
+                <code>False</code>
+          </td>
         </tr>
     </tbody>
   </table>
 
+<details class="return">
+  <summary>Return</summary>
+  <p>None</p>
+</details>
       <details class="quote">
         <summary>Source code in <code>pyi18n/loaders.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">31</span>
-<span class="normal">32</span>
-<span class="normal">33</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">33</span>
 <span class="normal">34</span>
 <span class="normal">35</span>
 <span class="normal">36</span>
@@ -1261,17 +1312,29 @@ __load_file (str, str, object, str) -&gt; dict: return file content</p>
 <span class="normal">38</span>
 <span class="normal">39</span>
 <span class="normal">40</span>
-<span class="normal">41</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">load_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;locales/&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+             <span class="n">load_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;locales/&quot;</span><span class="p">,</span>
+             <span class="n">namespaced</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+             <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
     <span class="sd">&quot;&quot;&quot; Initialize loader class</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        load_path (str): path to translations</span>
+<span class="sd">        namespaced (bool): namespaces support</span>
 
-<span class="sd">    Returns:</span>
+<span class="sd">    Return:</span>
 <span class="sd">        None</span>
-
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">load_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">load_path</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">namespaced</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">namespaced</span>
 </code></pre></div></td></tr></table></div>
       </details>
   </div>
@@ -1292,42 +1355,28 @@ __load_file (str, str, object, str) -&gt; dict: return file content</p>
   
       <p>loads content, should not be called directly</p>
 
-  <p><strong>Returns:</strong></p>
-  <table>
-    <thead>
-      <tr>
-<th>Name</th>        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-        <tr>
-<td><code>dict</code></td>          <td>
-                <code>dict</code>
-          </td>
-          <td><p>loaded content</p></td>
-        </tr>
-    </tbody>
-  </table>
-
+<details class="return">
+  <summary>Return</summary>
+  <p>dict: loaded content</p>
+</details>
       <details class="quote">
         <summary>Source code in <code>pyi18n/loaders.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">78</span>
-<span class="normal">79</span>
-<span class="normal">80</span>
-<span class="normal">81</span>
-<span class="normal">82</span>
-<span class="normal">83</span>
-<span class="normal">84</span>
-<span class="normal">85</span>
-<span class="normal">86</span>
-<span class="normal">87</span>
-<span class="normal">88</span>
-<span class="normal">89</span>
-<span class="normal">90</span>
-<span class="normal">91</span>
-<span class="normal">92</span>
-<span class="normal">93</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">__load_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">__load_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                 <span class="n">file_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
                 <span class="n">ext</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
                 <span class="n">ser_mod</span><span class="p">:</span> <span class="nb">object</span><span class="p">,</span>
@@ -1335,13 +1384,13 @@ __load_file (str, str, object, str) -&gt; dict: return file content</p>
                 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot; loads content, should not be called directly</span>
 
-<span class="sd">    Returns:</span>
+<span class="sd">    Return:</span>
 <span class="sd">        dict: loaded content</span>
-
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">_f</span><span class="p">:</span>
         <span class="n">load_params</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Loader&quot;</span><span class="p">:</span> <span class="n">yaml</span><span class="o">.</span><span class="n">FullLoader</span><span class="p">}</span> \
             <span class="k">if</span> <span class="n">ext</span> <span class="o">==</span> <span class="s2">&quot;yml&quot;</span> <span class="k">else</span> <span class="p">{}</span>
+
         <span class="k">return</span> <span class="n">ser_mod</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">_f</span><span class="p">,</span> <span class="o">**</span><span class="n">load_params</span><span class="p">)[</span><span class="n">locale</span><span class="p">]</span>
 </code></pre></div></td></tr></table></div>
       </details>
@@ -1363,39 +1412,23 @@ __load_file (str, str, object, str) -&gt; dict: return file content</p>
   
       <p>Return loader path</p>
 
-  <p><strong>Returns:</strong></p>
-  <table>
-    <thead>
-      <tr>
-<th>Name</th>        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-        <tr>
-<td><code>str</code></td>          <td>
-                <code>str</code>
-          </td>
-          <td><p>loader path</p></td>
-        </tr>
-    </tbody>
-  </table>
-
+<details class="return">
+  <summary>Return</summary>
+  <p>str: loader path</p>
+</details>
       <details class="quote">
         <summary>Source code in <code>pyi18n/loaders.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">104</span>
-<span class="normal">105</span>
-<span class="normal">106</span>
-<span class="normal">107</span>
-<span class="normal">108</span>
-<span class="normal">109</span>
-<span class="normal">110</span>
-<span class="normal">111</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_path</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_path</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot; Return loader path</span>
 
-<span class="sd">    Returns:</span>
+<span class="sd">    Return:</span>
 <span class="sd">        str: loader path</span>
-
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_path</span>
 </code></pre></div></td></tr></table></div>
@@ -1443,24 +1476,10 @@ __load_file (str, str, object, str) -&gt; dict: return file content</p>
     </tbody>
   </table>
 
-  <p><strong>Returns:</strong></p>
-  <table>
-    <thead>
-      <tr>
-<th>Name</th>        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-        <tr>
-<td><code>dict</code></td>          <td>
-                <code>dict</code>
-          </td>
-          <td><p>loaded translations</p></td>
-        </tr>
-    </tbody>
-  </table>
-
+<details class="return">
+  <summary>Return</summary>
+  <p>dict: loaded translations</p>
+</details>
 <details class="notes">
   <summary>Notes</summary>
   <p>Custom load function should be implemented
@@ -1468,14 +1487,7 @@ in child classes and return python dict</p>
 </details>
       <details class="quote">
         <summary>Source code in <code>pyi18n/loaders.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">43</span>
-<span class="normal">44</span>
-<span class="normal">45</span>
-<span class="normal">46</span>
-<span class="normal">47</span>
-<span class="normal">48</span>
-<span class="normal">49</span>
-<span class="normal">50</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">50</span>
 <span class="normal">51</span>
 <span class="normal">52</span>
 <span class="normal">53</span>
@@ -1501,20 +1513,26 @@ in child classes and return python dict</p>
 <span class="normal">73</span>
 <span class="normal">74</span>
 <span class="normal">75</span>
-<span class="normal">76</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">locales</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">,</span> <span class="n">ser_mod</span><span class="p">:</span> <span class="nb">object</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span>
+<span class="normal">79</span>
+<span class="normal">80</span>
+<span class="normal">81</span>
+<span class="normal">82</span>
+<span class="normal">83</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">locales</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">,</span> <span class="n">ser_mod</span><span class="p">:</span> <span class="nb">object</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot; Load translations for given locales,</span>
 <span class="sd">        should be overridden in child classes.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        locales (tuple): locales to load</span>
 
-<span class="sd">    Returns:</span>
+<span class="sd">    Return:</span>
 <span class="sd">        dict: loaded translations</span>
 
 <span class="sd">    Notes:</span>
 <span class="sd">        Custom load function should be implemented</span>
 <span class="sd">        in child classes and return python dict</span>
-
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">file_extension</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">ser_mod</span><span class="o">.</span><span class="vm">__name__</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;yaml&#39;</span><span class="p">,</span> <span class="s1">&#39;yml&#39;</span><span class="p">)</span>
@@ -1534,6 +1552,7 @@ in child classes and return python dict</p>
                                               <span class="p">)</span>
         <span class="k">except</span> <span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">decoder</span><span class="o">.</span><span class="n">JSONDecodeError</span><span class="p">,</span> <span class="n">yaml</span><span class="o">.</span><span class="n">YAMLError</span><span class="p">):</span>
             <span class="k">continue</span>
+
     <span class="k">return</span> <span class="n">loaded</span>
 </code></pre></div></td></tr></table></div>
       </details>
@@ -1555,39 +1574,23 @@ in child classes and return python dict</p>
   
       <p>Return loader type</p>
 
-  <p><strong>Returns:</strong></p>
-  <table>
-    <thead>
-      <tr>
-<th>Name</th>        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-        <tr>
-<td><code>str</code></td>          <td>
-                <code>str</code>
-          </td>
-          <td><p>loader type</p></td>
-        </tr>
-    </tbody>
-  </table>
-
+<details class="return">
+  <summary>Return</summary>
+  <p>str: loader type</p>
+</details>
       <details class="quote">
         <summary>Source code in <code>pyi18n/loaders.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 95</span>
-<span class="normal"> 96</span>
-<span class="normal"> 97</span>
-<span class="normal"> 98</span>
-<span class="normal"> 99</span>
-<span class="normal">100</span>
-<span class="normal">101</span>
-<span class="normal">102</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot; Return loader type</span>
 
-<span class="sd">    Returns:</span>
+<span class="sd">    Return:</span>
 <span class="sd">        str: loader type</span>
-
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type</span>
 </code></pre></div></td></tr></table></div>
@@ -1640,6 +1643,13 @@ in child classes and return python dict</p>
           <td><p>path to translations</p></td>
         </tr>
         <tr>
+          <td><code>namespaced</code></td>
+          <td>
+                <code>bool</code>
+          </td>
+          <td><p>tells loader should look for namespaces</p></td>
+        </tr>
+        <tr>
           <td><code>_type</code></td>
           <td>
                 <code>str</code>
@@ -1649,57 +1659,44 @@ in child classes and return python dict</p>
     </tbody>
   </table>
 
-<details class="methods">
-  <summary>Methods</summary>
-  <p>load (tuple, object) -&gt; dict: load translations for given
-                        locales and returns as python dict
-type () -&gt; str: return loader type
-get_path () -&gt; str: return loader path</p>
-</details>
 
         <details class="quote">
           <summary>Source code in <code>pyi18n/loaders.py</code></summary>
-          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">114</span>
-<span class="normal">115</span>
-<span class="normal">116</span>
-<span class="normal">117</span>
-<span class="normal">118</span>
-<span class="normal">119</span>
-<span class="normal">120</span>
-<span class="normal">121</span>
-<span class="normal">122</span>
-<span class="normal">123</span>
-<span class="normal">124</span>
-<span class="normal">125</span>
-<span class="normal">126</span>
-<span class="normal">127</span>
-<span class="normal">128</span>
-<span class="normal">129</span>
-<span class="normal">130</span>
-<span class="normal">131</span>
-<span class="normal">132</span>
-<span class="normal">133</span>
-<span class="normal">134</span>
-<span class="normal">135</span>
-<span class="normal">136</span>
-<span class="normal">137</span>
-<span class="normal">138</span>
-<span class="normal">139</span>
-<span class="normal">140</span>
-<span class="normal">141</span>
-<span class="normal">142</span>
-<span class="normal">143</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">PyI18nJsonLoader</span><span class="p">(</span><span class="n">PyI18nBaseLoader</span><span class="p">):</span>
+          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">PyI18nJsonLoader</span><span class="p">(</span><span class="n">PyI18nBaseLoader</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; PyI18n JSON Loader class</span>
 
 <span class="sd">    Attributes:</span>
 <span class="sd">        load_path (str): path to translations</span>
-<span class="sd">        _type (str): loader type</span>
+<span class="sd">        namespaced (bool): tells loader should look for namespaces</span>
 
-<span class="sd">    Methods:</span>
-<span class="sd">        load (tuple, object) -&gt; dict: load translations for given</span>
-<span class="sd">                                locales and returns as python dict</span>
-<span class="sd">        type () -&gt; str: return loader type</span>
-<span class="sd">        get_path () -&gt; str: return loader path</span>
+<span class="sd">        _type (str): loader type</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">LoaderType</span><span class="o">.</span><span class="n">JSON</span>
@@ -1712,10 +1709,12 @@ get_path () -&gt; str: return loader path</p>
 <span class="sd">        Args:</span>
 <span class="sd">            locales (tuple): locales to load</span>
 
-<span class="sd">        Returns:</span>
+<span class="sd">        Return:</span>
 <span class="sd">            dict: loaded translations</span>
-
 <span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">namespaced</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_load_namespaced</span><span class="p">(</span><span class="n">locales</span><span class="p">,</span> <span class="n">json</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">locales</span><span class="p">,</span> <span class="n">json</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
@@ -1772,40 +1771,28 @@ get_path () -&gt; str: return loader path</p>
     </tbody>
   </table>
 
-  <p><strong>Returns:</strong></p>
-  <table>
-    <thead>
-      <tr>
-<th>Name</th>        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-        <tr>
-<td><code>dict</code></td>          <td>
-                <code>dict</code>
-          </td>
-          <td><p>loaded translations</p></td>
-        </tr>
-    </tbody>
-  </table>
-
+<details class="return">
+  <summary>Return</summary>
+  <p>dict: loaded translations</p>
+</details>
       <details class="quote">
         <summary>Source code in <code>pyi18n/loaders.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">130</span>
-<span class="normal">131</span>
-<span class="normal">132</span>
-<span class="normal">133</span>
-<span class="normal">134</span>
-<span class="normal">135</span>
-<span class="normal">136</span>
-<span class="normal">137</span>
-<span class="normal">138</span>
-<span class="normal">139</span>
-<span class="normal">140</span>
-<span class="normal">141</span>
-<span class="normal">142</span>
-<span class="normal">143</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">locales</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">locales</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot; Load translations for given locales using json</span>
 
 <span class="sd">    Inherits from PyI18nBaseLoader</span>
@@ -1813,10 +1800,12 @@ get_path () -&gt; str: return loader path</p>
 <span class="sd">    Args:</span>
 <span class="sd">        locales (tuple): locales to load</span>
 
-<span class="sd">    Returns:</span>
+<span class="sd">    Return:</span>
 <span class="sd">        dict: loaded translations</span>
-
 <span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">namespaced</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_load_namespaced</span><span class="p">(</span><span class="n">locales</span><span class="p">,</span> <span class="n">json</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">locales</span><span class="p">,</span> <span class="n">json</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
@@ -1869,6 +1858,13 @@ get_path () -&gt; str: return loader path</p>
           <td><p>path to translations</p></td>
         </tr>
         <tr>
+          <td><code>namespaced</code></td>
+          <td>
+                <code>bool</code>
+          </td>
+          <td><p>tells loader should look for namespaces</p></td>
+        </tr>
+        <tr>
           <td><code>_type</code></td>
           <td>
                 <code>str</code>
@@ -1878,57 +1874,43 @@ get_path () -&gt; str: return loader path</p>
     </tbody>
   </table>
 
-<details class="methods">
-  <summary>Methods</summary>
-  <p>load (tuple, object) -&gt; dict: load translations for given
-                        locales and returns as python dict
-type () -&gt; str: return loader type
-get_path () -&gt; str: return loader path</p>
-</details>
 
         <details class="quote">
           <summary>Source code in <code>pyi18n/loaders.py</code></summary>
-          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">146</span>
-<span class="normal">147</span>
-<span class="normal">148</span>
-<span class="normal">149</span>
-<span class="normal">150</span>
-<span class="normal">151</span>
-<span class="normal">152</span>
-<span class="normal">153</span>
-<span class="normal">154</span>
-<span class="normal">155</span>
-<span class="normal">156</span>
-<span class="normal">157</span>
-<span class="normal">158</span>
-<span class="normal">159</span>
-<span class="normal">160</span>
-<span class="normal">161</span>
-<span class="normal">162</span>
-<span class="normal">163</span>
-<span class="normal">164</span>
-<span class="normal">165</span>
-<span class="normal">166</span>
-<span class="normal">167</span>
-<span class="normal">168</span>
-<span class="normal">169</span>
-<span class="normal">170</span>
-<span class="normal">171</span>
-<span class="normal">172</span>
-<span class="normal">173</span>
-<span class="normal">174</span>
-<span class="normal">175</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">PyI18nYamlLoader</span><span class="p">(</span><span class="n">PyI18nBaseLoader</span><span class="p">):</span>
+          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span>
+<span class="normal">187</span>
+<span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span>
+<span class="normal">194</span>
+<span class="normal">195</span>
+<span class="normal">196</span>
+<span class="normal">197</span>
+<span class="normal">198</span>
+<span class="normal">199</span>
+<span class="normal">200</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">PyI18nYamlLoader</span><span class="p">(</span><span class="n">PyI18nBaseLoader</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; PyI18n YAML Loader class</span>
 
 <span class="sd">    Attributes:</span>
 <span class="sd">        load_path (str): path to translations</span>
-<span class="sd">        _type (str): loader type</span>
+<span class="sd">        namespaced (bool): tells loader should look for namespaces</span>
 
-<span class="sd">    Methods:</span>
-<span class="sd">        load (tuple, object) -&gt; dict: load translations for given</span>
-<span class="sd">                                locales and returns as python dict</span>
-<span class="sd">        type () -&gt; str: return loader type</span>
-<span class="sd">        get_path () -&gt; str: return loader path</span>
+<span class="sd">        _type (str): loader type</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">LoaderType</span><span class="o">.</span><span class="n">YAML</span>
@@ -1941,10 +1923,11 @@ get_path () -&gt; str: return loader path</p>
 <span class="sd">        Args:</span>
 <span class="sd">            locales (tuple): locales to load</span>
 
-<span class="sd">        Returns:</span>
+<span class="sd">        Return:</span>
 <span class="sd">            dict: loaded translations</span>
-
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">namespaced</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_load_namespaced</span><span class="p">(</span><span class="n">locales</span><span class="p">,</span> <span class="n">yaml</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">locales</span><span class="p">,</span> <span class="n">yaml</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
@@ -2001,40 +1984,27 @@ get_path () -&gt; str: return loader path</p>
     </tbody>
   </table>
 
-  <p><strong>Returns:</strong></p>
-  <table>
-    <thead>
-      <tr>
-<th>Name</th>        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-        <tr>
-<td><code>dict</code></td>          <td>
-                <code>dict</code>
-          </td>
-          <td><p>loaded translations</p></td>
-        </tr>
-    </tbody>
-  </table>
-
+<details class="return">
+  <summary>Return</summary>
+  <p>dict: loaded translations</p>
+</details>
       <details class="quote">
         <summary>Source code in <code>pyi18n/loaders.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">162</span>
-<span class="normal">163</span>
-<span class="normal">164</span>
-<span class="normal">165</span>
-<span class="normal">166</span>
-<span class="normal">167</span>
-<span class="normal">168</span>
-<span class="normal">169</span>
-<span class="normal">170</span>
-<span class="normal">171</span>
-<span class="normal">172</span>
-<span class="normal">173</span>
-<span class="normal">174</span>
-<span class="normal">175</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">locales</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">186</span>
+<span class="normal">187</span>
+<span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span>
+<span class="normal">194</span>
+<span class="normal">195</span>
+<span class="normal">196</span>
+<span class="normal">197</span>
+<span class="normal">198</span>
+<span class="normal">199</span>
+<span class="normal">200</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">locales</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot; Load translations for given locales using yaml</span>
 
 <span class="sd">    Inherits from PyI18nBaseLoader</span>
@@ -2042,10 +2012,11 @@ get_path () -&gt; str: return loader path</p>
 <span class="sd">    Args:</span>
 <span class="sd">        locales (tuple): locales to load</span>
 
-<span class="sd">    Returns:</span>
+<span class="sd">    Return:</span>
 <span class="sd">        dict: loaded translations</span>
-
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">namespaced</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_load_namespaced</span><span class="p">(</span><span class="n">locales</span><span class="p">,</span> <span class="n">yaml</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">locales</span><span class="p">,</span> <span class="n">yaml</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
@@ -2125,7 +2096,7 @@ get_path () -&gt; str: return loader path</p>
       <div class="md-copyright">
   
     <div class="md-copyright__highlight">
-      Copyright &copy; 2022 Piotr Markiewicz
+      Copyright &copy; 2023 sectasy0
     </div>
   
   
