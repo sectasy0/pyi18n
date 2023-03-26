@@ -1,11 +1,6 @@
 """
 This module contains various helper functions and
 utilities that can be used throughout the application.
-
-Functions:
-- load_locale: Load translations from a single locale directory.
-- get_files: Get a list of files in a directory with a given file extension.
-- load_file: Load translations from a single file
 """
 
 from os import listdir, stat

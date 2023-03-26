@@ -3,32 +3,6 @@ This module provides the PyI18n class, which is the main localization class
 for internationalization and localization in Python. It uses a loader to load
 translation files and provides a gettext method to retrieve translations for
 a specified locale and path.
-
-Attributes:
-- available_locales (tuple): List of available locales.
-- load_path (str): Path to locales directory.
-- _loaded_translations (dict): Dictionary of loaded translations.
-
-Methods:
-- __init__(available_locales: tuple,
-           load_path: str = "locales/",
-           loader: PyI18nBaseLoader = None
-           ) -> None
-
-    Initializes class with the given available locales, load path, and loader.
-
-- __pyi18n_init() -> None
-    Validates and loads the translations for available locales and load path.
-
-- gettext(locale: str, path: str, **kwargs) -> Union[dict, str]
-    Retrieves the translation for the given locale and path, with optional
-    interpolation variables.
-
-- __find(path: str, locale: str) -> Union[dict, str]
-    Finds the translation for the given path and locale.
-
-- get_loader() -> PyI18nBaseLoader
-    Returns the loader class used by PyI18n.
 """
 from collections import defaultdict
 from os import getcwd

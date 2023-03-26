@@ -1,15 +1,6 @@
 """
 This module defines the PyI18n loaders which
 load translations from files in YAML or JSON format.
-
-Classes:
-- LoaderType: Enum for the different loader types.
-- PyI18nBaseLoader: PyI18n base loader class, supports YAML and JSON.
-- PyI18nJsonLoader: PyI18n JSON loader class.
-- PyI18nYamlLoader: PyI18n YAML loader class.
-
-Note:
-This module relies on pyi18n.helpers.load_locale function.
 """
 
 from os.path import exists, join
