@@ -1,5 +1,5 @@
 # PyI18n
-> PyI18n is a simple and easy to use internationalization library for Python, inspired by Ruby i18n.
+> PyI18n is GNU gettext free, simple and easy to use internationalization library for Python, inspired by Ruby i18n.
 
 ![Python version][python-image] [![Code Climate](https://codeclimate.com/github/sectasy0/pyi18n/badges/gpa.svg)](https://codeclimate.com/github/sectasy0/pyi18n/coverage) [![Issue Count](https://codeclimate.com/github/sectasy0/pyi18n/badges/issue_count.svg)](https://codeclimate.com/github/sectasy0/pyi18n)
 
