@@ -1,11 +1,11 @@
 from os.path import exists
-from xmltodict import parse
+from tomli import load
 from pyi18n.loaders import PyI18nBaseLoader
 from pyi18n import PyI18n
 
 
-class PyI18nXMLLoader(PyI18nBaseLoader):
-    """ Load translations for given locales using yaml
+class PyI18nTOMLLoader(PyI18nBaseLoader):
+    """ Load translations for given locales using toml
 
     Inherits from PyI18nBaseLoader
 
@@ -16,10 +16,10 @@ class PyI18nXMLLoader(PyI18nBaseLoader):
         dict: loaded translations
     """
 
-    _type: str = "xml"
+    _type: str = "toml"
 
     def load(self, locales: tuple) -> dict:
-        """ Load translations from xml files
+        """ Load translations from toml files
 
         Args:
             locales (tuple): list of available locales
@@ -31,18 +31,18 @@ class PyI18nXMLLoader(PyI18nBaseLoader):
         loaded: dict = {}
         for locale in locales:
 
-            file_path: str = f"{self.load_path}{locale}.xml"
+            file_path: str = f"{self.load_path}{locale}.toml"
             if not exists(file_path):
                 continue
 
-            with open(file_path, "r", encoding="utf-8") as _f:
-                loaded[locale] = parse(_f.read())[locale]
+            with open(file_path, "rb") as _f:
+                loaded[locale] = load(_f)
 
         return loaded
 
 
 if __name__ == "__main__":
-    loader: PyI18nXMLLoader = PyI18nXMLLoader("locales/")
+    loader: PyI18nTOMLLoader = PyI18nTOMLLoader("locales/")
     i18n: PyI18n = PyI18n(('en', 'pl'), loader=loader)
     print(i18n.gettext("en", "hello.world"))
     print(i18n.gettext("pl", "hello.world"))
