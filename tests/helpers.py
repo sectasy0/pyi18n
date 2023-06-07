@@ -3,15 +3,17 @@ from contextlib import contextmanager
 from subprocess import Popen, PIPE
 import pytest
 
-test_path: str = 'tests/locales/'
-empty_locales: str = 'tests/empty_locales/'
-bigger_files_path: str = 'tests/bigger_locales/'
-custom_loader_path: str = 'examples/locales/'
-corrupted_path: str = 'tests/corrupted_locales/'
+test_path: str = 'tests/fixtures/locales/'
+empty_locales: str = 'tests/fixtures/empty_locales/'
+bigger_files_path: str = 'tests/fixtures/bigger_locales/'
+custom_loader_path: str = 'examples/fixtures/locales/'
+corrupted_path: str = 'tests/fixtures/corrupted_locales/'
 
-namespaced_path: str = 'tests/namespaced/'
-namespaced_empty_path: str = 'tests/namespaced_empty'
-namespaced_bigger_path: str = 'tests/namespaced_bigger_locales/'
+namespaced_path: str = 'tests/fixtures/namespaced/'
+namespaced_empty_path: str = 'tests/fixtures/namespaced_empty'
+namespaced_bigger_path: str = 'tests/fixtures/namespaced_bigger_locales/'
+namespaced_json: str = 'tests/fixtures/namespaced_json/'
+namespaced_yml: str = 'tests/fixtures/namespaced_yml/'
 
 locale_content: dict = {
     "pl": {
@@ -164,6 +166,34 @@ bigger_locales: dict = {
     }
 }
 
+
+namespaced_content: dict = {
+    "de_DE": {
+        "common": {
+            "greeting": "Hallo",
+            "yes": "Ja",
+            "no": "Nein",
+            "farewell": "Goodbye"
+        },
+        "analysis": {
+            "title": "Analyse",
+            "description": "Dies ist die Analyse-Seite"
+        }
+    },
+    "en_US": {
+        "common": {
+            "greeting": "Hello",
+            "yes": "Yes",
+            "no": "No",
+            "farewell": "Goodbye"
+        },
+        "analysis": {
+            "title": "Analysis",
+            "description": "This is the analysis page"
+        }
+
+    }
+}
 
 @contextmanager
 def not_raises(exc):

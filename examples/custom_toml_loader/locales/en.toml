@@ -1,0 +1,4 @@
+[hello]
+hello_full_name_age = "Hello {name} {surname}! You are {age} years old."
+hello_user = "Hello {user}!"
+world = "Hello world!"

@@ -1,7 +1,8 @@
 # flake8: noqa
 import pytest
 from pyi18n.tasks import normalize
-from tests.helpers import test_path, empty_locales, not_raises
+from tests.helpers import (test_path, empty_locales, not_raises,
+                           namespaced_json, namespaced_yml)
 
 
 def test_should_normalize_locales():
@@ -11,9 +12,13 @@ def test_should_normalize_locales():
 
 def test_normalize_invalid_locales_path():
     with pytest.raises(SystemExit):
-        normalize.normalize_locales("some_invalid_path/")
+        normalize.normalize_locales('some_invalid_path/')
 
 
 def test_normalize_no_locale_in_locales():
     with pytest.raises(SystemExit):
         normalize.normalize_locales(empty_locales)
+
+
+def test_normalize_namespaced_json():
+    normalize.normalize_locales(namespaced_json)

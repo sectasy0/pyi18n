@@ -12,30 +12,29 @@ from pyi18n.helpers import load_locale
 
 
 class LoaderType:
-    """ Enum for the different loader types. """
+    """Enum for the different loader types."""
+
     BASE: str = "base"
     YAML: str = "yaml"
     JSON: str = "json"
 
 
 class PyI18nBaseLoader:
-    """ PyI18n Base Loader class, supports yaml and json
+    """PyI18n Base Loader class, supports yaml and json
 
     Attributes:
         load_path (str): path to translations
         namespaced (bool): tells loader should look for namespaces
 
-        _type (str): loader type
+        type (str): loader type
     """
 
-    _type: str = LoaderType.BASE
+    type: str = LoaderType.BASE
 
     def __init__(self,
                  load_path: str = "locales/",
-                 namespaced: bool = False
-                 ) -> None:
-
-        """ Initialize loader class
+                 namespaced: bool = False) -> None:
+        """Initialize loader class
 
         Args:
             load_path (str): path to translations
@@ -48,7 +47,7 @@ class PyI18nBaseLoader:
         self.namespaced: bool = namespaced
 
     def load(self, locales: tuple, ser_mod: object) -> dict:
-        """ Load translations for given locales,
+        """Load translations for given locales,
             should be overridden in child classes.
 
         Args:
@@ -62,40 +61,34 @@ class PyI18nBaseLoader:
             in child classes and return python dict
         """
 
-        file_extension: str = ser_mod.__name__.replace('yaml', 'yml')
+        file_extension: str = ser_mod.__name__.replace("yaml", "yml")
 
         loaded: dict = {}
         for locale in locales:
-
             file_path: str = f"{self.load_path}{locale}.{file_extension}"
             if not exists(file_path):
                 continue
 
             try:
-                loaded[locale] = self.__load_file(file_path,
-                                                  file_extension,
-                                                  ser_mod,
-                                                  locale
-                                                  )
+                loaded[locale] = self.__load_file(
+                    file_path, file_extension, ser_mod, locale
+                )
             except (json.decoder.JSONDecodeError, yaml.YAMLError):
                 continue
 
         return loaded
 
-    def __load_file(self,
-                    file_path: str,
-                    ext: str,
-                    ser_mod: object,
-                    locale: str
-                    ) -> dict:
-        """ loads content, should not be called directly
+    def __load_file(
+        self, file_path: str, ext: str, ser_mod: object, locale: str
+    ) -> dict:
+        """loads content, should not be called directly
 
         Return:
             dict: loaded content
         """
-        with open(file_path, 'r', encoding="utf-8") as _f:
-            load_params: dict = {"Loader": yaml.FullLoader} \
-                if ext == "yml" else {}
+        with open(file_path, "r", encoding="utf-8") as _f:
+            load_params: dict = {
+                "Loader": yaml.FullLoader} if ext == "yml" else {}
 
             return ser_mod.load(_f, **load_params)[locale]
 
@@ -115,7 +108,7 @@ class PyI18nBaseLoader:
         loaded: dict = {}
         for locale in locales:
             path: str = join(self.load_path, locale)
-            loaded_locale: dict = load_locale(path, ser_mod, self._type)
+            loaded_locale: dict = load_locale(path, ser_mod, self.type)
 
             if not loaded_locale:
                 continue
@@ -124,16 +117,8 @@ class PyI18nBaseLoader:
 
         return loaded
 
-    def type(self) -> str:
-        """ Return loader type
-
-        Return:
-            str: loader type
-        """
-        return self._type
-
     def get_path(self) -> str:
-        """ Return loader path
+        """Return loader path
 
         Return:
             str: loader path
@@ -142,19 +127,19 @@ class PyI18nBaseLoader:
 
 
 class PyI18nJsonLoader(PyI18nBaseLoader):
-    """ PyI18n JSON Loader class
+    """PyI18n JSON Loader class
 
     Attributes:
         load_path (str): path to translations
         namespaced (bool): tells loader should look for namespaces
 
-        _type (str): loader type
+        type (str): loader type
     """
 
-    _type: str = LoaderType.JSON
+    type: str = LoaderType.JSON
 
     def load(self, locales: tuple) -> dict:
-        """ Load translations for given locales using json
+        """Load translations for given locales using json
 
         Inherits from PyI18nBaseLoader
 
@@ -172,19 +157,19 @@ class PyI18nJsonLoader(PyI18nBaseLoader):
 
 
 class PyI18nYamlLoader(PyI18nBaseLoader):
-    """ PyI18n YAML Loader class
+    """PyI18n YAML Loader class
 
     Attributes:
         load_path (str): path to translations
         namespaced (bool): tells loader should look for namespaces
 
-        _type (str): loader type
+        type (str): loader type
     """
 
-    _type: str = LoaderType.YAML
+    type: str = LoaderType.YAML
 
     def load(self, locales: tuple) -> dict:
-        """ Load translations for given locales using yaml
+        """Load translations for given locales using yaml
 
         Inherits from PyI18nBaseLoader
 

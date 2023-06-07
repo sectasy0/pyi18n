@@ -8,7 +8,8 @@ from pytest import main
 from helpers import (test_path, locale_content,
                      bigger_files_path, bigger_locales,
                      empty_locales, corrupted_locales,
-                     corrupted_path, corrupted_locales_yaml)
+                     corrupted_path, corrupted_locales_yaml,
+                     namespaced_content, namespaced_yml)
 
 
 def create_corrupted_file() -> None:
@@ -26,10 +27,28 @@ def create_corrupted_file() -> None:
 
 def create_test_file(locale: str, content: dict, f_path: str) -> None:
     """ Create test file for locale. """
+
     with open(f"{f_path}{locale}.yml", "w", encoding="utf-8") as _f:
         _f.write(dump({locale: content}))
+
     with open(f"{f_path}{locale}.json", "w", encoding="utf-8") as _f:
         _f.write(dumps({locale: content}, indent=4))
+
+
+def create_fixtures_namespaced() -> None:
+    """ Create fixtures for namespaced """
+    for locale in namespaced_content.items():
+        locale_path: str = path.join(namespaced_yml, locale[0])
+        if not path.exists(locale_path):
+            mkdir(locale_path)
+
+        for file, content in locale[1].items():
+
+            with open(f"{locale_path}/{file}.json", "w", encoding="utf-8") as _f:
+                _f.write(dumps(content, indent=4, sort_keys=False))
+
+            with open(f"{locale_path}/{file}.yml", "w", encoding="utf-8") as _f:
+                _f.write(dump(content, sort_keys=False))
 
 
 def setup_fixtures() -> None:
@@ -44,16 +63,19 @@ def setup_fixtures() -> None:
         mkdir(empty_locales)
 
     for locale in locale_content.keys():
+
         with open(f"{test_path}/{locale}.yml", "w", encoding="utf-8") as _f:
             _f.write(dump({locale: locale_content[locale]}))
+
         with open(f"{test_path}/{locale}.json", "w", encoding="utf-8") as _f:
             _f.write(dumps({locale: locale_content[locale]}, indent=4))
 
         create_test_file(locale, locale_content[locale], test_path)
 
-    create_test_file("en", bigger_locales, bigger_files_path)
+    create_test_file('en', bigger_locales, bigger_files_path)
 
     create_corrupted_file()
+    create_fixtures_namespaced()
 
 
 if __name__ == "__main__":
