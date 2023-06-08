@@ -104,7 +104,7 @@ def test_load_file_yaml_invalid_loader():
 # may fail for PyYAML < 6.0
 def test_load_file_yaml_loader_yaml_but_type_json():
     file_path: str = f"{namespaced_path}de_DE/common.yml"
-    with pytest.raises(AttributeError):
+    with pytest.raises(TypeError):
         helpers.load_file(file_path, yaml, 'json')
 
 
