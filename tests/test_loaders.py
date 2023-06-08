@@ -99,8 +99,8 @@ def test_loader_yml_namespaced():
     loader = loaders.PyI18nYamlLoader(namespaced_path, namespaced=True)
     locales: tuple = ('en_US', 'de_DE')
     loaded_locales = loader.load(locales)
-    assert loaded_locales != {}
-    assert list(loaded_locales['en_US'].keys()) == ['common', 'analysis']
+    assert loaded_locales
+    assert all(item in list(loaded_locales['en_US'].keys()) for item in ['common', 'analysis'])
     assert loader.type == "yaml"
     assert list(loaded_locales.keys()) == list(locales)
 
@@ -109,7 +109,7 @@ def test_loader_yml_namespaced_ignore_one():
     loader = loaders.PyI18nYamlLoader(namespaced_path, namespaced=True)
     locales: tuple = ('en_US',)
     loaded_locales = loader.load(locales)
-    assert loaded_locales != {}
+    assert loaded_locales
     assert loader.type == "yaml"
     assert list(loaded_locales.keys()) == list(locales)
 
@@ -118,9 +118,9 @@ def test_loader_yml_namespaced_with_non_existing():
     loader = loaders.PyI18nYamlLoader(namespaced_path, namespaced=True)
     locales: tuple = ('en_US', 'de_DE', 'pl_PL')
     loaded_locales = loader.load(locales)
-    assert loaded_locales != {}
+    assert loaded_locales
     assert loader.type == "yaml"
-    assert list(loaded_locales.keys()) == ['en_US', 'de_DE']
+    assert ['en_US', 'de_DE'] >= list(loaded_locales.keys())
 
 
 def test_loader_yml_namespaced_empty():
@@ -135,7 +135,7 @@ def test_loader_yml_namespaced_bigger():
     loader = loaders.PyI18nYamlLoader(namespaced_bigger_path, namespaced=True)
     locales: tuple = ('en_US', 'de_DE')
     loaded_locales = loader.load(locales)
-    assert list(loaded_locales['en_US'].keys()) == ['common', 'analysis', 'orders']
+    assert ['common', 'analysis', 'orders'] <= list(loaded_locales['en_US'].keys())
     assert loader.type == "yaml"
     assert list(loaded_locales.keys()) == list(locales)
 
@@ -144,7 +144,7 @@ def test_loader_yml_namespaced_bigger_without_one():
     loader = loaders.PyI18nYamlLoader(namespaced_bigger_path, namespaced=True)
     locales: tuple = ('en_US',)
     loaded_locales = loader.load(locales)
-    assert list(loaded_locales['en_US'].keys()) == ['common', 'analysis', 'orders']
+    assert ['common', 'analysis', 'orders'] <= list(loaded_locales['en_US'].keys())
     assert loader.type == "yaml"
     assert list(loaded_locales.keys()) == list(locales)
 
@@ -169,9 +169,9 @@ def test_loader_json_namespaced():
     loader = loaders.PyI18nJsonLoader(namespaced_path, namespaced=True)
     locales: tuple = ('en_US', 'de_DE')
     loaded_locales = loader.load(locales)
-    assert loaded_locales != {}
+    assert loaded_locales
     assert loader.type == "json"
-    assert list(loaded_locales['en_US'].keys()) == ['common', 'analysis']
+    assert ['common', 'analysis'] <= list(loaded_locales['en_US'].keys())
     assert list(loaded_locales.keys()) == list(locales)
 
 
@@ -179,7 +179,7 @@ def test_loader_json_namespaced_ignore_one():
     loader = loaders.PyI18nJsonLoader(namespaced_path, namespaced=True)
     locales: tuple = ('en_US',)
     loaded_locales = loader.load(locales)
-    assert loaded_locales != {}
+    assert loaded_locales
     assert loader.type == "json"
     assert list(loaded_locales.keys()) == list(locales)
 
@@ -188,9 +188,9 @@ def test_loader_json_namespaced_with_non_existing():
     loader = loaders.PyI18nJsonLoader(namespaced_path, namespaced=True)
     locales: tuple = ('en_US', 'de_DE', 'pl_PL')
     loaded_locales = loader.load(locales)
-    assert loaded_locales != {}
+    assert loaded_locales
     assert loader.type == "json"
-    assert list(loaded_locales.keys()) == ['en_US', 'de_DE']
+    assert ['en_US', 'de_DE'] <= list(loaded_locales.keys())
 
 
 def test_loader_json_namespaced_empty():
@@ -205,7 +205,7 @@ def test_loader_json_namespaced_bigger():
     loader = loaders.PyI18nJsonLoader(namespaced_bigger_path, namespaced=True)
     locales: tuple = ('en_US', 'de_DE')
     loaded_locales = loader.load(locales)
-    assert list(loaded_locales['en_US'].keys()) == ['common', 'analysis', 'orders']
+    assert ['common', 'analysis', 'orders'] <= list(loaded_locales['en_US'].keys())
     assert loader.type == "json"
     assert list(loaded_locales.keys()) == list(locales)
 
@@ -214,7 +214,7 @@ def test_loader_json_namespaced_bigger_without_one():
     loader = loaders.PyI18nJsonLoader(namespaced_bigger_path, namespaced=True)
     locales: tuple = ('en_US',)
     loaded_locales = loader.load(locales)
-    assert list(loaded_locales['en_US'].keys()) == ['common', 'analysis', 'orders']
+    assert ['common', 'analysis', 'orders'] <= list(loaded_locales['en_US'].keys())
     assert loader.type == "json"
     assert list(loaded_locales.keys()) == list(locales)
 

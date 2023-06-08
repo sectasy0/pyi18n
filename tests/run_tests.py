@@ -12,6 +12,25 @@ from helpers import (test_path, locale_content,
                      namespaced_content, namespaced_yml)
 
 
+class ResultPlugin:
+    """ Plugin for collecting test results
+        This is due to that CI/CD tests won't fail
+            if any test fails running via run_tests.py
+    """
+    def __init__(self):
+        self.result = list()
+
+    def pytest_runtest_logreport(self, report) -> None:
+        """ called after test """
+        self.result.append(report.outcome)
+
+    def check_result(self) -> None:
+        """ call exit(1) if any test fails """
+        if 'failed' in self.result:
+            exit(1)
+
+
+
 def create_corrupted_file() -> None:
     """ Create corrupted test file for locale. """
 
@@ -81,4 +100,7 @@ def setup_fixtures() -> None:
 if __name__ == "__main__":
     setup_fixtures()
     environ['PYI18N_TEST_ENV'] = '1'
-    main(['-vv', '-s'])
+    result: ResultPlugin = ResultPlugin()
+    main(['-vv', '-s'], plugins=[result])
+    result.check_result()
+

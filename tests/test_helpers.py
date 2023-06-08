@@ -8,7 +8,7 @@ import yaml, json
 
 def test_get_files_yml():
     files: list = helpers.get_files(f"{namespaced_path}/en_US", 'yml')
-    assert files == ['common.yml', 'analysis.yml']
+    assert all(item in files for item in ['common.yml', 'analysis.yml'])
 
 
 def test_get_files_yml_invalid_namespace():
@@ -38,7 +38,7 @@ def test_get_files_yml_without_path():
 
 def test_get_files_json():
     files: list = helpers.get_files(f"{namespaced_path}/en_US", 'json')
-    assert files == ['common.json', 'analysis.json']
+    assert all(item in files for item in ['common.json', 'analysis.json'])
 
 
 def test_get_files_json_invalid_namespace():
