@@ -171,7 +171,7 @@ def test_loader_json_namespaced():
     loaded_locales = loader.load(locales)
     assert loaded_locales
     assert loader.type == "json"
-    assert ['common', 'analysis'] <= list(loaded_locales['en_US'].keys())
+    assert all(item in list(loaded_locales['en_US'].keys()) for item in ['common', 'analysis'])
     assert list(loaded_locales.keys()) == list(locales)
 
 
