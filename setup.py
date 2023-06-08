@@ -16,7 +16,7 @@ setup(
     author_email='sectasy0@gmail.com',
     url='https://github.com/sectasy0/pyi18n',
     packages=find_packages(),
-    install_requires=['PyYAML>=6.0'],
+    install_requires=['PyYAML>=5.4'],
     entry_points={
         'console_scripts': [
             'pyi18n-tasks=pyi18n.pyi18n_tasks:cli',
