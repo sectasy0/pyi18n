@@ -1,3 +1,10 @@
+### Version [1.2.2](https://pypi.org/project/pyi18n-v2/1.2.2/) - unreleased
+* Fixes:
+  * Downgrade PyYAML to >= 5.4, for compatibility with docker.
+  * Make `normalize` task to work with namespaced locales.
+* Others:
+  *  Styles and formatting have been standardized.
+
 ### Version [1.2.1](https://pypi.org/project/pyi18n-v2/1.2.1/) - 26.03.2023
 
 * Enhancements:
