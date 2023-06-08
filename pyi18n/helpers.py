@@ -27,7 +27,7 @@ def load_locale(path: str, ser_mod: object, l_type: str) -> dict:
         )
         return {}
 
-    file_extension: str = ser_mod.__name__.replace("yaml", "yml")
+    file_extension: str = ser_mod.__name__.replace('yaml', 'yml')
 
     loaded_locale: dict = {}
     for file_name in get_files(path, file_extension):
@@ -72,16 +72,21 @@ def load_file(file_path: str, ser_mod: object, l_type: str) -> dict:
     Return:
         dict: loaded translations from the file
     """
-    loader_params: dict = {"Loader": FullLoader} if l_type == "yaml" else {}
+    if not l_type:
+        raise TypeError('l_type must be valid loader type')
+
+    loader_params: dict = {'Loader': FullLoader} if l_type == 'yaml' else {}
     with open(file_path, "r", encoding="utf-8") as file:
         return ser_mod.load(file, **loader_params)
 
 
 def dump_locales(
-        loader: Any,
-        ser_mod: object,
-        namespaced: bool = False) -> None:
-    ext: str = loader.type.replace("yaml", "yml")
+    loader: Any,
+    ser_mod: object,
+    namespaced: bool = False
+) -> None:
+
+    ext: str = loader.type.replace('yaml', 'yml')
     locales: tuple = get_locales(loader.load_path, namespaced, ext)
 
     if not locales:
@@ -135,9 +140,5 @@ def file_override(content: dict, file_path: str, ser_mod: object) -> None:
     Return:
         None
     """
-    with open(file_path, "w", encoding="utf-8") as file:
+    with open(file_path, 'w', encoding='utf-8') as file:
         ser_mod.dump(content, file)
-
-
-def is_dump_implemented(loader: Any) -> bool:
-    return callable(vars(loader.__class__).get("dump", None))

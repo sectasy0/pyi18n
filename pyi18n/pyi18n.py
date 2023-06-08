@@ -35,11 +35,12 @@ class PyI18n:
 
     _loaded_translations: dict = {}
 
-    def __init__(self,
-                 available_locales: tuple,
-                 load_path: str = "locales/",
-                 loader: PyI18nBaseLoader = None
-                 ) -> None:
+    def __init__(
+        self,
+        available_locales: tuple,
+        load_path: str = 'locales/',
+        loader: PyI18nBaseLoader = None
+    ) -> None:
 
         """ Initialize i18n class
 

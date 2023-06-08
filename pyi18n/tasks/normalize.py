@@ -1,7 +1,7 @@
 """ This module contains functions for normalizing i18n localization files. """
 from os import listdir, getcwd
 from os.path import exists, isdir, join
-from typing import Union
+from typing import Union, Dict
 from pathlib import Path
 import json
 import yaml
@@ -9,7 +9,7 @@ import yaml
 from pyi18n import loaders
 
 
-def normalize_locales(locale_path: str = "locales/") -> dict:
+def normalize_locales(locale_path: str = 'locales/') -> Dict:
     """Sorts the keys in alphabetically order, and overrides files"""
     locale_path: str = f"{getcwd()}/{locale_path}"
 
@@ -46,7 +46,7 @@ def __save_normalized(
     locales: tuple,
     namespaced: bool = False,
 ) -> None:
-    ext: str = loader.type.replace("yaml", "yml")
+    ext: str = loader.type.replace('yaml', 'yml')
 
     if not locales:
         print("[ERROR] no locales found, check your path")
@@ -110,7 +110,7 @@ def file_override(content: dict, file_path: str, ser_mod: object) -> None:
     Return:
         None
     """
-    with open(file_path, "w", encoding="utf-8") as file:
+    with open(file_path, 'w', encoding='utf-8') as file:
         ser_mod(content, file)
 
 
@@ -120,7 +120,8 @@ def are_locales_namespaced(locale_path: str) -> bool:
 
 
 def get_loader(
-    locale_path: str, namespaced: bool
+    locale_path: str,
+    namespaced: bool
 ) -> Union[loaders.PyI18nBaseLoader, str]:
     """Analyses given path and return loader based on that.
         Note you in your files you have to store only locales
@@ -144,15 +145,15 @@ def get_loader(
     }
     ext: str = functions[namespaced]()
     ext_loaders: dict[str] = {
-        "yml": loaders.PyI18nYamlLoader,
-        "json": loaders.PyI18nJsonLoader,
+        'yml': loaders.PyI18nYamlLoader,
+        'json': loaders.PyI18nJsonLoader,
     }
 
     loader_class: Union[loaders.PyI18nBaseLoader, None] = ext_loaders.get(ext)
 
     if not loader_class:
         print(
-            "[ERROR] You're using not default loader version, "
+            "[ERROR] You're not using default loader version, "
             "make sure you pass -l argument"
         )
         exit(1)
