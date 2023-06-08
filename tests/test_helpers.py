@@ -75,16 +75,14 @@ def test_load_file_yaml():
     assert result == {'farewell': 'Auf Wiedersehen', 'greeting': 'Hallo', 'no': 'Nein', 'yes': 'Ja'}
 
 
-# will load because `l_type: str``, param is for
-# yml additional parameters, see pyi18n/helpers.py:76
-# should be changed after remove deprecated default loader from pyyaml package
+# may fail for PyYAML < 6.0
 def test_load_file_yaml_invalid_type():
     file_path: str = f"{namespaced_path}de_DE/common.yml"
-    result: dict = helpers.load_file(file_path, yaml, 'aaa')
-    assert isinstance(result, dict)
-    assert result == {'farewell': 'Auf Wiedersehen', 'greeting': 'Hallo', 'no': 'Nein', 'yes': 'Ja'}
+    with pytest.raises(TypeError):
+        helpers.load_file(file_path, yaml, 'aaa')
 
 
+# may fail for PyYAML < 6.0
 def test_load_file_yaml_without_type():
     file_path: str = f"{namespaced_path}de_DE/common.yml"
     with pytest.raises(TypeError):
@@ -103,11 +101,11 @@ def test_load_file_yaml_invalid_loader():
         helpers.load_file(file_path, object, 'yaml')
 
 
+# may fail for PyYAML < 6.0
 def test_load_file_yaml_loader_yaml_but_type_json():
-    # yaml is able to load json
     file_path: str = f"{namespaced_path}de_DE/common.yml"
-    loaded: dict = helpers.load_file(file_path, yaml, 'json')
-    assert loaded == {'farewell': 'Auf Wiedersehen', 'greeting': 'Hallo', 'no': 'Nein', 'yes': 'Ja'}
+    with pytest.raises(AttributeError):
+        helpers.load_file(file_path, yaml, 'json')
 
 
 # will load json because yaml is a superset of json
