@@ -79,7 +79,7 @@ def get_locales(locale_path: str, namespaced: bool, ext: str) -> tuple:
     """Returns a tuple of locales from the specified path.
 
     Args:
-        locale_path (str): A string representing the path to the locales directory.
+        locale_path (str): representing the path to the locales directory.
         namespaced (bool): tells function if should
                             look for loader in namespaced way.
         ext (str): A string representing the file extension of the locales.
@@ -116,7 +116,11 @@ def file_override(content: dict, file_path: str, ser_mod: object) -> None:
 
 def are_locales_namespaced(locale_path: str) -> bool:
     """Check if locales are namespaced"""
-    return all(map(lambda x: isdir(join(locale_path, x)), listdir(locale_path)))
+    return all(
+        map(
+            lambda x: isdir(join(locale_path, x)), listdir(locale_path)
+        )
+    )
 
 
 def get_loader(

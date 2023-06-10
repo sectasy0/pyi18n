@@ -80,7 +80,6 @@ def load_file(file_path: str, ser_mod: object, l_type: str) -> dict:
         return ser_mod.load(file, **loader_params)
 
 
-
 def get_locales(path: str, namespaced: bool, ext: str) -> tuple:
     """Returns a tuple of locales from the specified path.
 

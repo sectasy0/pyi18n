@@ -14,9 +14,9 @@ from pyi18n.helpers import load_locale
 class LoaderType:
     """Enum for the different loader types."""
 
-    BASE: str = 'base'
-    YAML: str = 'yaml'
-    JSON: str = 'json'
+    BASE: str = "base"
+    YAML: str = "yaml"
+    JSON: str = "json"
 
 
 class PyI18nBaseLoader:
@@ -31,8 +31,9 @@ class PyI18nBaseLoader:
 
     type: str = LoaderType.BASE
 
-    def __init__(self,
-        load_path: str = 'locales/',
+    def __init__(
+        self,
+        load_path: str = "locales/",
         namespaced: bool = False
     ) -> None:
         """Initialize loader class
@@ -62,7 +63,7 @@ class PyI18nBaseLoader:
             in child classes and return python dict
         """
 
-        file_extension: str = ser_mod.__name__.replace('yaml', 'yml')
+        file_extension: str = ser_mod.__name__.replace("yaml", "yml")
 
         loaded: dict = {}
         for locale in locales:
@@ -80,20 +81,16 @@ class PyI18nBaseLoader:
         return loaded
 
     def __load_file(
-        self,
-        file_path: str,
-        ext: str,
-        ser_mod: object,
-        locale: str
+        self, file_path: str, ext: str, ser_mod: object, locale: str
     ) -> dict:
         """loads content, should not be called directly
 
         Return:
             dict: loaded content
         """
-        with open(file_path, 'r', encoding='utf-8') as _f:
+        with open(file_path, "r", encoding="utf-8") as _f:
             load_params: dict = {
-                'Loader': yaml.FullLoader} if ext == 'yml' else {}
+                "Loader": yaml.FullLoader} if ext == "yml" else {}
 
             return ser_mod.load(_f, **load_params)[locale]
 
