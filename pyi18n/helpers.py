@@ -4,7 +4,7 @@ utilities that can be used throughout the application.
 """
 from os import listdir, stat
 from os.path import exists, join, splitext
-from typing import List, Any
+from typing import List
 from pathlib import Path
 from yaml import FullLoader
 
