@@ -80,34 +80,6 @@ def load_file(file_path: str, ser_mod: object, l_type: str) -> dict:
         return ser_mod.load(file, **loader_params)
 
 
-def dump_locales(
-    loader: Any,
-    ser_mod: object,
-    namespaced: bool = False
-) -> None:
-
-    ext: str = loader.type.replace('yaml', 'yml')
-    locales: tuple = get_locales(loader.load_path, namespaced, ext)
-
-    if not locales:
-        print("[ERROR] no locales found, check your path")
-        return
-
-    translations: dict = loader.load(locales)
-
-    for locale in translations.items():
-        if namespaced:
-            namespace, content = locale
-
-            for name, body in content.items():
-                full_path: str = f"{loader.load_path}{namespace}/{name}.{ext}"
-                file_override(body, full_path, ser_mod)
-
-            return
-
-        full_path: str = f"{loader.load_path}{locale[0]}.{ext}"
-        file_override({locale[0]: locale[1]}, full_path, ser_mod)
-
 
 def get_locales(path: str, namespaced: bool, ext: str) -> tuple:
     """Returns a tuple of locales from the specified path.
