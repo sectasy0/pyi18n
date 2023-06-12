@@ -3,6 +3,7 @@ from os import listdir, getcwd
 from os.path import exists, isdir, join
 from typing import Union, Dict
 from pathlib import Path
+from logging import error
 import json
 import yaml
 
@@ -14,11 +15,11 @@ def normalize_locales(locale_path: str = 'locales/') -> Dict:
     locale_path: str = f"{getcwd()}/{locale_path}"
 
     if not exists(locale_path):
-        print(f"[ERROR] {locale_path} does not exist")
+        error(f"{locale_path} does not exist")
         exit(1)
 
     if is_directory_empty(locale_path):
-        print(f"[ERROR] {locale_path} is empty")
+        error(f"{locale_path} is empty")
         exit(1)
 
     __perform_normalize(locale_path)
@@ -35,7 +36,7 @@ def __perform_normalize(locale_path: str) -> None:
     loader: loaders.PyI18nBaseLoader = loader(locale_path, namespaced)
 
     if not locales:
-        print("[ERROR] no locales found, check your path")
+        error("no locales found, check your path")
         exit(1)
 
     __save_normalized(loader, locales, namespaced)
@@ -49,7 +50,7 @@ def __save_normalized(
     ext: str = loader.type.replace('yaml', 'yml')
 
     if not locales:
-        print("[ERROR] no locales found, check your path")
+        error("no locales found, check your path")
         exit(1)
 
     translations: dict = loader.load(locales)
@@ -156,8 +157,8 @@ def get_loader(
     loader_class: Union[loaders.PyI18nBaseLoader, None] = ext_loaders.get(ext)
 
     if not loader_class:
-        print(
-            "[ERROR] You're not using default loader version, "
+        error(
+            "You're not using default loader version, "
             "make sure you pass -l argument"
         )
         exit(1)

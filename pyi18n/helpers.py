@@ -2,8 +2,9 @@
 This module contains various helper functions and
 utilities that can be used throughout the application.
 """
-from os import listdir, stat
 from os.path import exists, join, splitext
+from os import listdir, stat
+from logging import warning
 from typing import List
 from pathlib import Path
 from yaml import FullLoader
@@ -21,10 +22,10 @@ def load_locale(path: str, ser_mod: object, l_type: str) -> dict:
         dict: loaded translations for the locale
     """
     if not exists(path):
-        print(
-            f"[WARNING] path {path} doesn't exist, probably you forgot",
+        warning((
+            f"path {path} doesn't exist, probably you forgot",
             "to add it to the available locales list.",
-        )
+        ))
         return {}
 
     file_extension: str = ser_mod.__name__.replace('yaml', 'yml')
@@ -73,7 +74,7 @@ def load_file(file_path: str, ser_mod: object, l_type: str) -> dict:
         dict: loaded translations from the file
     """
     if not l_type:
-        raise TypeError('l_type must be valid loader type')
+        raise ValueError('l_type must be valid loader type')
 
     loader_params: dict = {'Loader': FullLoader} if l_type == 'yaml' else {}
     with open(file_path, "r", encoding="utf-8") as file:

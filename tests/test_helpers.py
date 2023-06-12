@@ -78,14 +78,14 @@ def test_load_file_yaml():
 # may fail for PyYAML < 6.0
 def test_load_file_yaml_invalid_type():
     file_path: str = f"{namespaced_path}de_DE/common.yml"
-    with pytest.raises(TypeError):
+    with pytest.raises(ValueError):
         helpers.load_file(file_path, yaml, 'aaa')
 
 
 # may fail for PyYAML < 6.0
 def test_load_file_yaml_without_type():
     file_path: str = f"{namespaced_path}de_DE/common.yml"
-    with pytest.raises(TypeError):
+    with pytest.raises(ValueError):
         helpers.load_file(file_path, yaml, None)
 
 
@@ -135,7 +135,7 @@ def test_load_file_json_invalid_type():
 # like above
 def test_load_file_json_without_type():
     file_path: str = f"{namespaced_path}de_DE/common.json"
-    with pytest.raises(TypeError):
+    with pytest.raises(ValueError):
         helpers.load_file(file_path, json, None)
 
 

@@ -210,5 +210,4 @@ def capture(command: str) -> str:
         stderr=PIPE,
     )
     out, err = proc.communicate()
-    print(proc.communicate())
     return out, err, proc.returncode

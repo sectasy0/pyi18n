@@ -81,7 +81,11 @@ class PyI18nBaseLoader:
         return loaded
 
     def __load_file(
-        self, file_path: str, ext: str, ser_mod: object, locale: str
+        self,
+        file_path: str,
+        ext: str,
+        ser_mod: object,
+        locale: str
     ) -> dict:
         """loads content, should not be called directly
 
