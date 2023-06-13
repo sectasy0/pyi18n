@@ -1,16 +1,17 @@
 """ This module contains functions for normalizing i18n localization files. """
 from os import listdir, getcwd
 from os.path import exists, isdir, join
-from typing import Union, Dict
+from typing import Callable, Optional, Type, Tuple
 from pathlib import Path
 from logging import error
 import json
 import yaml
 
-from pyi18n import loaders
+from pyi18n.loaders import (
+    PyI18nBaseLoader, PyI18nJsonLoader, PyI18nYamlLoader)
 
 
-def normalize_locales(locale_path: str = 'locales/') -> Dict:
+def normalize_locales(locale_path: str = 'locales/') -> None:
     """Sorts the keys in alphabetically order, and overrides files"""
     locale_path: str = f"{getcwd()}/{locale_path}"
 
@@ -33,7 +34,7 @@ def __perform_normalize(locale_path: str) -> None:
     loader, ext = get_loader(locale_path, namespaced)
     locales: tuple = get_locales(locale_path, namespaced, ext)
 
-    loader: loaders.PyI18nBaseLoader = loader(locale_path, namespaced)
+    loader: PyI18nBaseLoader = loader(locale_path, namespaced)
 
     if not locales:
         error("no locales found, check your path")
@@ -43,7 +44,7 @@ def __perform_normalize(locale_path: str) -> None:
 
 
 def __save_normalized(
-    loader: loaders.PyI18nBaseLoader,
+    loader: PyI18nBaseLoader,
     locales: tuple,
     namespaced: bool = False,
 ) -> None:
@@ -55,12 +56,12 @@ def __save_normalized(
 
     translations: dict = loader.load(locales)
 
-    serializers: dict = {
+    serializers: dict[str, Callable] = {
         "json": lambda c, f: json.dump(c, f, sort_keys=True, indent=4),
         "yml": yaml.dump,
     }
 
-    ser_mod: type = serializers[ext]
+    ser_mod: Callable = serializers[ext]
 
     for locale in translations.items():
         if namespaced:
@@ -97,7 +98,7 @@ def get_locales(locale_path: str, namespaced: bool, ext: str) -> tuple:
     return tuple(target_func[namespaced]())
 
 
-def file_override(content: dict, file_path: str, ser_mod: object) -> None:
+def file_override(content: dict, file_path: str, ser_mod: Callable) -> None:
     """Override the contents of the file at the specified file path.
 
     Args:
@@ -127,7 +128,7 @@ def are_locales_namespaced(locale_path: str) -> bool:
 def get_loader(
     locale_path: str,
     namespaced: bool
-) -> Union[loaders.PyI18nBaseLoader, str]:
+) -> Tuple[Type[PyI18nBaseLoader], str]:
     """Analyses given path and return loader based on that.
         Note you in your files you have to store only locales
         if you have other files not related to locales it could return
@@ -144,17 +145,17 @@ def get_loader(
     """
 
     first: str = listdir(locale_path)[0]
-    functions: dict[callable] = {
+    functions: dict[bool, Callable[[], str]] = {
         True: lambda: listdir(join(locale_path, first))[0].split(".")[-1],
         False: lambda: first.split(".")[-1],
     }
     ext: str = functions[namespaced]()
-    ext_loaders: dict[str] = {
-        'yml': loaders.PyI18nYamlLoader,
-        'json': loaders.PyI18nJsonLoader,
+    ext_loaders: dict[str, Type[PyI18nBaseLoader]] = {
+        'yml': PyI18nYamlLoader,
+        'json': PyI18nJsonLoader,
     }
 
-    loader_class: Union[loaders.PyI18nBaseLoader, None] = ext_loaders.get(ext)
+    loader_class: Optional[Type[PyI18nBaseLoader]] = ext_loaders.get(ext)
 
     if not loader_class:
         error(
@@ -163,7 +164,7 @@ def get_loader(
         )
         exit(1)
 
-    return loader_class, ext
+    return (loader_class, ext)
 
 
 def is_directory_empty(directory_path: str) -> bool:

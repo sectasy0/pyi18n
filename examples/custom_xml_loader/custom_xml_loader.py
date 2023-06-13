@@ -16,7 +16,7 @@ class PyI18nXMLLoader(PyI18nBaseLoader):
         dict: loaded translations
     """
 
-    _type: str = "xml"
+    type: str = "xml"
 
     def load(self, locales: tuple) -> dict:
         """ Load translations from xml files

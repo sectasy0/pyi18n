@@ -5,11 +5,11 @@ translation files and provides a gettext method to retrieve translations for
 a specified locale and path.
 """
 from collections import defaultdict
-from os import getcwd
-from os.path import exists
-from functools import reduce
+from typing import Optional, Union
 from operator import getitem
-from typing import Union
+from functools import reduce
+from os.path import exists
+from os import getcwd
 
 from .loaders import PyI18nBaseLoader
 from .loaders import PyI18nYamlLoader
@@ -39,7 +39,7 @@ class PyI18n:
         self,
         available_locales: tuple,
         load_path: str = 'locales/',
-        loader: PyI18nBaseLoader = None
+        loader: Optional[PyI18nBaseLoader] = None
     ) -> None:
 
         """ Initialize i18n class

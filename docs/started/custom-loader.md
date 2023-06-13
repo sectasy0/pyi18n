@@ -9,7 +9,7 @@ To create your own loader, you have to inherit from `PyI18nBaseLoader` class and
 ```py
 class PyI18nXMLLoader(PyI18nBaseLoader):
 
-    _type: str = "xml" # type of loader
+    type: str = "xml" # type of loader
 
     def load(self, locales: tuple) -> dict:
         # XML loader logic

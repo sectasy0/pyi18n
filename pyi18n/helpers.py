@@ -2,15 +2,16 @@
 This module contains various helper functions and
 utilities that can be used throughout the application.
 """
+from ast import Dict
 from os.path import exists, join, splitext
 from os import listdir, stat
 from logging import warning
-from typing import List
+from typing import Any, List, Type
 from pathlib import Path
 from yaml import FullLoader
 
 
-def load_locale(path: str, ser_mod: object, l_type: str) -> dict:
+def load_locale(path: str, ser_mod: Type, l_type: str) -> dict:
     """Load translations from a single locale directory.
 
     Args:
@@ -62,12 +63,12 @@ def get_files(path: str, file_extension: str) -> List[str]:
     ]
 
 
-def load_file(file_path: str, ser_mod: object, l_type: str) -> dict:
+def load_file(file_path: str, ser_mod: Type, l_type: str) -> Dict:
     """Load translations from a single file.
 
     Args:
         file_path (str): path to the translation file
-        ser_mod (object): module for serialization
+        ser_mod (Callable): module for serialization
         l_type (str): type of file to load (e.g. "yaml", "json")
 
     Return:
@@ -76,7 +77,7 @@ def load_file(file_path: str, ser_mod: object, l_type: str) -> dict:
     if not l_type:
         raise ValueError('l_type must be valid loader type')
 
-    loader_params: dict = {'Loader': FullLoader} if l_type == 'yaml' else {}
+    loader_params: dict[str, Any] = {'Loader': FullLoader} if l_type == 'yaml' else {}
     with open(file_path, "r", encoding="utf-8") as file:
         return ser_mod.load(file, **loader_params)
 
@@ -101,7 +102,7 @@ def get_locales(path: str, namespaced: bool, ext: str) -> tuple:
     return tuple(target_func[namespaced]())
 
 
-def file_override(content: dict, file_path: str, ser_mod: object) -> None:
+def file_override(content: dict, file_path: str, ser_mod: Type) -> None:
     """Override the contents of the file at the specified file path.
 
     Args:

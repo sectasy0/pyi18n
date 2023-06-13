@@ -108,7 +108,7 @@ products = {
 }
 
 if __name__ == "__main__":
-    available_locales: Tuple[str] = ('en', 'pl')
+    available_locales: tuple = ('en', 'pl')
 
     user_locale: str = input('Enter your locale: ')
     if user_locale.lower() not in available_locales:
@@ -145,7 +145,7 @@ from pyi18n import PyI18n
 from pyi18n.loaders import PyI18nJsonLoader
 
 if __name__ == "__main__":
-    available_locales: Tuple[str] = ('en', 'pl')
+    available_locales: tuple = ('en', 'pl')
     loader: PyI18nJsonLoader = PyI18nJsonLoader('translations/')
     i18n: PyI18n = PyI18n(available_locales, loader=loader)
     _ = i18n.gettext

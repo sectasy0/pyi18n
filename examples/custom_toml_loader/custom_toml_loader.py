@@ -16,7 +16,7 @@ class PyI18nTOMLLoader(PyI18nBaseLoader):
         dict: loaded translations
     """
 
-    _type: str = "toml"
+    type: str = "toml"
 
     def load(self, locales: tuple) -> dict:
         """ Load translations from toml files
