@@ -101,6 +101,6 @@ if __name__ == "__main__":
     setup_fixtures()
     environ['PYI18N_TEST_ENV'] = '1'
     result: ResultPlugin = ResultPlugin()
-    main(['-vv', '-s'], plugins=[result])
+    main(['-vv', '-s', '--log-cli-level=INFO'], plugins=[result])
     result.check_result()
 
