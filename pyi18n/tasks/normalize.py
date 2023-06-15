@@ -90,9 +90,12 @@ def get_locales(locale_path: str, namespaced: bool, ext: str) -> tuple:
         tuple: locales found in the directory.
     """
     target_func: dict = {
-        True: lambda: [p.name for p in Path(locale_path).iterdir() if p.is_dir()],
+        True: lambda: [
+            p.name for p
+            in Path(locale_path).iterdir() if p.is_dir()],
         False: lambda: [
-            Path(file).stem for file in listdir(locale_path) if file.endswith(ext)
+            Path(file).stem for file
+            in listdir(locale_path)if file.endswith(ext)
         ],
     }
     return tuple(target_func[namespaced]())

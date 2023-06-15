@@ -77,7 +77,8 @@ def load_file(file_path: str, ser_mod: Type, l_type: str) -> Dict:
     if not l_type:
         raise ValueError('l_type must be valid loader type')
 
-    loader_params: dict[str, Any] = {'Loader': FullLoader} if l_type == 'yaml' else {}
+    yaml_type: bool = l_type == 'yaml'
+    loader_params: dict[str, Any] = {'Loader': FullLoader} if yaml_type else {}
     with open(file_path, "r", encoding="utf-8") as file:
         return ser_mod.load(file, **loader_params)
 
