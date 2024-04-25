@@ -9,8 +9,8 @@ from tests.helpers import namespaced_path
 
 
 def test_get_files_yml():
-    files: list = helpers.get_files(f"{namespaced_path}en_US", 'yml')
-    assert all(item in files for item in ['common.yml', 'analysis.yml'])
+    files: list = helpers.get_files(f"{namespaced_path}en_US", 'yaml')
+    assert all(item in files for item in ['common.yaml', 'analysis.yml'])
 
 
 def test_get_files_yml_invalid_namespace():
@@ -69,7 +69,7 @@ def test_get_files_json_without_path():
 
 
 def test_load_file_yaml():
-    file_path: str = f"{namespaced_path}de_DE/common.yml"
+    file_path: str = f"{namespaced_path}de_DE/common.yaml"
     result: dict = helpers.load_file(file_path, yaml, 'yaml')
     assert isinstance(result, dict)
     assert result == {'farewell': 'Auf Wiedersehen', 'greeting': 'Hallo', 'no': 'Nein', 'yes': 'Ja'}
@@ -77,26 +77,26 @@ def test_load_file_yaml():
 
 # may fail for PyYAML < 6.0
 def test_load_file_yaml_without_type():
-    file_path: str = f"{namespaced_path}de_DE/common.yml"
+    file_path: str = f"{namespaced_path}de_DE/common.yaml"
     with pytest.raises(ValueError):
         helpers.load_file(file_path, yaml, None)
 
 
 def test_load_file_yaml_without_loader():
-    file_path: str = f"{namespaced_path}de_DE/common.yml"
+    file_path: str = f"{namespaced_path}de_DE/common.yaml"
     with pytest.raises(AttributeError):
         helpers.load_file(file_path, None, 'yaml')
 
 
 def test_load_file_yaml_invalid_loader():
-    file_path: str = f"{namespaced_path}de_DE/common.yml"
+    file_path: str = f"{namespaced_path}de_DE/common.yaml"
     with pytest.raises(AttributeError):
         helpers.load_file(file_path, object, 'yaml')
 
 
 # may fail for PyYAML < 6.0
 def test_load_file_yaml_loader_yaml_but_type_json():
-    file_path: str = f"{namespaced_path}de_DE/common.yml"
+    file_path: str = f"{namespaced_path}de_DE/common.yaml"
     with pytest.raises(TypeError):
         helpers.load_file(file_path, yaml, 'json')
 

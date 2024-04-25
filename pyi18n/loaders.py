@@ -64,13 +64,17 @@ class PyI18nBaseLoader:
             in child classes and return python dict
         """
 
-        file_extension: str = ser_mod.__name__.replace("yaml", "yml")
+        file_extension: str = ser_mod.__name__
 
         loaded: dict = {}
         for locale in locales:
             file_path: str = f"{self.load_path}{locale}.{file_extension}"
+
             if not exists(file_path):
-                continue
+                if file_extension == LoaderType.YAML and exists(f"{self.load_path}{locale}.yml"):
+                    file_path = f"{self.load_path}{locale}.yml"
+                else:
+                    continue
 
             try:
                 loaded[locale] = self.__load_file(
@@ -95,7 +99,7 @@ class PyI18nBaseLoader:
         """
         with open(file_path, "r", encoding="utf-8") as _f:
             load_params: dict = {
-                "Loader": yaml.FullLoader} if ext == "yml" else {}
+                "Loader": yaml.FullLoader} if ext in ("yml", "yaml") else {}
 
             return ser_mod.load(_f, **load_params)[locale]
 

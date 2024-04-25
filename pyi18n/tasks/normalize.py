@@ -154,6 +154,7 @@ def get_loader(
     }
     ext: str = functions[namespaced]()
     ext_loaders: dict[str, Type[PyI18nBaseLoader]] = {
+        'yaml': PyI18nYamlLoader,
         'yml': PyI18nYamlLoader,
         'json': PyI18nJsonLoader,
     }
