@@ -135,7 +135,7 @@ def test_loader_yml_namespaced_bigger():
     loader = loaders.PyI18nYamlLoader(namespaced_bigger_path, namespaced=True)
     locales: tuple = ('en_US', 'de_DE')
     loaded_locales = loader.load(locales)
-    assert ['common', 'analysis', 'orders'] <= list(loaded_locales['en_US'].keys())
+    assert len(['common', 'analysis', 'orders']) <= len(list(loaded_locales['en_US'].keys()))
     assert loader.type == "yaml"
     assert list(loaded_locales.keys()) == list(locales)
 
@@ -144,7 +144,7 @@ def test_loader_yml_namespaced_bigger_without_one():
     loader = loaders.PyI18nYamlLoader(namespaced_bigger_path, namespaced=True)
     locales: tuple = ('en_US',)
     loaded_locales = loader.load(locales)
-    assert ['common', 'analysis', 'orders'] <= list(loaded_locales['en_US'].keys())
+    assert len(['common', 'analysis', 'orders']) <= len(list(loaded_locales['en_US'].keys()))
     assert loader.type == "yaml"
     assert list(loaded_locales.keys()) == list(locales)
 

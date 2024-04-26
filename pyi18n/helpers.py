@@ -29,9 +29,9 @@ def load_locale(path: str, ser_mod: Type, l_type: str) -> dict:
         ))
         return {}
 
-    file_extension: str = ser_mod.__name__.replace('yaml', 'yml')
-
+    file_extension: str = ser_mod.__name__
     loaded_locale: dict = {}
+
     for file_name in get_files(path, file_extension):
         file_path: str = join(path, file_name)
         namespace: str = splitext(file_name)[0]
@@ -59,7 +59,7 @@ def get_files(path: str, file_extension: str) -> List[str]:
         return []
 
     return [
-        fn for fn in listdir(path) if fn.endswith(file_extension)
+        fn for fn in listdir(path) if fn.replace("yml", "yaml").endswith(file_extension)
     ]
 
 
