@@ -4,8 +4,10 @@ for internationalization and localization in Python. It uses a loader to load
 translation files and provides a gettext method to retrieve translations for
 a specified locale and path.
 """
+
+from __future__ import annotations
+
 from collections import defaultdict
-from typing import Optional, Union
 from operator import getitem
 from functools import reduce
 from os.path import exists
@@ -19,7 +21,7 @@ class PyI18n:
     """ Main i18n localization class
 
     Attributes:
-        available_locales (tuple): list of available locales
+        available_locales (tuple | list): list of available locales
         load_path (str): path to locales directory
         _loaded_translations (dict): (class attribute) dictionary
                                     of loaded translations
@@ -37,25 +39,29 @@ class PyI18n:
 
     def __init__(
         self,
-        available_locales: tuple,
+        available_locales: tuple | list,
         load_path: str = 'locales/',
-        loader: Optional[PyI18nBaseLoader] = None
+        loader: PyI18nBaseLoader | None = None
     ) -> None:
 
         """ Initialize i18n class
 
         Args:
-            available_locales (tuple): list of available locales
+            available_locales (tuple | list): list of available locales
             load_path (str): path to locales directory
 
         Return:
             None
         """
 
-        self.available_locales: tuple = available_locales
+        self.available_locales: tuple | list = available_locales
         self.load_path: str = f"{getcwd()}/{load_path}"
         self.loader: PyI18nBaseLoader = loader or PyI18nYamlLoader(
             self.load_path)
+
+        if not isinstance(self.available_locales, (tuple, list)):
+            raise TypeError("`available_locales` aint tuple nor list")
+
 
         self.load_path: str = self.loader.get_path() if self.loader.get_path(
         ) != self.load_path else self.load_path
@@ -81,7 +87,7 @@ class PyI18n:
         self._loaded_translations: dict = self.loader.load(
                                             self.available_locales)
 
-    def gettext(self, locale: str, path: str, **kwargs) -> Union[dict, str]:
+    def gettext(self, locale: str, path: str, **kwargs) -> dict | str:
         """ Get translation for given locale and path
 
         Args:
@@ -90,7 +96,7 @@ class PyI18n:
             **kwargs (dict): interpolation variables
 
         Returns:
-            Union[dict, str]: translation str, dict or error message
+            dict | str: translation str, dict or error message
 
         Raises:
             ValueError: if locale is not in self.available_locales
@@ -101,7 +107,7 @@ class PyI18n:
             raise ValueError(f"locale {locale} not specified "
                              "in available locales")
 
-        founded: Union[dict, str] = self.__find(path, locale)
+        founded: dict | str = self.__find(path, locale)
 
         if len(kwargs) > 0 and isinstance(founded, str):
             try:
@@ -110,7 +116,7 @@ class PyI18n:
                 return founded
         return founded
 
-    def __find(self, path: str, locale: str) -> Union[dict, str]:
+    def __find(self, path: str, locale: str) -> dict | str:
         """ Find translation for given path and locale
 
         Args:
@@ -118,7 +124,7 @@ class PyI18n:
             locale (str): locale to get translation for
 
         Returns:
-            Union[dict, str]: translation str, dict or error message
+            dict | str: translation str, dict or error message
 
         """
         try:

@@ -3,12 +3,11 @@ This module defines the PyI18n loaders which
 load translations from files in YAML or JSON format.
 """
 
-from os.path import exists, join
-from typing import Type
 import json
 import yaml
+from os.path import exists, join
 
-from pyi18n.helpers import load_locale
+from .helpers import load_locale
 
 
 class LoaderType:
@@ -48,13 +47,13 @@ class PyI18nBaseLoader:
         self.load_path: str = load_path
         self.namespaced: bool = namespaced
 
-    def load(self, locales: tuple, ser_mod: Type) -> dict:
+    def load(self, locales: tuple, ser_mod: type) -> dict:
         """Load translations for given locales,
             should be overridden in child classes.
 
         Args:
             locales (tuple): locales to load
-            ser_mod (Type): serializer module
+            ser_mod (type): serializer module
 
         Return:
             dict: loaded translations
@@ -89,7 +88,7 @@ class PyI18nBaseLoader:
         self,
         file_path: str,
         ext: str,
-        ser_mod: Type,
+        ser_mod: type,
         locale: str
     ) -> dict:
         """loads content, should not be called directly
@@ -103,7 +102,7 @@ class PyI18nBaseLoader:
 
             return ser_mod.load(_f, **load_params)[locale]
 
-    def _load_namespaced(self, locales: tuple, ser_mod: Type) -> dict:
+    def _load_namespaced(self, locales: tuple, ser_mod: type) -> dict:
         """Load translations from namespaces.
 
         Should be overridden in child classes.
@@ -111,7 +110,7 @@ class PyI18nBaseLoader:
 
         Args:
             locales (tuple): locales to load
-            ser_mod (Type): module for serialization
+            ser_mod (type): module for serialization
 
         Return:
             dict: loaded translations

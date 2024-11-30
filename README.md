@@ -224,6 +224,6 @@ See issues, If I have enough time and come up with a good idea on how this packa
 4. Push to the branch (`git push origin feature/fooBar`)
 5. Create a new Pull Request
 
-[python-image]: https://img.shields.io/badge/python-3.6-blue
+[python-image]: https://img.shields.io/badge/python-3.9-blue
 [pypi-image]: https://img.shields.io/badge/pypi-remly-blue
 [pypi-url]:  pypi.org/project/pyi18n/

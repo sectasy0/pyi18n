@@ -2,16 +2,15 @@
 This module contains various helper functions and
 utilities that can be used throughout the application.
 """
-from ast import Dict
 from os.path import exists, join, splitext
 from os import listdir, stat
+from typing import Any
 from logging import warning
-from typing import Any, List, Type
 from pathlib import Path
 from yaml import FullLoader
 
 
-def load_locale(path: str, ser_mod: Type, l_type: str) -> dict:
+def load_locale(path: str, ser_mod: type, l_type: str) -> dict:
     """Load translations from a single locale directory.
 
     Args:
@@ -45,7 +44,7 @@ def load_locale(path: str, ser_mod: Type, l_type: str) -> dict:
     return loaded_locale
 
 
-def get_files(path: str, file_extension: str) -> List[str]:
+def get_files(path: str, file_extension: str) -> list:
     """Get a list of files in a directory with a given file extension.
 
     Args:
@@ -53,7 +52,7 @@ def get_files(path: str, file_extension: str) -> List[str]:
         file_extension (str): file extension to search for (e.g. ".yml")
 
     Return:
-        List[str]: list of file names in the directory with the given extension
+        list: list of file names in the directory with the given extension
     """
     if not file_extension:
         return []
@@ -63,7 +62,7 @@ def get_files(path: str, file_extension: str) -> List[str]:
     ]
 
 
-def load_file(file_path: str, ser_mod: Type, l_type: str) -> Dict:
+def load_file(file_path: str, ser_mod: type, l_type: str) -> dict:
     """Load translations from a single file.
 
     Args:
@@ -103,7 +102,7 @@ def get_locales(path: str, namespaced: bool, ext: str) -> tuple:
     return tuple(target_func[namespaced]())
 
 
-def file_override(content: dict, file_path: str, ser_mod: Type) -> None:
+def file_override(content: dict, file_path: str, ser_mod: type) -> None:
     """Override the contents of the file at the specified file path.
 
     Args:
