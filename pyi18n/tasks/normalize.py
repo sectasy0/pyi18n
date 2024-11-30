@@ -1,7 +1,6 @@
 """ This module contains functions for normalizing i18n localization files. """
 from os import listdir, getcwd
 from os.path import exists, isdir, join
-from typing import Callable, Optional, Type, Tuple
 from pathlib import Path
 from logging import error
 import json
@@ -56,12 +55,12 @@ def __save_normalized(
 
     translations: dict = loader.load(locales)
 
-    serializers: dict[str, Callable] = {
+    serializers: dict[str, callable] = {
         "json": lambda c, f: json.dump(c, f, sort_keys=True, indent=4),
         "yml": yaml.dump,
     }
 
-    ser_mod: Callable = serializers[ext]
+    ser_mod: callable = serializers[ext]
 
     for locale in translations.items():
         if namespaced:
@@ -101,7 +100,7 @@ def get_locales(locale_path: str, namespaced: bool, ext: str) -> tuple:
     return tuple(target_func[namespaced]())
 
 
-def file_override(content: dict, file_path: str, ser_mod: Callable) -> None:
+def file_override(content: dict, file_path: str, ser_mod: callable) -> None:
     """Override the contents of the file at the specified file path.
 
     Args:
@@ -131,7 +130,7 @@ def are_locales_namespaced(locale_path: str) -> bool:
 def get_loader(
     locale_path: str,
     namespaced: bool
-) -> Tuple[Type[PyI18nBaseLoader], str]:
+) -> tuple[type[PyI18nBaseLoader], str]:
     """Analyses given path and return loader based on that.
         Note you in your files you have to store only locales
         if you have other files not related to locales it could return
@@ -148,18 +147,18 @@ def get_loader(
     """
 
     first: str = listdir(locale_path)[0]
-    functions: dict[bool, Callable[[], str]] = {
+    functions: dict[bool, callable[[], str]] = {
         True: lambda: listdir(join(locale_path, first))[0].split(".")[-1],
         False: lambda: first.split(".")[-1],
     }
     ext: str = functions[namespaced]()
-    ext_loaders: dict[str, Type[PyI18nBaseLoader]] = {
+    ext_loaders: dict[str, type[PyI18nBaseLoader]] = {
         'yaml': PyI18nYamlLoader,
         'yml': PyI18nYamlLoader,
         'json': PyI18nJsonLoader,
     }
 
-    loader_class: Optional[Type[PyI18nBaseLoader]] = ext_loaders.get(ext)
+    loader_class: type[PyI18nBaseLoader] | None = ext_loaders.get(ext)
 
     if not loader_class:
         error(
