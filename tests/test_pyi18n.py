@@ -28,7 +28,7 @@ def test_initialize_with_custom_load_path() -> None:
     assert i18n.get_loader().type == "yaml"
 
 
-def test_initialize_available_locales_aint_tuple_nor_list() -> None
+def test_initialize_available_locales_aint_tuple_nor_list() -> None:
     available_locales: tuple = ("en")
     with pytest.raises(TypeError):
         PyI18n(available_locales, load_path=test_path)
